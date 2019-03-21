@@ -31,12 +31,5 @@ namespace ServiceModel.Configuration
 
             return this;
         }
-
-        public ServiceModelBuilder AddXmlConfiguration(string path)
-        {
-            Services.AddSingleton<IConfigureNamedOptions<ServiceModelOptions>>(new Xml.XmlServiceModelOptions(path));
-
-            return this;
-        }
     }
 }

@@ -56,22 +56,4 @@ namespace ServiceModel.Configuration.Xml
 
         public IReadOnlyCollection<IOperationBehavior> OperationBehaviors { get; }
     }
-
-    public class Service
-    {
-        public string Name { get; set; }
-
-        public IEnumerable<Endpoint> Endpoints { get; set; }
-    }
-
-    public class Endpoint
-    {
-        public string Address { get; set; }
-
-        public string BehaviorConfiguration { get; set; }
-
-        public string Binding { get; set; }
-
-        public string Contract { get; set; }
-    }
 }
