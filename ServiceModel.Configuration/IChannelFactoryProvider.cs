@@ -2,8 +2,8 @@
 
 namespace ServiceModel.Configuration
 {
-    public interface IChannelFactoryProvider<T>
+    public interface IChannelFactoryProvider
     {
-        ChannelFactory<T> CreateChannelFactory(string name);
+        ChannelFactory<T> CreateChannelFactory<T>(string name);
     }
 }

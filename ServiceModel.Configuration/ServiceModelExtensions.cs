@@ -10,7 +10,7 @@ namespace ServiceModel.Configuration
         {
             services.AddOptions<ServiceEndpoint>();
             services.AddTransient<IPostConfigureOptions<ServiceModelOptions>, ServiceEndpointValidation>();
-            services.AddSingleton(typeof(IChannelFactoryProvider<>), typeof(ChannelFactoryProvider<>));
+            services.AddSingleton<IChannelFactoryProvider, ChannelFactoryProvider>();
 
             return new ServiceModelBuilder(services);
         }

@@ -4,7 +4,7 @@ using System.ServiceModel;
 
 namespace ServiceModel.Configuration
 {
-    internal class ChannelFactoryProvider<T> : IChannelFactoryProvider<T>
+    internal class ChannelFactoryProvider : IChannelFactoryProvider
     {
         private readonly IOptionsMonitor<ServiceModelOptions> _options;
 
@@ -13,7 +13,7 @@ namespace ServiceModel.Configuration
             _options = options;
         }
 
-        public ChannelFactory<T> CreateChannelFactory(string name)
+        public ChannelFactory<T> CreateChannelFactory<T>(string name)
         {
             if (name == null)
             {

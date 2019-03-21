@@ -27,11 +27,11 @@ namespace ServiceModel.Configuration.Tests
         {
             using (var provider = CreateProvider(wcf => { }))
             {
-                var factoryProvider = provider.GetRequiredService<IChannelFactoryProvider<IService>>();
+                var factoryProvider = provider.GetRequiredService<IChannelFactoryProvider>();
 
-                Assert.Throws<ArgumentNullException>(() => factoryProvider.CreateChannelFactory(null));
-                Assert.Throws<UnknownEndpointException>(() => factoryProvider.CreateChannelFactory(string.Empty));
-                Assert.Throws<UnknownEndpointException>(() => factoryProvider.CreateChannelFactory(_fixture.Create<string>()));
+                Assert.Throws<ArgumentNullException>(() => factoryProvider.CreateChannelFactory<IService>(null));
+                Assert.Throws<UnknownEndpointException>(() => factoryProvider.CreateChannelFactory<IService>(string.Empty));
+                Assert.Throws<UnknownEndpointException>(() => factoryProvider.CreateChannelFactory<IService>(_fixture.Create<string>()));
             }
         }
 
@@ -51,8 +51,8 @@ namespace ServiceModel.Configuration.Tests
 
             using (var provider = CreateProvider(Configure))
             {
-                var factoryProvider = provider.GetRequiredService<IChannelFactoryProvider<IService>>();
-                var factory = factoryProvider.CreateChannelFactory(name);
+                var factoryProvider = provider.GetRequiredService<IChannelFactoryProvider>();
+                var factory = factoryProvider.CreateChannelFactory<IService>(name);
 
                 Assert.Equal(endpoint, factory.Endpoint.Address);
             }
@@ -75,8 +75,8 @@ namespace ServiceModel.Configuration.Tests
 
             using (var provider = CreateProvider(Configure))
             {
-                var factoryProvider = provider.GetRequiredService<IChannelFactoryProvider<IService>>();
-                var factory = factoryProvider.CreateChannelFactory(name);
+                var factoryProvider = provider.GetRequiredService<IChannelFactoryProvider>();
+                var factory = factoryProvider.CreateChannelFactory<IService>(name);
 
                 Assert.Equal(2, factory.Endpoint.EndpointBehaviors.Count);
                 Assert.Single(factory.Endpoint.EndpointBehaviors.Where(b => b == behavior));
@@ -101,8 +101,8 @@ namespace ServiceModel.Configuration.Tests
 
             using (var provider = CreateProvider(Configure))
             {
-                var factoryProvider = provider.GetRequiredService<IChannelFactoryProvider<IService>>();
-                var factory = factoryProvider.CreateChannelFactory(name);
+                var factoryProvider = provider.GetRequiredService<IChannelFactoryProvider>();
+                var factory = factoryProvider.CreateChannelFactory<IService>(name);
 
                 Assert.Equal(2, factory.Endpoint.EndpointBehaviors.Count);
                 Assert.Single(factory.Endpoint.EndpointBehaviors.Where(b => b == behavior));
