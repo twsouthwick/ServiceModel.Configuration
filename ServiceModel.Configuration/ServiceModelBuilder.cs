@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using System;
 using System.ServiceModel.Description;
+using System.Xml;
 
 namespace ServiceModel.Configuration
 {
@@ -26,6 +28,13 @@ namespace ServiceModel.Configuration
             {
                 option.Behaviors.Add(behavior);
             });
+
+            return this;
+        }
+
+        public ServiceModelBuilder AddXmlConfiguration(string path)
+        {
+            Services.AddSingleton<IConfigureNamedOptions<ServiceModelOptions>>(new Xml.XmlServiceModelOptions(path));
 
             return this;
         }
