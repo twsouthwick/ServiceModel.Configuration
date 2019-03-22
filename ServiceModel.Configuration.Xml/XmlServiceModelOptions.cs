@@ -1,40 +1,39 @@
 ﻿using Microsoft.Extensions.Options;
 using System;
-using System.IO;
-using System.Xml;
+using System.ServiceModel;
 
 namespace ServiceModel.Configuration.Xml
 {
-    internal class XmlServiceModelOptions : IConfigureNamedOptions<ServiceModelOptions>
+     internal class XmlServiceModelOptions : IConfigureNamedOptions<ServiceModelOptions>
     {
-        public XmlServiceModelOptions(string path)
+        private readonly ITypeMapper _mapper;
+        private readonly ServiceModelConfiguration _configuration;
+
+        public XmlServiceModelOptions(ITypeMapper mapper, ServiceModelConfiguration configuration)
         {
-            using (var reader = XmlReader.Create(path))
+            _mapper = mapper;
+            _configuration = configuration;
+        }
+
+        public void Configure(string name, ServiceModelOptions options)
+        {
+            foreach (var service in _configuration.Services)
             {
-                Configuration = ServiceModelConfiguration.Parse(reader);
+                if (string.Equals(service.Name, name, StringComparison.Ordinal))
+                {
+                    foreach (var endpoint in service.Endpoints)
+                    {
+                        options.Services.Add(_mapper.GetType(endpoint.Contract), new ServiceModelService
+                        {
+                            Endpoint = new EndpointAddress(endpoint.Address)
+                        });
+                    }
+                }
             }
         }
 
-        public XmlServiceModelOptions(Stream stream)
+        public void Configure(ServiceModelOptions options)
         {
-            using (var reader = XmlReader.Create(stream))
-            {
-                Configuration = ServiceModelConfiguration.Parse(reader);
-            }
         }
-
-        public XmlServiceModelOptions(TextReader text)
-        {
-            using (var reader = XmlReader.Create(text))
-            {
-                Configuration = ServiceModelConfiguration.Parse(reader);
-            }
-        }
-
-        public ServiceModelConfiguration Configuration { get; }
-
-        public void Configure(string name, ServiceModelOptions options) => throw new NotImplementedException();
-
-        public void Configure(ServiceModelOptions options) => throw new NotImplementedException();
     }
 }

@@ -1,25 +1,48 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using NSubstitute;
 using System;
+using System.IO;
 using Xunit;
 
 namespace ServiceModel.Configuration.Xml.Tests
 {
     public class ServiceModelXmlExtensionsTests
     {
-        [Fact(Skip = "Not implemented yet")]
-        public void XmlConfiguration()
+        [Fact]
+        public void SingleService()
         {
-            void Configure(ServiceModelBuilder builder)
-            {
-                builder.AddXmlConfiguration("config1.xml");
-            }
+            var xml = @"
+<configuration>
+    <system.serviceModel>
+        <services>
+            <service name=""service1"">
+                <endpoint
+                    address=""http://service1""
+                    contract=""IService"" />
+            </service>
+        </services>
+    </system.serviceModel>
+</configuration>";
 
-            using (var provider = CreateProvider(Configure))
+            using (var fs = TemporaryFileStream.Create(xml))
             {
-                var factoryProvider = provider.GetRequiredService<IChannelFactoryProvider>();
-                var factory = factoryProvider.CreateChannelFactory<IService>("service1");
+                void Configure(ServiceModelBuilder builder)
+                {
+                    var mapper = Substitute.For<ITypeMapper>();
 
-                Assert.Single(factory.Endpoint.EndpointBehaviors);
+                    mapper.GetType("IService").Returns(typeof(IService));
+
+                    builder.Services.AddSingleton<ITypeMapper>(mapper);
+                    builder.AddXmlConfiguration(fs.Name);
+                }
+
+                using (var provider = CreateProvider(Configure))
+                {
+                    var factoryProvider = provider.GetRequiredService<IChannelFactoryProvider>();
+                    var factory = factoryProvider.CreateChannelFactory<IService>("service1");
+
+                    Assert.Equal("http://service1/", factory.Endpoint.Address.ToString());
+                }
             }
         }
 
@@ -34,6 +57,33 @@ namespace ServiceModel.Configuration.Xml.Tests
             configure(services.AddServiceModelClient());
 
             return services.BuildServiceProvider();
+        }
+
+        private class TemporaryFileStream : FileStream
+        {
+            private TemporaryFileStream(string path)
+                : base(path, FileMode.Open, FileAccess.Read)
+            {
+            }
+
+            public static FileStream Create(string xml)
+            {
+                var path = Path.GetTempFileName();
+
+                File.WriteAllText(path, xml);
+
+                return new TemporaryFileStream(path);
+            }
+
+            protected override void Dispose(bool disposing)
+            {
+                base.Dispose(disposing);
+
+                if (disposing)
+                {
+                    File.Delete(Name);
+                }
+            }
         }
     }
 }

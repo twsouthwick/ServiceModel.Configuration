@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using ServiceModel.Configuration.Xml;
+using System.Xml;
 
 namespace ServiceModel.Configuration
 {
@@ -8,9 +9,14 @@ namespace ServiceModel.Configuration
     {
         public static ServiceModelBuilder AddXmlConfiguration(this ServiceModelBuilder builder, string path)
         {
-            builder.Services.AddSingleton<IConfigureNamedOptions<ServiceModelOptions>>(new XmlServiceModelOptions(path));
+            using (var reader = XmlReader.Create(path))
+            {
+                var configuration = ServiceModelConfiguration.Parse(reader);
 
-            return builder;
+                builder.Services.AddSingleton<IConfigureOptions<ServiceModelOptions>>(ctx => new XmlServiceModelOptions(ctx.GetRequiredService<ITypeMapper>(), configuration));
+
+                return builder;
+            }
         }
     }
 }
