@@ -49,8 +49,9 @@ namespace ServiceModel.Configuration.Tests
 
                 var service = Assert.Single(config.Services);
 
-                Assert.Equal("Service1", service.Name);
-                var endpoint = Assert.Single(service.Endpoints);
+                Assert.Equal("Service1", service.Key);
+                Assert.Equal("Service1", service.Value.Name);
+                var endpoint = Assert.Single(service.Value.Endpoints);
 
                 Assert.Equal("http://service1", endpoint.Address);
                 Assert.Equal("MyContract", endpoint.Contract);

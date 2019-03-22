@@ -17,23 +17,20 @@ namespace ServiceModel.Configuration.Xml
 
         public void Configure(string name, ServiceModelOptions options)
         {
-            foreach (var service in _configuration.Services)
+            if (_configuration.Services.TryGetValue(name, out var service))
             {
-                if (string.Equals(service.Name, name, StringComparison.Ordinal))
+                foreach (var endpoint in service.Endpoints)
                 {
-                    foreach (var endpoint in service.Endpoints)
+                    if (_mapper.TryResolve(endpoint.Contract, out var contract))
                     {
-                        if (_mapper.TryResolve(endpoint.Contract, out var contract))
+                        options.Services.Add(contract, new ServiceModelService
                         {
-                            options.Services.Add(contract, new ServiceModelService
-                            {
-                                Endpoint = new EndpointAddress(endpoint.Address)
-                            });
-                        }
-                        else
-                        {
-                            throw new ServiceConfigurationException($"Could not resolve contract type '{endpoint.Contract}'");
-                        }
+                            Endpoint = new EndpointAddress(endpoint.Address)
+                        });
+                    }
+                    else
+                    {
+                        throw new ServiceConfigurationException($"Could not resolve contract type '{endpoint.Contract}'");
                     }
                 }
             }

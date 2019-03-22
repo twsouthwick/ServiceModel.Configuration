@@ -39,14 +39,14 @@ namespace ServiceModel.Configuration.Xml
             IReadOnlyCollection<IOperationBehavior> operationBehaviors
             )
         {
-            Services = services ?? Array.Empty<Service>();
+            Services = (services ?? Array.Empty<Service>()).ToDictionary(t => t.Name, StringComparer.Ordinal);
             Bindings = bindings ?? Array.Empty<Binding>();
             ContractBehaviors = contractBehaviors ?? Array.Empty<IContractBehavior>();
             EndpointBehaviors = endpointBehaviors ?? Array.Empty<IEndpointBehavior>();
             OperationBehaviors = operationBehaviors ?? Array.Empty<IOperationBehavior>();
         }
 
-        public IReadOnlyCollection<Service> Services { get; }
+        public IReadOnlyDictionary<string, Service> Services { get; }
 
         public IReadOnlyCollection<Binding> Bindings { get; }
 
