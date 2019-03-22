@@ -20,9 +20,14 @@ namespace ServiceModel.Configuration
                 throw new ArgumentNullException(nameof(name));
             }
 
-            var endpoint = _options.Get(name).ToServiceEndpoint(name);
+            if (_options.Get(name).Services.TryGet<T>(out var service))
+            {
+                var endpoint = service.ToServiceEndpoint(name);
 
-            return new ConfiguredChannelFactory<T>(endpoint);
+                return new ConfiguredChannelFactory<T>(endpoint);
+            }
+
+            throw new ServiceConfigurationException($"No service for {typeof(T)} is available for {name}");
         }
     }
 }

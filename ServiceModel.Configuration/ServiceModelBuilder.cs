@@ -1,8 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 using System;
 using System.ServiceModel.Description;
-using System.Xml;
 
 namespace ServiceModel.Configuration
 {
@@ -26,7 +24,10 @@ namespace ServiceModel.Configuration
         {
             Services.ConfigureAll<ServiceModelOptions>(option =>
             {
-                option.Behaviors.Add(behavior);
+                foreach (var service in option.Services)
+                {
+                    service.Behaviors.Add(behavior);
+                }
             });
 
             return this;

@@ -30,8 +30,8 @@ namespace ServiceModel.Configuration.Tests
                 var factoryProvider = provider.GetRequiredService<IChannelFactoryProvider>();
 
                 Assert.Throws<ArgumentNullException>(() => factoryProvider.CreateChannelFactory<IService>(null));
-                Assert.Throws<UnknownEndpointException>(() => factoryProvider.CreateChannelFactory<IService>(string.Empty));
-                Assert.Throws<UnknownEndpointException>(() => factoryProvider.CreateChannelFactory<IService>(_fixture.Create<string>()));
+                Assert.Throws<ServiceConfigurationException>(() => factoryProvider.CreateChannelFactory<IService>(string.Empty));
+                Assert.Throws<ServiceConfigurationException>(() => factoryProvider.CreateChannelFactory<IService>(_fixture.Create<string>()));
             }
         }
 
@@ -45,7 +45,10 @@ namespace ServiceModel.Configuration.Tests
             {
                 wcf.AddServiceEndpoint(name, e =>
                 {
-                    e.Endpoint = endpoint;
+                    e.Services.Add<IService>(new ServiceModelService
+                    {
+                        Endpoint = endpoint
+                    });
                 });
             }
 
@@ -68,8 +71,14 @@ namespace ServiceModel.Configuration.Tests
             {
                 wcf.AddServiceEndpoint(name, e =>
                 {
-                    e.Endpoint = _fixture.Create<EndpointAddress>();
-                    e.Behaviors.Add(behavior);
+                    var service = new ServiceModelService
+                    {
+                        Endpoint = _fixture.Create<EndpointAddress>(),
+                    };
+
+                    service.Behaviors.Add(behavior);
+
+                    e.Services.Add<IService>(service);
                 });
             }
 
@@ -93,7 +102,10 @@ namespace ServiceModel.Configuration.Tests
             {
                 wcf.AddServiceEndpoint(name, e =>
                 {
-                    e.Endpoint = _fixture.Create<EndpointAddress>();
+                    e.Services.Add<IService>(new ServiceModelService
+                    {
+                        Endpoint = _fixture.Create<EndpointAddress>(),
+                    });
                 });
 
                 wcf.AddGlobalBehavior(behavior);

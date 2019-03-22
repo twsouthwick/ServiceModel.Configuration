@@ -6,10 +6,6 @@ namespace ServiceModel.Configuration
     {
         public void PostConfigure(string name, ServiceModelOptions options)
         {
-            if (options.Endpoint == null)
-            {
-                throw new UnknownEndpointException(name);
-            }
         }
     }
 }
