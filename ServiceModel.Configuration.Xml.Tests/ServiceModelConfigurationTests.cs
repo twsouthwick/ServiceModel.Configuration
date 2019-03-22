@@ -5,7 +5,7 @@ using Xunit;
 
 namespace ServiceModel.Configuration.Tests
 {
-    public class ServiceModelConfigurationTests
+    public class ServiceModelConfigurationTests : ServiceModelTestBase
     {
         [Fact]
         public void EmptyModel()

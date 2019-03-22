@@ -4,12 +4,12 @@ using System.ServiceModel;
 
 namespace ServiceModel.Configuration.Xml
 {
-     internal class XmlServiceModelOptions : IConfigureNamedOptions<ServiceModelOptions>
+    internal class XmlServiceModelOptions : IConfigureNamedOptions<ServiceModelOptions>
     {
-        private readonly ITypeMapper _mapper;
+        private readonly IContractResolver _mapper;
         private readonly ServiceModelConfiguration _configuration;
 
-        public XmlServiceModelOptions(ITypeMapper mapper, ServiceModelConfiguration configuration)
+        public XmlServiceModelOptions(IContractResolver mapper, ServiceModelConfiguration configuration)
         {
             _mapper = mapper;
             _configuration = configuration;
@@ -23,10 +23,17 @@ namespace ServiceModel.Configuration.Xml
                 {
                     foreach (var endpoint in service.Endpoints)
                     {
-                        options.Services.Add(_mapper.GetType(endpoint.Contract), new ServiceModelService
+                        if (_mapper.TryResolve(endpoint.Contract, out var contract))
                         {
-                            Endpoint = new EndpointAddress(endpoint.Address)
-                        });
+                            options.Services.Add(contract, new ServiceModelService
+                            {
+                                Endpoint = new EndpointAddress(endpoint.Address)
+                            });
+                        }
+                        else
+                        {
+                            throw new ServiceConfigurationException($"Could not resolve contract type '{endpoint.Contract}'");
+                        }
                     }
                 }
             }

@@ -9,19 +9,8 @@ using Xunit;
 
 namespace ServiceModel.Configuration.Tests
 {
-    public class ServiceModelBuilderTests
+    public class ServiceModelBuilderTests : ServiceModelTestBase
     {
-        private readonly Fixture _fixture;
-
-        public ServiceModelBuilderTests()
-        {
-            _fixture = new Fixture();
-
-            _fixture.Register<string>(() => $"string_{Guid.NewGuid()}");
-            _fixture.Register<EndpointAddress>(() => new EndpointAddress(_fixture.Create<Uri>().ToString()));
-            _fixture.Register<Uri>(() => new Uri($"http://{Guid.NewGuid()}"));
-        }
-
         [Fact]
         public void NoEndpointRegistered()
         {
@@ -31,15 +20,15 @@ namespace ServiceModel.Configuration.Tests
 
                 Assert.Throws<ArgumentNullException>(() => factoryProvider.CreateChannelFactory<IService>(null));
                 Assert.Throws<ServiceConfigurationException>(() => factoryProvider.CreateChannelFactory<IService>(string.Empty));
-                Assert.Throws<ServiceConfigurationException>(() => factoryProvider.CreateChannelFactory<IService>(_fixture.Create<string>()));
+                Assert.Throws<ServiceConfigurationException>(() => factoryProvider.CreateChannelFactory<IService>(Create<string>()));
             }
         }
 
         [Fact]
         public void RegisteredEndpoint()
         {
-            var endpoint = _fixture.Create<EndpointAddress>();
-            var name = _fixture.Create<string>();
+            var endpoint = Create<EndpointAddress>();
+            var name = Create<string>();
 
             void Configure(ServiceModelBuilder wcf)
             {
@@ -64,7 +53,7 @@ namespace ServiceModel.Configuration.Tests
         [Fact]
         public void CustomBehavior()
         {
-            var name = _fixture.Create<string>();
+            var name = Create<string>();
             var behavior = Substitute.For<IEndpointBehavior>();
 
             void Configure(ServiceModelBuilder wcf)
@@ -73,7 +62,7 @@ namespace ServiceModel.Configuration.Tests
                 {
                     var service = new ServiceModelService
                     {
-                        Endpoint = _fixture.Create<EndpointAddress>(),
+                        Endpoint = Create<EndpointAddress>(),
                     };
 
                     service.Behaviors.Add(behavior);
@@ -95,7 +84,7 @@ namespace ServiceModel.Configuration.Tests
         [Fact]
         public void GlobalCustomBehavior()
         {
-            var name = _fixture.Create<string>();
+            var name = Create<string>();
             var behavior = Substitute.For<IEndpointBehavior>();
 
             void Configure(ServiceModelBuilder wcf)
@@ -104,7 +93,7 @@ namespace ServiceModel.Configuration.Tests
                 {
                     e.Services.Add<IService>(new ServiceModelService
                     {
-                        Endpoint = _fixture.Create<EndpointAddress>(),
+                        Endpoint = Create<EndpointAddress>(),
                     });
                 });
 
@@ -119,19 +108,6 @@ namespace ServiceModel.Configuration.Tests
                 Assert.Equal(2, factory.Endpoint.EndpointBehaviors.Count);
                 Assert.Single(factory.Endpoint.EndpointBehaviors.Where(b => b == behavior));
             }
-        }
-
-        private interface IService
-        {
-        }
-
-        public ServiceProvider CreateProvider(Action<ServiceModelBuilder> configure)
-        {
-            var services = new ServiceCollection();
-
-            configure(services.AddServiceModelClient());
-
-            return services.BuildServiceProvider();
         }
     }
 }

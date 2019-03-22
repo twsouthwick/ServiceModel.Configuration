@@ -13,7 +13,7 @@ namespace ServiceModel.Configuration
             {
                 var configuration = ServiceModelConfiguration.Parse(reader);
 
-                builder.Services.AddSingleton<IConfigureOptions<ServiceModelOptions>>(ctx => new XmlServiceModelOptions(ctx.GetRequiredService<ITypeMapper>(), configuration));
+                builder.Services.AddSingleton<IConfigureOptions<ServiceModelOptions>>(ctx => new XmlServiceModelOptions(ctx.GetRequiredService<IContractResolver>(), configuration));
 
                 return builder;
             }

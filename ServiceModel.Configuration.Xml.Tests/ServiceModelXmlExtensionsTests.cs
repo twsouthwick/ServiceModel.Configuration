@@ -6,19 +6,21 @@ using Xunit;
 
 namespace ServiceModel.Configuration.Xml.Tests
 {
-    public class ServiceModelXmlExtensionsTests
+    public class ServiceModelXmlExtensionsTests : ServiceModelTestBase
     {
         [Fact]
-        public void SingleService()
+        public void SingleServiceDefaultResolver()
         {
-            var xml = @"
+            var name = Create<string>();
+            var address = Create<Uri>().ToString();
+            var xml = $@"
 <configuration>
     <system.serviceModel>
         <services>
-            <service name=""service1"">
+            <service name=""{name}"">
                 <endpoint
-                    address=""http://service1""
-                    contract=""IService"" />
+                    address=""{address}""
+                    contract=""{typeof(IService).FullName}"" />
             </service>
         </services>
     </system.serviceModel>
@@ -28,35 +30,63 @@ namespace ServiceModel.Configuration.Xml.Tests
             {
                 void Configure(ServiceModelBuilder builder)
                 {
-                    var mapper = Substitute.For<ITypeMapper>();
-
-                    mapper.GetType("IService").Returns(typeof(IService));
-
-                    builder.Services.AddSingleton<ITypeMapper>(mapper);
                     builder.AddXmlConfiguration(fs.Name);
                 }
 
                 using (var provider = CreateProvider(Configure))
                 {
                     var factoryProvider = provider.GetRequiredService<IChannelFactoryProvider>();
-                    var factory = factoryProvider.CreateChannelFactory<IService>("service1");
+                    var factory = factoryProvider.CreateChannelFactory<IService>(name);
 
-                    Assert.Equal("http://service1/", factory.Endpoint.Address.ToString());
+                    Assert.Equal(address, factory.Endpoint.Address.ToString());
                 }
             }
         }
 
-        private interface IService
+        [Fact]
+        public void SingleServiceCustomResolver()
         {
-        }
+            var name = Create<string>();
+            var address = Create<Uri>().ToString();
+            var contract = Create<string>();
+            var xml = $@"
+<configuration>
+    <system.serviceModel>
+        <services>
+            <service name=""{name}"">
+                <endpoint
+                    address=""{address}""
+                    contract=""{contract}"" />
+            </service>
+        </services>
+    </system.serviceModel>
+</configuration>";
 
-        public ServiceProvider CreateProvider(Action<ServiceModelBuilder> configure)
-        {
-            var services = new ServiceCollection();
+            using (var fs = TemporaryFileStream.Create(xml))
+            {
+                void Configure(ServiceModelBuilder builder)
+                {
+                    var mapper = Substitute.For<IContractResolver>();
 
-            configure(services.AddServiceModelClient());
+                    mapper.TryResolve(contract, out Arg.Any<Type>())
+                        .Returns(x =>
+                        {
+                            x[1] = typeof(IService);
+                            return true;
+                        });
 
-            return services.BuildServiceProvider();
+                    builder.Services.AddSingleton<IContractResolver>(mapper);
+                    builder.AddXmlConfiguration(fs.Name);
+                }
+
+                using (var provider = CreateProvider(Configure))
+                {
+                    var factoryProvider = provider.GetRequiredService<IChannelFactoryProvider>();
+                    var factory = factoryProvider.CreateChannelFactory<IService>(name);
+
+                    Assert.Equal(address, factory.Endpoint.Address.ToString());
+                }
+            }
         }
 
         private class TemporaryFileStream : FileStream

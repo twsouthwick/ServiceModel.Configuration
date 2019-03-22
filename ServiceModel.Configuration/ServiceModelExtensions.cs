@@ -12,6 +12,8 @@ namespace ServiceModel.Configuration
             services.AddTransient<IPostConfigureOptions<ServiceModelOptions>, ServiceEndpointValidation>();
             services.AddSingleton<IChannelFactoryProvider, ChannelFactoryProvider>();
 
+            services.AddSingleton<IContractResolver, DefaultContractResolver>();
+
             return new ServiceModelBuilder(services);
         }
     }
