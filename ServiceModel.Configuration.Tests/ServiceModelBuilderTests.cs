@@ -1,4 +1,3 @@
-using AutoFixture;
 using Microsoft.Extensions.DependencyInjection;
 using NSubstitute;
 using System;
@@ -34,9 +33,42 @@ namespace ServiceModel.Configuration.Tests
             {
                 wcf.AddServiceEndpoint(name, e =>
                 {
-                    e.Services.Add<IService>(new ServiceModelService
+                    e.Services.Add<IService>(s =>
                     {
-                        Endpoint = endpoint
+                        s.Endpoint = endpoint;
+                    });
+                });
+            }
+
+            using (var provider = CreateProvider(Configure))
+            {
+                var factoryProvider = provider.GetRequiredService<IChannelFactoryProvider>();
+                var factory = factoryProvider.CreateChannelFactory<IService>(name);
+
+                Assert.Equal(endpoint, factory.Endpoint.Address);
+            }
+        }
+
+        [Fact]
+        public void RegisteredEndpointTwice()
+        {
+            var endpoint = Create<EndpointAddress>();
+            var name = Create<string>();
+
+            void Configure(ServiceModelBuilder wcf)
+            {
+                wcf.AddServiceEndpoint(name, e =>
+                {
+                    e.Services.Add<IService>(s =>
+                    {
+                        s.Endpoint = endpoint;
+                    });
+                });
+
+                wcf.AddServiceEndpoint(name, e =>
+                {
+                    e.Services.Add<IService>(s =>
+                    {
                     });
                 });
             }
@@ -60,14 +92,12 @@ namespace ServiceModel.Configuration.Tests
             {
                 wcf.AddServiceEndpoint(name, e =>
                 {
-                    var service = new ServiceModelService
+                    e.Services.Add<IService>(s =>
                     {
-                        Endpoint = Create<EndpointAddress>(),
-                    };
+                        s.Endpoint = Create<EndpointAddress>();
 
-                    service.Behaviors.Add(behavior);
-
-                    e.Services.Add<IService>(service);
+                        s.Behaviors.Add(behavior);
+                    });
                 });
             }
 
@@ -91,9 +121,9 @@ namespace ServiceModel.Configuration.Tests
             {
                 wcf.AddServiceEndpoint(name, e =>
                 {
-                    e.Services.Add<IService>(new ServiceModelService
+                    e.Services.Add<IService>(s =>
                     {
-                        Endpoint = Create<EndpointAddress>(),
+                        s.Endpoint = Create<EndpointAddress>();
                     });
                 });
 

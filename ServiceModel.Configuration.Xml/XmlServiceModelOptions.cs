@@ -23,9 +23,9 @@ namespace ServiceModel.Configuration.Xml
                 {
                     if (_mapper.TryResolve(endpoint.Contract, out var contract))
                     {
-                        options.Services.Add(contract, new ServiceModelService
+                        options.Services.Add(contract, s =>
                         {
-                            Endpoint = new EndpointAddress(endpoint.Address)
+                            s.Endpoint = new EndpointAddress(endpoint.Address);
                         });
                     }
                     else

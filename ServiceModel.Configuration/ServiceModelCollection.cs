@@ -8,24 +8,29 @@ namespace ServiceModel.Configuration
     {
         private readonly Dictionary<Type, ServiceModelService> _services = new Dictionary<Type, ServiceModelService>();
 
-        public void Add(Type type, ServiceModelService service)
+        public void Add<T>(Action<ServiceModelService> configure) => Add(typeof(T), configure);
+
+        public void Add(Type type, Action<ServiceModelService> configure)
         {
             Validate(type);
 
-            _services[type] = service ?? throw new ArgumentNullException(nameof(service));
-        }
-
-        public bool TryAdd(Type type, ServiceModelService service)
-        {
-            Validate(type);
-
-            if (!_services.ContainsKey(type))
+            if (configure == null)
             {
-                _services[type] = service ?? throw new ArgumentNullException(nameof(service));
-                return true;
+                throw new ArgumentNullException(nameof(configure));
             }
 
-            return false;
+            if (_services.TryGetValue(type, out var current))
+            {
+                configure(current);
+            }
+            else
+            {
+                var service = new ServiceModelService();
+
+                configure(service);
+
+                _services.Add(type, service);
+            }
         }
 
         public bool TryGet<T>(out ServiceModelService service) => _services.TryGetValue(typeof(T), out service);
