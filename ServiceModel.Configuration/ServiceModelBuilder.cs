@@ -13,8 +13,18 @@ namespace ServiceModel.Configuration
 
         public IServiceCollection Services { get; }
 
+        public ServiceModelBuilder AddServiceEndpoint(Action<ServiceModelOptions> configure)
+        {
+            return AddServiceEndpoint(ServiceModelDefaults.DefaultName, configure);
+        }
+
         public ServiceModelBuilder AddServiceEndpoint(string name, Action<ServiceModelOptions> configure)
         {
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
             Services.Configure(name, configure);
 
             return this;

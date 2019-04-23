@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using System.ServiceModel;
 using System.ServiceModel.Description;
 
 namespace ServiceModel.Configuration
@@ -10,7 +11,9 @@ namespace ServiceModel.Configuration
         {
             services.AddOptions<ServiceEndpoint>();
             services.AddTransient<IPostConfigureOptions<ServiceModelOptions>, ServiceEndpointValidation>();
-            services.AddSingleton<IChannelFactoryProvider, ChannelFactoryProvider>();
+            services.AddSingleton<IChannelFactoryProvider>(ctx => ctx.GetRequiredService<ChannelFactoryProvider>());
+            services.AddSingleton<ChannelFactoryProvider>();
+            services.AddSingleton(typeof(ChannelFactory<>), typeof(ConfiguredChannelFactory<>));
 
             services.AddSingleton<IContractResolver, DefaultContractResolver>();
 

@@ -139,5 +139,29 @@ namespace ServiceModel.Configuration.Tests
                 Assert.Single(factory.Endpoint.EndpointBehaviors.Where(b => b == behavior));
             }
         }
+
+        [Fact]
+        public void DefaultServiceEndpoint()
+        {
+            var endpoint = Create<EndpointAddress>();
+
+            void Configure(ServiceModelBuilder wcf)
+            {
+                wcf.AddServiceEndpoint(ServiceModelDefaults.DefaultName, e =>
+                {
+                    e.Services.Add<IService>(s =>
+                    {
+                        s.Endpoint = endpoint;
+                    });
+                });
+            }
+
+            using (var provider = CreateProvider(Configure))
+            {
+                var factory = provider.GetRequiredService<ChannelFactory<IService>>();
+
+                Assert.Equal(endpoint, factory.Endpoint.Address);
+            }
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
 using System;
 using System.ServiceModel;
+using System.ServiceModel.Description;
 
 namespace ServiceModel.Configuration
 {
@@ -13,7 +14,7 @@ namespace ServiceModel.Configuration
             _options = options;
         }
 
-        public ChannelFactory<T> CreateChannelFactory<T>(string name)
+        public ServiceEndpoint GetEndpoint<T>(string name)
         {
             if (name == null)
             {
@@ -24,10 +25,12 @@ namespace ServiceModel.Configuration
             {
                 var endpoint = service.ToServiceEndpoint(name);
 
-                return new ConfiguredChannelFactory<T>(endpoint);
+                return endpoint;
             }
 
             throw new ServiceConfigurationException($"No service for {typeof(T)} is available for {name}");
         }
+
+        public ChannelFactory<T> CreateChannelFactory<T>(string name) => new ConfiguredChannelFactory<T>(GetEndpoint<T>(name));
     }
 }

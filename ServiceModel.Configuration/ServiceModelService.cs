@@ -15,6 +15,11 @@ namespace ServiceModel.Configuration
 
         internal ServiceEndpoint ToServiceEndpoint(string name)
         {
+            if (string.IsNullOrEmpty(name))
+            {
+                name = "Default";
+            }
+
             var endpoint = new ServiceEndpoint(new ContractDescription(name), Binding, Endpoint);
 
             foreach (var behavior in Behaviors)
