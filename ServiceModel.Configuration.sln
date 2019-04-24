@@ -3,17 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28711.60
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceModel.Configuration", "ServiceModel.Configuration\ServiceModel.Configuration.csproj", "{4D5C3F71-66A8-4729-9229-8023AC41E445}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceModel.Configuration", "ServiceModel.Configuration\ServiceModel.Configuration.csproj", "{4D5C3F71-66A8-4729-9229-8023AC41E445}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceModel.Configuration.Tests", "ServiceModel.Configuration.Tests\ServiceModel.Configuration.Tests.csproj", "{40719496-B3DE-49B1-8BAF-30AA010569A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceModel.Configuration.Tests", "ServiceModel.Configuration.Tests\ServiceModel.Configuration.Tests.csproj", "{40719496-B3DE-49B1-8BAF-30AA010569A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceModel.Configuration.Xml", "ServiceModel.Configuration.Xml\ServiceModel.Configuration.Xml.csproj", "{B3346119-AF4C-4EB5-9AAB-59106F8D0E60}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceModel.Configuration.Xml", "ServiceModel.Configuration.Xml\ServiceModel.Configuration.Xml.csproj", "{B3346119-AF4C-4EB5-9AAB-59106F8D0E60}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{58A73F5D-7542-43BC-AC68-6035D6A65BF4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{20408FB4-DA83-4757-98BD-15006F78184E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceModel.Configuration.Xml.Tests", "ServiceModel.Configuration.Xml.Tests\ServiceModel.Configuration.Xml.Tests.csproj", "{43B7F507-285E-4D0A-B9BC-F0B660FE8E30}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceModel.Configuration.Xml.Tests", "ServiceModel.Configuration.Xml.Tests\ServiceModel.Configuration.Xml.Tests.csproj", "{43B7F507-285E-4D0A-B9BC-F0B660FE8E30}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sample", "sample", "{F0F675EF-ABF0-4118-ACCB-F9A7A151020B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigurationSample", "sample\ConfigurationSample\ConfigurationSample.csproj", "{54B6B989-9C2E-4EC5-8B1B-974AA48AF349}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +41,10 @@ Global
 		{43B7F507-285E-4D0A-B9BC-F0B660FE8E30}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{43B7F507-285E-4D0A-B9BC-F0B660FE8E30}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{43B7F507-285E-4D0A-B9BC-F0B660FE8E30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54B6B989-9C2E-4EC5-8B1B-974AA48AF349}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54B6B989-9C2E-4EC5-8B1B-974AA48AF349}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54B6B989-9C2E-4EC5-8B1B-974AA48AF349}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54B6B989-9C2E-4EC5-8B1B-974AA48AF349}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -46,6 +54,7 @@ Global
 		{40719496-B3DE-49B1-8BAF-30AA010569A8} = {20408FB4-DA83-4757-98BD-15006F78184E}
 		{B3346119-AF4C-4EB5-9AAB-59106F8D0E60} = {58A73F5D-7542-43BC-AC68-6035D6A65BF4}
 		{43B7F507-285E-4D0A-B9BC-F0B660FE8E30} = {20408FB4-DA83-4757-98BD-15006F78184E}
+		{54B6B989-9C2E-4EC5-8B1B-974AA48AF349} = {F0F675EF-ABF0-4118-ACCB-F9A7A151020B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F97525AA-4A0C-4437-BC31-3E562F758A8D}
