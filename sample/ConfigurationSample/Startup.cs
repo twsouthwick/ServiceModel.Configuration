@@ -1,16 +1,9 @@
-﻿using System;
-using ServiceModel.Configuration;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using ServiceModel.Configuration;
 using System.ServiceModel;
 
 namespace ConfigurationSample
@@ -29,11 +22,12 @@ namespace ConfigurationSample
         {
             services.AddServiceModelClient()
                 .AddXmlConfiguration("wcf.config")
-                .AddServiceEndpoint(options=>
+                .AddServiceEndpoint(options =>
                 {
-                    options.Services.Add<IService>(o =>
+                    options.Services.Add<IRoleService>(o =>
                     {
                         o.Binding = new BasicHttpBinding();
+                        o.Endpoint = new EndpointAddress("http://localhost:8090/roles");
                     });
                 });
 

@@ -12,22 +12,5 @@ namespace ServiceModel.Configuration
         public Binding Binding { get; set; }
 
         public ICollection<IEndpointBehavior> Behaviors { get; } = new List<IEndpointBehavior>();
-
-        internal ServiceEndpoint ToServiceEndpoint(string name)
-        {
-            if (string.IsNullOrEmpty(name))
-            {
-                name = "Default";
-            }
-
-            var endpoint = new ServiceEndpoint(new ContractDescription(name), Binding, Endpoint);
-
-            foreach (var behavior in Behaviors)
-            {
-                endpoint.EndpointBehaviors.Add(behavior);
-            }
-
-            return endpoint;
-        }
     }
 }

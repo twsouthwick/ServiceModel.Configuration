@@ -5,7 +5,7 @@ using System.ServiceModel;
 
 namespace ServiceModel.Configuration
 {
-    public class ServiceModelTestBase
+    public abstract class ServiceModelTestBase
     {
         private readonly Fixture _fixture;
 
@@ -20,6 +20,7 @@ namespace ServiceModel.Configuration
 
         protected T Create<T>() => _fixture.Create<T>();
 
+        [ServiceContract]
         protected interface IService
         {
         }

@@ -11,11 +11,13 @@ namespace ConfigurationSample.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        private readonly ChannelFactory<IService> _service;
+        private readonly ChannelFactory<IRoleService> _service;
 
-        public ValuesController(ChannelFactory<IService> service)
+        public ValuesController(ChannelFactory<IRoleService> service)
         {
             _service = service;
+            var channel = service.CreateChannel();
+            var role = channel.GetRoles("user1");
         }
 
         // GET api/values
