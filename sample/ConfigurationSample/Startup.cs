@@ -21,7 +21,7 @@ namespace ConfigurationSample
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddServiceModelClient()
-                .AddXmlConfiguration("wcf.config")
+                .AddConfigurationManagerFile("wcf.config")
                 .AddServiceEndpoint(options =>
                 {
                     options.Services.Add<IRoleService>(o =>

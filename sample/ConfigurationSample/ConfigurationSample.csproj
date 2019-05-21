@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\ServiceModel.Configuration.Xml\ServiceModel.Configuration.Xml.csproj" />
+    <ProjectReference Include="..\..\ServiceModel.Configuration.ConfigurationManager\ServiceModel.Configuration.ConfigurationManager.csproj" />
     <ProjectReference Include="..\..\ServiceModel.Configuration\ServiceModel.Configuration.csproj" />
   </ItemGroup>
 

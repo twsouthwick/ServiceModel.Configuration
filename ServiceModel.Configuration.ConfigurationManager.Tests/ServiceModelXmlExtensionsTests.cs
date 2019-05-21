@@ -30,7 +30,7 @@ namespace ServiceModel.Configuration.Xml.Tests
             {
                 void Configure(ServiceModelBuilder builder)
                 {
-                    builder.AddXmlConfiguration(fs.Name);
+                    builder.AddConfigurationManagerFile(fs.Name);
                 }
 
                 using (var provider = CreateProvider(Configure))
@@ -76,7 +76,7 @@ namespace ServiceModel.Configuration.Xml.Tests
                         });
 
                     builder.Services.AddSingleton<IContractResolver>(mapper);
-                    builder.AddXmlConfiguration(fs.Name);
+                    builder.AddConfigurationManagerFile(fs.Name);
                 }
 
                 using (var provider = CreateProvider(Configure))

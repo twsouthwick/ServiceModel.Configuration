@@ -7,7 +7,7 @@ namespace ServiceModel.Configuration
 {
     public static class ServiceModelXmlExtensions
     {
-        public static ServiceModelBuilder AddXmlConfiguration(this ServiceModelBuilder builder, string path)
+        public static ServiceModelBuilder AddConfigurationManagerFile(this ServiceModelBuilder builder, string path)
         {
             using (var reader = XmlReader.Create(path))
             {
