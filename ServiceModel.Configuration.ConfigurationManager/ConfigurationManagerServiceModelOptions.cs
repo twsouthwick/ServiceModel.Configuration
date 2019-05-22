@@ -1,11 +1,8 @@
 ﻿using Microsoft.Extensions.Options;
-using System;
 using System.Configuration;
-using System.IO;
 using System.Linq;
 using System.ServiceModel;
 using System.ServiceModel.Configuration;
-using System.Xml.Linq;
 
 namespace ServiceModel.Configuration.Xml
 {
@@ -22,9 +19,9 @@ namespace ServiceModel.Configuration.Xml
             _isOptional = isOptional;
         }
 
-        public void Configure(string name, ServiceModelOptions options)
+        public void Configure(string _, ServiceModelOptions options)
         {
-            var configuration = Load(_path);
+            var configuration = ConfigurationManager.OpenMappedMachineConfiguration(new ConfigurationFileMap(_path));
             var section = ServiceModelSectionGroup.GetSectionGroup(configuration);
 
             if (section == null)
@@ -34,48 +31,29 @@ namespace ServiceModel.Configuration.Xml
                     return;
                 }
 
-                throw new InvalidOperationException("Section not found");
+                throw new ServiceModelConfigurationException("Section not found");
             }
 
             if (section is ServiceModelSectionGroup group)
             {
-                Configure(name, options, group);
+                Configure(_, options, group);
             }
             else
             {
-                throw new InvalidOperationException("Not valid type");
+                throw new ServiceModelConfigurationException("Not valid type");
             }
         }
 
-        private static System.Configuration.Configuration Load(string path)
-        {
-            return ConfigurationManager.OpenMappedMachineConfiguration(new ConfigurationFileMap(path));
-            //var tmp = Path.GetTempFileName();
-
-            ////initial.SectionGroups.Add("system.serviceModel", new ServiceModelSectionGroup());
-
-            //initial.SaveAs(tmp);
-
-            //var final = ConfigurationManager.OpenMappedMachineConfiguration(new ConfigurationFileMap(tmp));
-
-            //File.Delete(tmp);
-
-            //return final;
-        }
-
-        private void Configure(string name, ServiceModelOptions options, ServiceModelSectionGroup group)
+        private void Configure(string _, ServiceModelOptions options, ServiceModelSectionGroup group)
         {
             foreach (var service in group.Services.Services.Cast<ServiceElement>())
             {
                 foreach (var endpoint in service.Endpoints.Cast<ServiceEndpointElement>())
                 {
-                    if (_mapper.TryResolve(endpoint.Contract, out var type))
+                    options.Services.Add(_mapper.ResolveContract(endpoint.Contract), o =>
                     {
-                        options.Services.Add(type, o =>
-                        {
-                            o.Endpoint = new EndpointAddress(endpoint.Address);
-                        });
-                    }
+                        o.Endpoint = new EndpointAddress(endpoint.Address);
+                    });
                 }
             }
         }

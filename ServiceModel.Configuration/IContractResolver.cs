@@ -1,9 +1,12 @@
 ﻿using System;
+using System.ServiceModel.Description;
 
 namespace ServiceModel.Configuration
 {
     public interface IContractResolver
     {
-        bool TryResolve(string name, out Type type);
+        Type ResolveContract(string name);
+
+        ContractDescription ResolveDescription(Type type);
     }
 }

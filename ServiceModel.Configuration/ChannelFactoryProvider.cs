@@ -8,10 +8,12 @@ namespace ServiceModel.Configuration
     internal class ChannelFactoryProvider : IChannelFactoryProvider
     {
         private readonly IOptionsMonitor<ServiceModelOptions> _options;
+        private readonly IContractResolver _contractResolver;
 
-        public ChannelFactoryProvider(IOptionsMonitor<ServiceModelOptions> options)
+        public ChannelFactoryProvider(IOptionsMonitor<ServiceModelOptions> options, IContractResolver contractResolver)
         {
             _options = options;
+            _contractResolver = contractResolver;
         }
 
         public ServiceEndpoint GetEndpoint<T>(string name)
@@ -31,9 +33,9 @@ namespace ServiceModel.Configuration
 
         public ChannelFactory<T> CreateChannelFactory<T>(string name) => new ConfiguredChannelFactory<T>(GetEndpoint<T>(name));
 
-        private static ServiceEndpoint CreateEndpoint<T>(ServiceModelService service)
+        private ServiceEndpoint CreateEndpoint<T>(ServiceModelService service)
         {
-            var contract = ContractDescription.GetContract(typeof(T));
+            var contract = _contractResolver.ResolveDescription(typeof(T));
             var endpoint = new ServiceEndpoint(contract, service.Binding, service.Endpoint);
 
             foreach (var behavior in service.Behaviors)

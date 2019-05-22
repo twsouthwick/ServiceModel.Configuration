@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Linq;
+using System.ServiceModel.Description;
 
 namespace ServiceModel.Configuration
 {
     internal class DefaultContractResolver : IContractResolver
     {
-        public bool TryResolve(string name, out Type type)
+        public virtual ContractDescription ResolveDescription(Type type) => ContractDescription.GetContract(type);
+
+        public virtual Type ResolveContract(string name)
         {
             var items = AppDomain.CurrentDomain.GetAssemblies().OrderBy(t => t.FullName).ToList();
 
@@ -13,13 +16,11 @@ namespace ServiceModel.Configuration
             {
                 if (assembly.GetType(name) is Type found)
                 {
-                    type = found;
-                    return true;
+                    return found;
                 }
             }
 
-            type = null;
-            return false;
+            throw new ServiceModelConfigurationException($"Could not resolve contract '{name}'");
         }
     }
 }

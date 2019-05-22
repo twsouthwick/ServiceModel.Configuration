@@ -2,6 +2,7 @@
 using NSubstitute;
 using System;
 using System.IO;
+using System.ServiceModel.Description;
 using Xunit;
 
 namespace ServiceModel.Configuration.Xml.Tests
@@ -78,12 +79,8 @@ namespace ServiceModel.Configuration.Xml.Tests
                 {
                     var mapper = Substitute.For<IContractResolver>();
 
-                    mapper.TryResolve(contract, out Arg.Any<Type>())
-                        .Returns(x =>
-                        {
-                            x[1] = typeof(IService);
-                            return true;
-                        });
+                    mapper.ResolveContract(contract).Returns(typeof(IService));
+                    mapper.ResolveDescription(typeof(IService)).Returns(ContractDescription.GetContract(typeof(IService)));
 
                     builder.Services.AddSingleton<IContractResolver>(mapper);
                     builder.AddConfigurationManagerFile(fs.Name);
