@@ -5,7 +5,7 @@ using System.IO;
 using System.ServiceModel.Description;
 using Xunit;
 
-namespace ServiceModel.Configuration.Xml.Tests
+namespace ServiceModel.Configuration.ConfigurationManager.Tests
 {
     public class ConfigurationManagerExtensionsTests : ServiceModelTestBase
     {

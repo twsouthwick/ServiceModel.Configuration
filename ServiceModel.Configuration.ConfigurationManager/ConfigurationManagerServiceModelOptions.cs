@@ -4,7 +4,7 @@ using System.Linq;
 using System.ServiceModel;
 using System.ServiceModel.Configuration;
 
-namespace ServiceModel.Configuration.Xml
+namespace ServiceModel.Configuration
 {
     internal class ConfigurationManagerServiceModelOptions : IConfigureNamedOptions<ServiceModelOptions>
     {
