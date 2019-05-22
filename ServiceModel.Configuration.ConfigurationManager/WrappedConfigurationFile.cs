@@ -10,14 +10,16 @@ namespace ServiceModel.Configuration
     {
         public WrappedConfigurationFile(string path)
         {
-            ConfigPath = Path.GetTempFileName();
-
-            var original = XDocument.Load(path);
-            WritePath(ConfigPath, original);
+            ConfigPath = WrapFile(XDocument.Load(path));
         }
 
-        private void WritePath(string configPath, XDocument original)
+        public string ConfigPath { get; }
+
+        public void Dispose() => File.Delete(ConfigPath);
+
+        private static string WrapFile(XDocument original)
         {
+            var configPath = Path.GetTempFileName();
             var serviceModel = original.Descendants("system.serviceModel");
 
             var doc = new XDocument(
@@ -31,10 +33,8 @@ namespace ServiceModel.Configuration
             {
                 doc.WriteTo(writer);
             }
+
+            return configPath;
         }
-
-        public string ConfigPath { get; }
-
-        public void Dispose() => File.Delete(ConfigPath);
     }
 }
