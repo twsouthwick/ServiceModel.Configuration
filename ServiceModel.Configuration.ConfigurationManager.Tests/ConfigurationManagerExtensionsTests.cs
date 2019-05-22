@@ -7,7 +7,7 @@ using Xunit;
 
 namespace ServiceModel.Configuration.Xml.Tests
 {
-    public class ServiceModelXmlExtensionsTests : ServiceModelTestBase
+    public class ConfigurationManagerExtensionsTests : ServiceModelTestBase
     {
         [Fact]
         public void SingleServiceDefaultResolver()
