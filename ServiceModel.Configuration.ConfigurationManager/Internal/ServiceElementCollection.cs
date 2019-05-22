@@ -10,7 +10,7 @@ namespace System.ServiceModel.Configuration
     using System.Globalization;
 
     [ConfigurationCollection(typeof(ServiceElement), AddItemName = ConfigurationStrings.Service)]
-    public sealed class ServiceElementCollection : ServiceModelEnhancedConfigurationElementCollection<ServiceElement>
+    internal sealed class ServiceElementCollection : ServiceModelEnhancedConfigurationElementCollection<ServiceElement>
     {
         public ServiceElementCollection()
             : base(ConfigurationStrings.Service)

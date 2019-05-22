@@ -12,7 +12,7 @@ namespace System.ServiceModel.Configuration
     using System.Globalization;
 
     [ConfigurationCollection(typeof(ServiceEndpointElement), AddItemName = ConfigurationStrings.Endpoint)]
-    public sealed class ServiceEndpointElementCollection : ServiceModelEnhancedConfigurationElementCollection<ServiceEndpointElement>
+    internal sealed class ServiceEndpointElementCollection : ServiceModelEnhancedConfigurationElementCollection<ServiceEndpointElement>
     {
         public ServiceEndpointElementCollection()
             : base(ConfigurationStrings.Endpoint)

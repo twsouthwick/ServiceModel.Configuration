@@ -3129,7 +3129,7 @@ using System.Globalization;
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class ServiceElement
+    sealed partial class ServiceElement
     {
         ConfigurationPropertyCollection properties;
 

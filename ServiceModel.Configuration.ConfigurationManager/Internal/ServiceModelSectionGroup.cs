@@ -8,7 +8,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel.Channels;
     using System.ServiceModel;
 
-    public sealed class ServiceModelSectionGroup : ConfigurationSectionGroup
+    internal sealed class ServiceModelSectionGroup : ConfigurationSectionGroup
     {
         public ServiceModelSectionGroup() { }
 

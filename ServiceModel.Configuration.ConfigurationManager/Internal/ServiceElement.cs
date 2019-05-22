@@ -8,7 +8,7 @@ namespace System.ServiceModel.Configuration
     using System.Runtime;
     using System.Security;
 
-    public sealed partial class ServiceElement : ConfigurationElement, IConfigurationContextProviderInternal
+    internal sealed partial class ServiceElement : ConfigurationElement, IConfigurationContextProviderInternal
     {
         [SecurityCritical]
         EvaluationContextHelper contextHelper;
