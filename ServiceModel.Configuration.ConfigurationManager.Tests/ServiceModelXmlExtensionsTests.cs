@@ -15,16 +15,21 @@ namespace ServiceModel.Configuration.Xml.Tests
             var address = Create<Uri>().ToString();
             var xml = $@"
 <configuration>
+    <configSections>
+        <sectionGroup name=""system.serviceModel"" type=""System.ServiceModel.Configuration.ServiceModelSectionGroup, ServiceModel.Configuration.ConfigurationManager, Version = 1.0.0.0, Culture = neutral, PublicKeyToken = null"" >
+            <section name=""services"" type=""System.ServiceModel.Configuration.ServicesSection, ServiceModel.Configuration.ConfigurationManager, Version = 1.0.0.0, Culture = neutral, PublicKeyToken = null"" />
+        </sectionGroup>
+    </configSections>
     <system.serviceModel>
-        <services>
-            <service name=""{name}"">
-                <endpoint
-                    address=""{address}""
-                    contract=""{typeof(IService).FullName}"" />
-            </service>
-        </services>
-    </system.serviceModel>
-</configuration>";
+          <services>
+              <service name=""{name}"">
+                  <endpoint
+                      address=""{address}""
+                      contract=""{typeof(IService).FullName}"" />
+              </service>
+          </services>
+      </system.serviceModel>
+      </configuration>";
 
             using (var fs = TemporaryFileStream.Create(xml))
             {
@@ -51,6 +56,11 @@ namespace ServiceModel.Configuration.Xml.Tests
             var contract = Create<string>();
             var xml = $@"
 <configuration>
+    <configSections>
+        <sectionGroup name=""system.serviceModel"" type=""System.ServiceModel.Configuration.ServiceModelSectionGroup, ServiceModel.Configuration.ConfigurationManager, Version = 1.0.0.0, Culture = neutral, PublicKeyToken = null"" >
+            <section name=""services"" type=""System.ServiceModel.Configuration.ServicesSection, ServiceModel.Configuration.ConfigurationManager, Version = 1.0.0.0, Culture = neutral, PublicKeyToken = null"" />
+        </sectionGroup>
+    </configSections>
     <system.serviceModel>
         <services>
             <service name=""{name}"">
