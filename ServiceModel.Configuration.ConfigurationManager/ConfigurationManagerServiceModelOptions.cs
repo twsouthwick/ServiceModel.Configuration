@@ -21,26 +21,29 @@ namespace ServiceModel.Configuration
 
         public void Configure(string _, ServiceModelOptions options)
         {
-            var configuration = ConfigurationManager.OpenMappedMachineConfiguration(new ConfigurationFileMap(_path));
-            var section = ServiceModelSectionGroup.GetSectionGroup(configuration);
-
-            if (section == null)
+            using (var configFile = new WrappedConfigurationFile(_path))
             {
-                if (_isOptional)
+                var configuration = ConfigurationManager.OpenMappedMachineConfiguration(new ConfigurationFileMap(configFile.ConfigPath));
+                var section = ServiceModelSectionGroup.GetSectionGroup(configuration);
+
+                if (section == null)
                 {
-                    return;
+                    if (_isOptional)
+                    {
+                        return;
+                    }
+
+                    throw new ServiceModelConfigurationException("Section not found");
                 }
 
-                throw new ServiceModelConfigurationException("Section not found");
-            }
-
-            if (section is ServiceModelSectionGroup group)
-            {
-                Configure(_, options, group);
-            }
-            else
-            {
-                throw new ServiceModelConfigurationException("Not valid type");
+                if (section is ServiceModelSectionGroup group)
+                {
+                    Configure(_, options, group);
+                }
+                else
+                {
+                    throw new ServiceModelConfigurationException("Not valid type");
+                }
             }
         }
 

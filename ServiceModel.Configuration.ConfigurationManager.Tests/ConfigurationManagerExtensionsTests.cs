@@ -16,11 +16,6 @@ namespace ServiceModel.Configuration.ConfigurationManager.Tests
             var address = Create<Uri>().ToString();
             var xml = $@"
 <configuration>
-    <configSections>
-        <sectionGroup name=""system.serviceModel"" type=""System.ServiceModel.Configuration.ServiceModelSectionGroup, ServiceModel.Configuration.ConfigurationManager, Version = 1.0.0.0, Culture = neutral, PublicKeyToken = null"" >
-            <section name=""services"" type=""System.ServiceModel.Configuration.ServicesSection, ServiceModel.Configuration.ConfigurationManager, Version = 1.0.0.0, Culture = neutral, PublicKeyToken = null"" />
-        </sectionGroup>
-    </configSections>
     <system.serviceModel>
           <services>
               <service name=""{name}"">
@@ -30,7 +25,7 @@ namespace ServiceModel.Configuration.ConfigurationManager.Tests
               </service>
           </services>
       </system.serviceModel>
-      </configuration>";
+</configuration>";
 
             using (var fs = TemporaryFileStream.Create(xml))
             {
@@ -57,11 +52,6 @@ namespace ServiceModel.Configuration.ConfigurationManager.Tests
             var contract = Create<string>();
             var xml = $@"
 <configuration>
-    <configSections>
-        <sectionGroup name=""system.serviceModel"" type=""System.ServiceModel.Configuration.ServiceModelSectionGroup, ServiceModel.Configuration.ConfigurationManager, Version = 1.0.0.0, Culture = neutral, PublicKeyToken = null"" >
-            <section name=""services"" type=""System.ServiceModel.Configuration.ServicesSection, ServiceModel.Configuration.ConfigurationManager, Version = 1.0.0.0, Culture = neutral, PublicKeyToken = null"" />
-        </sectionGroup>
-    </configSections>
     <system.serviceModel>
         <services>
             <service name=""{name}"">
