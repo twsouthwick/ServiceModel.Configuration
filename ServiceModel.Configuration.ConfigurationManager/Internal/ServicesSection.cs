@@ -46,32 +46,32 @@ namespace System.ServiceModel.Configuration
 
             if (context != null)
             {
-                //foreach (ServiceElement service in this.Services)
-                //{
-                //    BehaviorsSection.ValidateServiceBehaviorReference(service.BehaviorConfiguration, context, service);
+                foreach (ServiceElement service in this.Services)
+                {
+                    //BehaviorsSection.ValidateServiceBehaviorReference(service.BehaviorConfiguration, context, service);
 
-                //    foreach (ServiceEndpointElement endpoint in service.Endpoints)
-                //    {
-                //        if (string.IsNullOrEmpty(endpoint.Kind))
-                //        {
-                //            if (!string.IsNullOrEmpty(endpoint.EndpointConfiguration))
-                //            {
-                //                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigInvalidAttribute, "endpointConfiguration", "endpoint", "kind")));
-                //            }
-                //            if (string.IsNullOrEmpty(endpoint.Binding))
-                //            {
-                //                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.RequiredAttributeMissing, "binding", "endpoint")));
-                //            }
-                //        }
-                //        if (string.IsNullOrEmpty(endpoint.Binding) && !string.IsNullOrEmpty(endpoint.BindingConfiguration))
-                //        {
-                //            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigInvalidAttribute, "bindingConfiguration", "endpoint", "binding")));
-                //        }
-                //        BehaviorsSection.ValidateEndpointBehaviorReference(endpoint.BehaviorConfiguration, context, endpoint);
-                //        BindingsSection.ValidateBindingReference(endpoint.Binding, endpoint.BindingConfiguration, context, endpoint);
-                //        StandardEndpointsSection.ValidateEndpointReference(endpoint.Kind, endpoint.EndpointConfiguration, context, endpoint);
-                //    }
-                //}
+                    //foreach (ServiceEndpointElement endpoint in service.Endpoints)
+                    //{
+                    //    if (string.IsNullOrEmpty(endpoint.Kind))
+                    //    {
+                    //        if (!string.IsNullOrEmpty(endpoint.EndpointConfiguration))
+                    //        {
+                    //            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigInvalidAttribute, "endpointConfiguration", "endpoint", "kind")));
+                    //        }
+                    //        if (string.IsNullOrEmpty(endpoint.Binding))
+                    //        {
+                    //            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.RequiredAttributeMissing, "binding", "endpoint")));
+                    //        }
+                    //    }
+                    //    if (string.IsNullOrEmpty(endpoint.Binding) && !string.IsNullOrEmpty(endpoint.BindingConfiguration))
+                    //    {
+                    //        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigInvalidAttribute, "bindingConfiguration", "endpoint", "binding")));
+                    //    }
+                    //    BehaviorsSection.ValidateEndpointBehaviorReference(endpoint.BehaviorConfiguration, context, endpoint);
+                    //    BindingsSection.ValidateBindingReference(endpoint.Binding, endpoint.BindingConfiguration, context, endpoint);
+                    //    StandardEndpointsSection.ValidateEndpointReference(endpoint.Kind, endpoint.EndpointConfiguration, context, endpoint);
+                    //}
+                }
             }
         }
 
