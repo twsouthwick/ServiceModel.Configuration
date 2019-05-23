@@ -21,7 +21,7 @@ namespace System.ServiceModel.Configuration
         {
             if (element == null)
             {
-                throw new ArgumentNullException(nameof(element));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("element");
             }
 
             TBindingConfiguration configElementKey = (TBindingConfiguration)element;

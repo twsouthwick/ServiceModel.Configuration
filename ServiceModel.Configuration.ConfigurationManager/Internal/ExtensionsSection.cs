@@ -10,6 +10,7 @@ namespace System.ServiceModel.Configuration
     using System.Runtime;
     using System.Security;
     using System.ServiceModel;
+    using System.ServiceModel.Diagnostics;
 
     public partial class ExtensionsSection : ConfigurationSection
     {
@@ -63,22 +64,20 @@ namespace System.ServiceModel.Configuration
 
         void InitializeBindingElementExtenions()
         {
-//            this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.BinaryMessageEncodingSectionName, typeof(BinaryMessageEncodingElement).AssemblyQualifiedName));
-//            this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.CompositeDuplexSectionName, typeof(CompositeDuplexElement).AssemblyQualifiedName));
-//            this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.OneWaySectionName, typeof(OneWayElement).AssemblyQualifiedName));
-//            this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.TransactionFlowSectionName, typeof(TransactionFlowElement).AssemblyQualifiedName));
-//            this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.HttpsTransportSectionName, typeof(HttpsTransportElement).AssemblyQualifiedName));
-//            this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.HttpTransportSectionName, typeof(HttpTransportElement).AssemblyQualifiedName));
-//            this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.MsmqIntegrationSectionName, typeof(MsmqIntegrationElement).AssemblyQualifiedName));
-//            this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.MsmqTransportSectionName, typeof(MsmqTransportElement).AssemblyQualifiedName));
-//            this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.MtomMessageEncodingSectionName, typeof(MtomMessageEncodingElement).AssemblyQualifiedName));
-//            this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.NamedPipeTransportSectionName, typeof(NamedPipeTransportElement).AssemblyQualifiedName));
-//#pragma warning disable 0618
-//            this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.PeerTransportSectionName, typeof(PeerTransportElement).AssemblyQualifiedName));
-//            this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.PnrpPeerResolverSectionName, typeof(PnrpPeerResolverElement).AssemblyQualifiedName));
-//#pragma warning restore 0618
-//            this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.PrivacyNoticeSectionName, typeof(PrivacyNoticeElement).AssemblyQualifiedName));
-//            this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.ReliableSessionSectionName, typeof(ReliableSessionElement).AssemblyQualifiedName));
+            //this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.BinaryMessageEncodingSectionName, typeof(BinaryMessageEncodingElement).AssemblyQualifiedName));
+            //this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.CompositeDuplexSectionName, typeof(CompositeDuplexElement).AssemblyQualifiedName));
+            //this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.OneWaySectionName, typeof(OneWayElement).AssemblyQualifiedName));
+            //this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.TransactionFlowSectionName, typeof(TransactionFlowElement).AssemblyQualifiedName));
+            //this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.HttpsTransportSectionName, typeof(HttpsTransportElement).AssemblyQualifiedName));
+            //this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.HttpTransportSectionName, typeof(HttpTransportElement).AssemblyQualifiedName));
+            //this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.MsmqIntegrationSectionName, typeof(MsmqIntegrationElement).AssemblyQualifiedName));
+            //this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.MsmqTransportSectionName, typeof(MsmqTransportElement).AssemblyQualifiedName));
+            //this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.MtomMessageEncodingSectionName, typeof(MtomMessageEncodingElement).AssemblyQualifiedName));
+            //this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.NamedPipeTransportSectionName, typeof(NamedPipeTransportElement).AssemblyQualifiedName));
+            //this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.PeerTransportSectionName, typeof(PeerTransportElement).AssemblyQualifiedName));
+            //this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.PnrpPeerResolverSectionName, typeof(PnrpPeerResolverElement).AssemblyQualifiedName));
+            //this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.PrivacyNoticeSectionName, typeof(PrivacyNoticeElement).AssemblyQualifiedName));
+            //this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.ReliableSessionSectionName, typeof(ReliableSessionElement).AssemblyQualifiedName));
             this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.SecuritySectionName, typeof(SecurityElement).AssemblyQualifiedName));
             //this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.SslStreamSecuritySectionName, typeof(SslStreamSecurityElement).AssemblyQualifiedName));
             //this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.TcpTransportSectionName, typeof(TcpTransportElement).AssemblyQualifiedName));
@@ -87,40 +86,38 @@ namespace System.ServiceModel.Configuration
             //this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.UseManagedPresentationSectionName, typeof(UseManagedPresentationElement).AssemblyQualifiedName));
             //this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.WindowsStreamSecuritySectionName, typeof(WindowsStreamSecurityElement).AssemblyQualifiedName));
 
-            //if (OSEnvironmentHelper.IsApplicationTargeting45)
-            //{
-            //    this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.UdpTransportSectionName, ConfigurationStrings.UdpTransportElementType));
-            //}
+            if (OSEnvironmentHelper.IsApplicationTargeting45)
+            {
+                this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.UdpTransportSectionName, ConfigurationStrings.UdpTransportElementType));
+            }
         }
 
         void InitializeBindingExtensions()
         {
             this.BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.BasicHttpBindingCollectionElementName, typeof(BasicHttpBindingCollectionElement).AssemblyQualifiedName));
-//            this.BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.CustomBindingCollectionElementName, typeof(CustomBindingCollectionElement).AssemblyQualifiedName));
-//            this.BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.MsmqIntegrationBindingCollectionElementName, typeof(MsmqIntegrationBindingCollectionElement).AssemblyQualifiedName));
-//            this.BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.NetMsmqBindingCollectionElementName, typeof(NetMsmqBindingCollectionElement).AssemblyQualifiedName));
-//            this.BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.NetNamedPipeBindingCollectionElementName, typeof(NetNamedPipeBindingCollectionElement).AssemblyQualifiedName));
-//#pragma warning disable 0618
-//            this.BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.NetPeerTcpBindingCollectionElementName, typeof(NetPeerTcpBindingCollectionElement).AssemblyQualifiedName));
-//#pragma warning restore 0618
-//            this.BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.NetTcpBindingCollectionElementName, typeof(NetTcpBindingCollectionElement).AssemblyQualifiedName));
-//            this.BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.WSDualHttpBindingCollectionElementName, typeof(WSDualHttpBindingCollectionElement).AssemblyQualifiedName));
-//            this.BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.WSFederationHttpBindingCollectionElementName, typeof(WSFederationHttpBindingCollectionElement).AssemblyQualifiedName));
-//            this.BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.WS2007FederationHttpBindingCollectionElementName, typeof(WS2007FederationHttpBindingCollectionElement).AssemblyQualifiedName));
-//            this.BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.WSHttpBindingCollectionElementName, typeof(WSHttpBindingCollectionElement).AssemblyQualifiedName));
-//            this.BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.WS2007HttpBindingCollectionElementName, typeof(WS2007HttpBindingCollectionElement).AssemblyQualifiedName));
-//            this.BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.MexHttpBindingCollectionElementName, typeof(MexHttpBindingCollectionElement).AssemblyQualifiedName));
-//            this.BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.MexHttpsBindingCollectionElementName, typeof(MexHttpsBindingCollectionElement).AssemblyQualifiedName));
-//            this.BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.MexNamedPipeBindingCollectionElementName, typeof(MexNamedPipeBindingCollectionElement).AssemblyQualifiedName));
-//            this.BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.MexTcpBindingCollectionElementName, typeof(MexTcpBindingCollectionElement).AssemblyQualifiedName));
+            //this.BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.CustomBindingCollectionElementName, typeof(CustomBindingCollectionElement).AssemblyQualifiedName));
+            //this.BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.MsmqIntegrationBindingCollectionElementName, typeof(MsmqIntegrationBindingCollectionElement).AssemblyQualifiedName));
+            //this.BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.NetMsmqBindingCollectionElementName, typeof(NetMsmqBindingCollectionElement).AssemblyQualifiedName));
+            //this.BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.NetNamedPipeBindingCollectionElementName, typeof(NetNamedPipeBindingCollectionElement).AssemblyQualifiedName));
+            //this.BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.NetPeerTcpBindingCollectionElementName, typeof(NetPeerTcpBindingCollectionElement).AssemblyQualifiedName));
+            //this.BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.NetTcpBindingCollectionElementName, typeof(NetTcpBindingCollectionElement).AssemblyQualifiedName));
+            //this.BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.WSDualHttpBindingCollectionElementName, typeof(WSDualHttpBindingCollectionElement).AssemblyQualifiedName));
+            //this.BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.WSFederationHttpBindingCollectionElementName, typeof(WSFederationHttpBindingCollectionElement).AssemblyQualifiedName));
+            //this.BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.WS2007FederationHttpBindingCollectionElementName, typeof(WS2007FederationHttpBindingCollectionElement).AssemblyQualifiedName));
+            //this.BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.WSHttpBindingCollectionElementName, typeof(WSHttpBindingCollectionElement).AssemblyQualifiedName));
+            //this.BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.WS2007HttpBindingCollectionElementName, typeof(WS2007HttpBindingCollectionElement).AssemblyQualifiedName));
+            //this.BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.MexHttpBindingCollectionElementName, typeof(MexHttpBindingCollectionElement).AssemblyQualifiedName));
+            //this.BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.MexHttpsBindingCollectionElementName, typeof(MexHttpsBindingCollectionElement).AssemblyQualifiedName));
+            //this.BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.MexNamedPipeBindingCollectionElementName, typeof(MexNamedPipeBindingCollectionElement).AssemblyQualifiedName));
+            //this.BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.MexTcpBindingCollectionElementName, typeof(MexTcpBindingCollectionElement).AssemblyQualifiedName));
 
-            //if (OSEnvironmentHelper.IsApplicationTargeting45)
-            //{
-            //    this.BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.UdpBindingCollectionElementName, ConfigurationStrings.UdpBindingCollectionElementType));
-            //    this.BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.NetHttpBindingCollectionElementName, typeof(NetHttpBindingCollectionElement).AssemblyQualifiedName));
-            //    this.BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.NetHttpsBindingCollectionElementName, typeof(NetHttpsBindingCollectionElement).AssemblyQualifiedName));
-            //    this.BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.BasicHttpsBindingCollectionElementName, typeof(BasicHttpsBindingCollectionElement).AssemblyQualifiedName));
-            //}
+            if (OSEnvironmentHelper.IsApplicationTargeting45)
+            {
+                this.BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.UdpBindingCollectionElementName, ConfigurationStrings.UdpBindingCollectionElementType));
+                //this.BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.NetHttpBindingCollectionElementName, typeof(NetHttpBindingCollectionElement).AssemblyQualifiedName));
+                //this.BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.NetHttpsBindingCollectionElementName, typeof(NetHttpsBindingCollectionElement).AssemblyQualifiedName));
+                //this.BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.BasicHttpsBindingCollectionElementName, typeof(BasicHttpsBindingCollectionElement).AssemblyQualifiedName));
+            }
         }
 
         void InitializeEndpointExtensions()
@@ -159,7 +156,7 @@ namespace System.ServiceModel.Configuration
             //{
             //    collectionName = ConfigurationStrings.BehaviorExtensions;
             //}
-            // else
+            //else
             if (extensionType.IsSubclassOf(typeof(BindingElementExtensionElement)))
             {
                 collectionName = ConfigurationStrings.BindingElementExtensions;
@@ -174,13 +171,11 @@ namespace System.ServiceModel.Configuration
             //}
             else
             {
-                    throw new InvalidOperationException();
                 // LookupAssociatedCollection built on assumption that extensionType is valid.
                 // This should be protected at the callers site.  If assumption is invalid, then
                 // configuration system is in an indeterminate state.  Need to stop in a manner that
                 // user code can not capture.
-                //Fx.Assert(String.Format(CultureInfo.InvariantCulture, "{0} is not a type supported by the ServiceModelExtensionsSection collections.", extensionType.AssemblyQualifiedName));
-                //DiagnosticUtility.FailFast(String.Format(CultureInfo.InvariantCulture, "{0} is not a type supported by the ServiceModelExtensionsSection collections.", extensionType.AssemblyQualifiedName));
+                DiagnosticUtility.FailFast(String.Format(CultureInfo.InvariantCulture, "{0} is not a type supported by the ServiceModelExtensionsSection collections.", extensionType.AssemblyQualifiedName));
             }
 
             return collectionName;
@@ -220,9 +215,7 @@ namespace System.ServiceModel.Configuration
                     // This should be protected at the callers site.  If assumption is invalid, then
                     // configuration system is in an indeterminate state.  Need to stop in a manner that
                     // user code can not capture.
-                    throw new InvalidOperationException();
-                    //Fx.Assert(String.Format(CultureInfo.InvariantCulture, "{0} is not a valid ServiceModelExtensionsSection collection name.", collectionName));
-                    //DiagnosticUtility.FailFast(String.Format(CultureInfo.InvariantCulture, "{0} is not a valid ServiceModelExtensionsSection collection name.", collectionName));
+                    DiagnosticUtility.FailFast(String.Format(CultureInfo.InvariantCulture, "{0} is not a valid ServiceModelExtensionsSection collection name.", collectionName));
                     break;
             }
 
@@ -260,13 +253,11 @@ namespace System.ServiceModel.Configuration
                     collection = extensionsSection.EndpointExtensions;
                     break;
                 default:
-                    throw new InvalidOperationException();
                     // LookupCollection built on assumption that collectionName is valid.
                     // This should be protected at the callers site.  If assumption is invalid, then
                     // configuration system is in an indeterminate state.  Need to stop in a manner that
                     // user code can not capture.
-                    //Fx.Assert(String.Format(CultureInfo.InvariantCulture, "{0} is not a valid ServiceModelExtensionsSection collection name.", collectionName));
-                    //DiagnosticUtility.FailFast(String.Format(CultureInfo.InvariantCulture, "{0} is not a valid ServiceModelExtensionsSection collection name.", collectionName));
+                    DiagnosticUtility.FailFast(String.Format(CultureInfo.InvariantCulture, "{0} is not a valid ServiceModelExtensionsSection collection name.", collectionName));
                     break;
             }
 

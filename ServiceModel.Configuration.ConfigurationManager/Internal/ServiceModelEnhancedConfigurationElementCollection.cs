@@ -6,7 +6,9 @@ namespace System.ServiceModel.Configuration
 {
     using System.Collections.Generic;
     using System.Configuration;
+    using System.Diagnostics;
     using System.Globalization;
+    using System.ServiceModel.Diagnostics;
 
     public abstract class ServiceModelEnhancedConfigurationElementCollection<TConfigurationElement> : ServiceModelConfigurationElementCollection<TConfigurationElement>
         where TConfigurationElement : ConfigurationElement, new()
@@ -19,9 +21,9 @@ namespace System.ServiceModel.Configuration
 
         protected override void BaseAdd(ConfigurationElement element)
         {
-            if (element == null)
+            if (null == element)
             {
-                throw new ArgumentNullException(nameof(element));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("element");
             }
 
             // Is this a duplicate key?
@@ -35,7 +37,8 @@ namespace System.ServiceModel.Configuration
                     // being manipulated (i.e. duplicate in same config file)
                     if (oldElement.ElementInformation.IsPresent)
                     {
-                        throw new ConfigurationErrorsException($"ConfigDuplicateKeyAtSameScope: {this.ElementName} : {newElementKey}");
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(
+                            SR.GetString(SR.ConfigDuplicateKeyAtSameScope, this.ElementName, newElementKey)));
                     }
                 }
             }

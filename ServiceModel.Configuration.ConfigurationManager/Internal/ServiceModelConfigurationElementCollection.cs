@@ -9,7 +9,6 @@ namespace System.ServiceModel.Configuration
     using System.Collections.Generic;
     using System.Configuration;
     using System.Globalization;
-    using System.Linq;
     using System.Text;
 
     public abstract class ServiceModelConfigurationElementCollection<ConfigurationElementType> : ConfigurationElementCollection
@@ -61,7 +60,7 @@ namespace System.ServiceModel.Configuration
             {
                 if (element == null)
                 {
-                    throw new ArgumentNullException(nameof(element));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("element");
                 }
             }
 
@@ -95,13 +94,12 @@ namespace System.ServiceModel.Configuration
 
                 if (0 == elementKeys.Count)
                 {
-                    throw new ArgumentNullException(nameof(key));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("key");
                 }
                 else if (1 == elementKeys.Count)
                 {
-                    throw new InvalidOperationException();
-                    //throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(
-                        //SR.GetString(SR.ConfigElementKeyNull, elementKeys[0])));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(
+                        SR.GetString(SR.ConfigElementKeyNull, elementKeys[0])));
                 }
                 else
                 {
@@ -114,9 +112,8 @@ namespace System.ServiceModel.Configuration
 
                     elementKeysString = elementKeysString.Append(elementKeys[elementKeys.Count - 1]);
 
-                    throw new InvalidOperationException();
-                    //throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(
-                        //SR.GetString(SR.ConfigElementKeysNull, elementKeys.ToString())));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(
+                        SR.GetString(SR.ConfigElementKeysNull, elementKeys.ToString())));
                 }
             }
             else
@@ -134,27 +131,28 @@ namespace System.ServiceModel.Configuration
         {
             if (array == null)
             {
-                throw new ArgumentNullException(nameof(array));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("array");
             }
 
             if (start < 0 || start >= array.Length)
             {
-                throw new InvalidOperationException();
-                //throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("start", SR.GetString(SR.ConfigInvalidStartValue, array.Length - 1, start));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("start", SR.GetString(SR.ConfigInvalidStartValue,
+                    array.Length - 1,
+                    start));
             }
             ((ICollection)this).CopyTo(array, start);
         }
 
         protected override string ElementName
         {
-            get
+            get 
             {
                 string retval = this.elementName;
                 if (string.IsNullOrEmpty(retval))
                 {
                     retval = base.ElementName;
                 }
-                return retval;
+                return retval; 
             }
         }
 
@@ -162,32 +160,32 @@ namespace System.ServiceModel.Configuration
         {
             if (element == null)
             {
-                throw new ArgumentNullException(nameof(element));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("element");
             }
 
             return this.BaseIndexOf(element);
         }
 
-        public void Remove(ConfigurationElementType element)
+        public void Remove(ConfigurationElementType element) 
         {
             if (!this.IsReadOnly())
             {
                 if (element == null)
                 {
-                    throw new ArgumentNullException(nameof(element));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("element");
                 }
             }
 
             this.BaseRemove(this.GetElementKey(element));
         }
 
-        public void RemoveAt(object key)
+        public void RemoveAt(object key) 
         {
             if (!this.IsReadOnly())
             {
                 if (key == null)
                 {
-                    throw new ArgumentNullException(nameof(key));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("key");
                 }
             }
 
@@ -205,13 +203,14 @@ namespace System.ServiceModel.Configuration
             {
                 if (key == null)
                 {
-                    throw new ArgumentNullException(nameof(key));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("key");
                 }
                 ConfigurationElementType retval = (ConfigurationElementType)this.BaseGet(key);
                 if (retval == null)
                 {
-                    throw new InvalidOperationException();
-                    //throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new System.Collections.Generic.KeyNotFoundException( SR.GetString(SR.ConfigKeyNotFoundInElementCollection, key.ToString())));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new System.Collections.Generic.KeyNotFoundException(
+                        SR.GetString(SR.ConfigKeyNotFoundInElementCollection,
+                        key.ToString())));
                 }
                 return retval;
             }
@@ -224,11 +223,11 @@ namespace System.ServiceModel.Configuration
 
                 if (value == null)
                 {
-                    throw new ArgumentNullException(nameof(value));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("value");
                 }
                 if (key == null)
                 {
-                    throw new ArgumentNullException(nameof(key));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("key");
                 }
                 if (this.GetElementKey(value).ToString().Equals((string)key, StringComparison.Ordinal))
                 {
@@ -240,11 +239,10 @@ namespace System.ServiceModel.Configuration
                 }
                 else
                 {
-                    throw new InvalidOperationException();
 #pragma warning disable 56506 //Microsoft; Variable 'key' checked for null previously
-                    //throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.ConfigKeysDoNotMatch,
-                        //this.GetElementKey(value).ToString(),
-                        //key.ToString()));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.ConfigKeysDoNotMatch,
+                        this.GetElementKey(value).ToString(),
+                        key.ToString()));
 #pragma warning restore
                 }
             }

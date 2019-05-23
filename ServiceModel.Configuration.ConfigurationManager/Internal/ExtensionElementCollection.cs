@@ -35,9 +35,9 @@ namespace System.ServiceModel.Configuration
 
         protected override object GetElementKey(ConfigurationElement element)
         {
-            if (element == null)
+            if (null == element)
             {
-                throw new ArgumentNullException(nameof(element));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("element");
             }
 
             ExtensionElement configElementKey = (ExtensionElement)element;
@@ -75,7 +75,8 @@ namespace System.ServiceModel.Configuration
             {
                 if (element.Name.Equals(extension.Name, StringComparison.Ordinal))
                 {
-                    throw new ConfigurationErrorsException("ERROR!");// SR.GetString(SR.ConfigDuplicateExtensionName, element.Name)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(
+                        SR.GetString(SR.ConfigDuplicateExtensionName, element.Name)));
                 }
 
                 bool foundDuplicateType = false;
@@ -96,7 +97,8 @@ namespace System.ServiceModel.Configuration
 
                 if (foundDuplicateType)
                 {
-                    throw new ConfigurationErrorsException("ERROR!");// SR.GetString(SR.ConfigDuplicateExtensionType, element.Type)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(
+                        SR.GetString(SR.ConfigDuplicateExtensionType, element.Type)));
                 }
             }
         }

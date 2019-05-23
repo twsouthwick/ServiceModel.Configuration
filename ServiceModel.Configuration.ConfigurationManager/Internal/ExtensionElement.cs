@@ -20,7 +20,7 @@ namespace System.ServiceModel.Configuration
         {
             if (String.IsNullOrEmpty(name))
             {
-                throw new ArgumentNullException("name");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("name");
             }
 
             this.Name = name;
@@ -31,7 +31,7 @@ namespace System.ServiceModel.Configuration
         {
             if (String.IsNullOrEmpty(type))
             {
-                throw new ArgumentNullException("type");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("type");
             }
 
             this.Type = type;

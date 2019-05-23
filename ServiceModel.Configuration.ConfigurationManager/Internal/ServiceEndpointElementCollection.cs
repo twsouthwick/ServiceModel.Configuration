@@ -12,7 +12,7 @@ namespace System.ServiceModel.Configuration
     using System.Globalization;
 
     [ConfigurationCollection(typeof(ServiceEndpointElement), AddItemName = ConfigurationStrings.Endpoint)]
-    internal sealed class ServiceEndpointElementCollection : ServiceModelEnhancedConfigurationElementCollection<ServiceEndpointElement>
+    public sealed class ServiceEndpointElementCollection : ServiceModelEnhancedConfigurationElementCollection<ServiceEndpointElement>
     {
         public ServiceEndpointElementCollection()
             : base(ConfigurationStrings.Endpoint)
@@ -27,7 +27,7 @@ namespace System.ServiceModel.Configuration
         {
             if (element == null)
             {
-                throw new ArgumentNullException(nameof(element));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("element");
             }
 
             ServiceEndpointElement configElementKey = (ServiceEndpointElement)element;

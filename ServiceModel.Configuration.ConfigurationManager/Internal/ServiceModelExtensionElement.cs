@@ -11,6 +11,7 @@ namespace System.ServiceModel.Configuration
     using System.Security;
     using System.Security.Permissions;
     using System.ServiceModel;
+    using System.ServiceModel.Diagnostics;
     using System.Xml;
 
     //[ConfigurationPermission(SecurityAction.InheritanceDemand, Unrestricted = true)]
@@ -80,7 +81,7 @@ namespace System.ServiceModel.Configuration
             {
                 if (!string.IsNullOrEmpty(this.configurationElementName))
                 {
-                    Debug.Assert(configurationElementName == value,
+                    Debug.Assert(this.configurationElementName == value,
                         string.Format(System.Globalization.CultureInfo.InvariantCulture,
                             "The configuration element name has already being set to '{0} and cannot be reset to '{1}'",
                             this.configurationElementName, value));
@@ -114,21 +115,13 @@ namespace System.ServiceModel.Configuration
         {
             if (this.IsReadOnly())
             {
-                throw new ConfigurationErrorsException("ERROR!");// SR.GetString(SR.ConfigReadOnly)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly)));
             }
             if (from == null)
             {
-                throw new ArgumentNullException("from");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("from");
             }
         }
-
-        //DictionaryTraceRecord CreateCanAddRecord(string extensionCollectionName)
-        //{
-        //    Dictionary<string, string> values = new Dictionary<string, string>(2);
-        //    values["ElementType"] = System.Runtime.Diagnostics.DiagnosticTraceBase.XmlEncode(ThisType.AssemblyQualifiedName);
-        //    values["CollectionName"] = ConfigurationStrings.ExtensionsSectionPath + "/" + extensionCollectionName;
-        //    return new DictionaryTraceRecord(values);
-        //}
 
         internal void DeserializeInternal(XmlReader reader, bool serializeCollectionKey)
         {
@@ -177,11 +170,17 @@ namespace System.ServiceModel.Configuration
             {
                 if (String.IsNullOrEmpty(this.extensionCollectionName))
                 {
-                    throw new ConfigurationErrorsException("ERROR!");// SR.GetString(SR.ConfigNoExtensionCollectionAssociatedWithType, extensionSectionType.AssemblyQualifiedName), this.ElementInformation.Source, this.ElementInformation.LineNumber));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigNoExtensionCollectionAssociatedWithType,
+                        extensionSectionType.AssemblyQualifiedName),
+                        this.ElementInformation.Source,
+                        this.ElementInformation.LineNumber));
                 }
                 else
                 {
-                    throw new ConfigurationErrorsException("ERROR!");// SR.GetString(SR.ConfigExtensionCollectionNotFound, this.extensionCollectionName), this.ElementInformation.Source, this.ElementInformation.LineNumber));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigExtensionCollectionNotFound,
+                        this.extensionCollectionName),
+                        this.ElementInformation.Source,
+                        this.ElementInformation.LineNumber));
                 }
             }
 
@@ -208,7 +207,11 @@ namespace System.ServiceModel.Configuration
 
             if (String.IsNullOrEmpty(configurationElementName))
             {
-                throw new ConfigurationErrorsException("ERROR!");// SR.GetString(SR.ConfigExtensionTypeNotRegisteredInCollection, extensionSectionType.AssemblyQualifiedName, this.extensionCollectionName), this.ElementInformation.Source, this.ElementInformation.LineNumber));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigExtensionTypeNotRegisteredInCollection,
+                    extensionSectionType.AssemblyQualifiedName,
+                    this.extensionCollectionName),
+                    this.ElementInformation.Source,
+                    this.ElementInformation.LineNumber));
             }
 
             return configurationElementName;

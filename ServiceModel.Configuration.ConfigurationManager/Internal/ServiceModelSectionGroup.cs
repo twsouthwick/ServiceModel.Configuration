@@ -8,7 +8,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel.Channels;
     using System.ServiceModel;
 
-    internal sealed class ServiceModelSectionGroup : ConfigurationSectionGroup
+    public sealed class ServiceModelSectionGroup : ConfigurationSectionGroup
     {
         public ServiceModelSectionGroup() { }
 
@@ -47,10 +47,10 @@ namespace System.ServiceModel.Configuration
         //    get { return (ServiceHostingEnvironmentSection)this.Sections[ConfigurationStrings.ServiceHostingEnvironmentSectionName]; }
         //}
 
-        //public ExtensionsSection Extensions
-        //{
-        //    get { return (ExtensionsSection)this.Sections[ConfigurationStrings.Extensions]; }
-        //}
+        public ExtensionsSection Extensions
+        {
+            get { return (ExtensionsSection)this.Sections[ConfigurationStrings.Extensions]; }
+        }
 
         //public ProtocolMappingSection ProtocolMapping
         //{
@@ -71,7 +71,7 @@ namespace System.ServiceModel.Configuration
         {
             if (config == null)
             {
-                throw new ArgumentNullException(nameof(config));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("config");
             }
 
             return (ServiceModelSectionGroup)config.SectionGroups[ConfigurationStrings.SectionGroupName];

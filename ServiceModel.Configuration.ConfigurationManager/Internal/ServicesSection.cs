@@ -8,7 +8,7 @@ namespace System.ServiceModel.Configuration
     using System.Runtime;
     using System.Security;
 
-    internal sealed partial class ServicesSection : ConfigurationSection, IConfigurationContextProviderInternal
+    public sealed partial class ServicesSection : ConfigurationSection, IConfigurationContextProviderInternal
     {
         [SecurityCritical]
         EvaluationContextHelper contextHelper;
@@ -23,10 +23,10 @@ namespace System.ServiceModel.Configuration
             get { return (ServiceElementCollection)this[ConfigurationStrings.DefaultCollectionName]; }
         }
 
-        //internal static ServicesSection GetSection()
-        //{
-        //    return (ServicesSection)ConfigurationHelpers.GetSection(ConfigurationStrings.ServicesSectionPath);
-        //}
+        internal static ServicesSection GetSection()
+        {
+            return (ServicesSection)ConfigurationHelpers.GetSection(ConfigurationStrings.ServicesSectionPath);
+        }
 
         [SecurityCritical]
         internal static ServicesSection UnsafeGetSection()
@@ -75,6 +75,7 @@ namespace System.ServiceModel.Configuration
             }
         }
 
+        [SecurityCritical]
         protected override void Reset(ConfigurationElement parentElement)
         {
             this.contextHelper.OnReset(parentElement);
@@ -87,6 +88,7 @@ namespace System.ServiceModel.Configuration
             return this.EvaluationContext;
         }
 
+        [SecurityCritical]
         ContextInformation IConfigurationContextProviderInternal.GetOriginalEvaluationContext()
         {
             return this.contextHelper.GetOriginalContext(this);

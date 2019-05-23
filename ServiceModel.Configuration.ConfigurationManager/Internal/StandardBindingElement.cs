@@ -87,14 +87,15 @@ namespace System.ServiceModel.Configuration
 
         public void ApplyConfiguration(Binding binding)
         {
-            if (binding == null)
+            if (null == binding)
             {
-                throw new ArgumentNullException(nameof(binding));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("binding");
             }
-
             if (binding.GetType() != this.BindingElementType)
             {
-                throw new Exception("ERROR!");// SR.GetString(SR.ConfigInvalidTypeForBinding, (this.BindingElementType == null) ? string.Empty : this.BindingElementType.AssemblyQualifiedName, binding.GetType().AssemblyQualifiedName));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.ConfigInvalidTypeForBinding,
+                    (this.BindingElementType == null) ? string.Empty : this.BindingElementType.AssemblyQualifiedName,
+                    binding.GetType().AssemblyQualifiedName));
             }
 
             // The properties binding.Name and this.Name are actually two different things:
@@ -113,14 +114,15 @@ namespace System.ServiceModel.Configuration
 
         protected virtual internal void InitializeFrom(Binding binding)
         {
-            if (binding == null)
+            if (null == binding)
             {
-                throw new ArgumentNullException(nameof(binding));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("binding");
             }
-
             if (binding.GetType() != this.BindingElementType)
             {
-                throw new Exception("ERROR!");// SR.GetString(SR.ConfigInvalidTypeForBinding, (this.BindingElementType == null) ? string.Empty : this.BindingElementType.AssemblyQualifiedName, binding.GetType().AssemblyQualifiedName));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.ConfigInvalidTypeForBinding,
+                    (this.BindingElementType == null) ? string.Empty : this.BindingElementType.AssemblyQualifiedName,
+                    binding.GetType().AssemblyQualifiedName));
             }
 
             // The properties binding.Name and this.Name are actually two different things:

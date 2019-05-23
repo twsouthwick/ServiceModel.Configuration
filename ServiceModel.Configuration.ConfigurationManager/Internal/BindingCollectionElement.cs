@@ -53,7 +53,10 @@ namespace System.ServiceModel.Configuration
 
             if (null == collection)
             {
-                throw new ConfigurationErrorsException("ERROR!");// SR.GetString(SR.ConfigExtensionCollectionNotFound, ConfigurationStrings.BindingExtensions), this.ElementInformation.Source, this.ElementInformation.LineNumber));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigExtensionCollectionNotFound,
+                    ConfigurationStrings.BindingExtensions),
+                    this.ElementInformation.Source,
+                    this.ElementInformation.LineNumber));
             }
 
             for (int i = 0; i < collection.Count; i++)
@@ -79,8 +82,13 @@ namespace System.ServiceModel.Configuration
 
             if (String.IsNullOrEmpty(configuredSectionName))
             {
-                throw new ConfigurationErrorsException("ERROR!");// SR.GetString(SR.ConfigExtensionTypeNotRegisteredInCollection, extensionSectionType.AssemblyQualifiedName, ConfigurationStrings.BindingExtensions), this.ElementInformation.Source, this.ElementInformation.LineNumber));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigExtensionTypeNotRegisteredInCollection,
+                    extensionSectionType.AssemblyQualifiedName,
+                    ConfigurationStrings.BindingExtensions),
+                    this.ElementInformation.Source,
+                    this.ElementInformation.LineNumber));
             }
+
             return configuredSectionName;
         }
 

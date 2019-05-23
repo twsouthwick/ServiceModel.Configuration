@@ -15,9 +15,10 @@ namespace System.ServiceModel.Configuration
     {
         public virtual void ApplyConfiguration(BindingElement bindingElement)
         {
-            if (bindingElement == null)
+            // Some items make sense just as tags and have no other configuration
+            if (null == bindingElement)
             {
-                throw new ArgumentNullException(nameof(bindingElement));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("bindingElement");
             }
         }
 
@@ -32,12 +33,14 @@ namespace System.ServiceModel.Configuration
         {
             if (bindingElement == null)
             {
-                throw new ArgumentNullException(nameof(bindingElement));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("bindingElement");
             }
-
             if (bindingElement.GetType() != this.BindingElementType)
             {
-                throw new ArgumentException("bindingElement");//, SR.GetString(SR.ConfigInvalidTypeForBindingElement, this.BindingElementType.ToString(), bindingElement.GetType().ToString()));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("bindingElement",
+                    SR.GetString(SR.ConfigInvalidTypeForBindingElement,
+                    this.BindingElementType.ToString(),
+                    bindingElement.GetType().ToString()));
             }
         }
     }

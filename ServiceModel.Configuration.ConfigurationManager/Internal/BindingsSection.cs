@@ -160,7 +160,7 @@ namespace System.ServiceModel.Configuration
         {
             if (config == null)
             {
-                throw new ArgumentNullException(nameof(config));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("config");
             }
 
             return (BindingsSection)config.GetSection(ConfigurationStrings.BindingsSectionGroupPath);
@@ -182,7 +182,9 @@ namespace System.ServiceModel.Configuration
 
         protected override bool OnDeserializeUnrecognizedElement(string elementName, XmlReader reader)
         {
-            throw new ConfigurationErrorsException("Couldn't deserialize");// SR.GetString(SR.ConfigBindingExtensionNotFound, ConfigurationHelpers.GetBindingsSectionPath(elementName))));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ConfigurationErrorsException(SR.GetString(SR.ConfigBindingExtensionNotFound,
+                        ConfigurationHelpers.GetBindingsSectionPath(elementName))));
         }
 
         internal static bool TryAdd(string name, Binding binding, Configuration config, out string bindingSectionName)
@@ -273,7 +275,7 @@ namespace System.ServiceModel.Configuration
                             Type extensionType = Type.GetType(bindingExtension.Type, false);
                             if (extensionType == null)
                             {
-                                //ConfigurationHelpers.TraceExtensionTypeNotFound(bindingExtension);
+                                ConfigurationHelpers.TraceExtensionTypeNotFound(bindingExtension);
                             }
                             else
                             {
@@ -314,14 +316,22 @@ namespace System.ServiceModel.Configuration
 
                 if (bindingCollectionElement == null)
                 {
-                    throw new ConfigurationErrorsException("Error!");// SR.GetString(SR.ConfigInvalidSection, ConfigurationHelpers.GetBindingsSectionPath(binding)), configurationElement.ElementInformation.Source, configurationElement.ElementInformation.LineNumber));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigInvalidSection,
+                        ConfigurationHelpers.GetBindingsSectionPath(binding)),
+                        configurationElement.ElementInformation.Source,
+                        configurationElement.ElementInformation.LineNumber));
                 }
 
                 if (!String.IsNullOrEmpty(bindingConfiguration))
                 {
                     if (!bindingCollectionElement.ContainsKey(bindingConfiguration))
                     {
-                        throw new ConfigurationErrorsException("Error!");// SR.GetString(SR.ConfigInvalidBindingName, bindingConfiguration, ConfigurationHelpers.GetBindingsSectionPath(binding), ConfigurationStrings.BindingConfiguration), configurationElement.ElementInformation.Source, configurationElement.ElementInformation.LineNumber));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigInvalidBindingName,
+                            bindingConfiguration,
+                            ConfigurationHelpers.GetBindingsSectionPath(binding),
+                            ConfigurationStrings.BindingConfiguration),
+                            configurationElement.ElementInformation.Source,
+                            configurationElement.ElementInformation.LineNumber));
                     }
                 }
             }
