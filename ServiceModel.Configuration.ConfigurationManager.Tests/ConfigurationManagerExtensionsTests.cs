@@ -87,8 +87,9 @@ namespace ServiceModel.Configuration.ConfigurationManager.Tests
             }
         }
 
-        [Fact]
-        public void SimpleBasicHttpBinding()
+        [InlineData("basicHttpBinding", typeof(BasicHttpBinding))]
+        [Theory]
+        public void SimpleBasicHttpBinding(string bindingName, Type bindingType)
         {
             var name = Create<string>();
             var address = Create<Uri>().ToString();
@@ -101,7 +102,7 @@ namespace ServiceModel.Configuration.ConfigurationManager.Tests
                 <endpoint
                     address=""{address}""
                     contract=""{contract}""
-                    binding=""basicHttpBinding"" />
+                    binding=""{bindingName}"" />
             </service>
         </services>
     </system.serviceModel>
@@ -126,7 +127,7 @@ namespace ServiceModel.Configuration.ConfigurationManager.Tests
                     var factory = factoryProvider.CreateChannelFactory<IService>(name);
 
                     Assert.Equal(address, factory.Endpoint.Address.ToString());
-                    Assert.IsType<BasicHttpBinding>(factory.Endpoint.Binding);
+                    Assert.Equal(bindingType, factory.Endpoint.Binding.GetType());
                 }
             }
         }
