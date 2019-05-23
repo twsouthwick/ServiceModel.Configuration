@@ -116,7 +116,7 @@ namespace System.ServiceModel.Configuration
                 this.BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.UdpBindingCollectionElementName, ConfigurationStrings.UdpBindingCollectionElementType));
                 //this.BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.NetHttpBindingCollectionElementName, typeof(NetHttpBindingCollectionElement).AssemblyQualifiedName));
                 //this.BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.NetHttpsBindingCollectionElementName, typeof(NetHttpsBindingCollectionElement).AssemblyQualifiedName));
-                //this.BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.BasicHttpsBindingCollectionElementName, typeof(BasicHttpsBindingCollectionElement).AssemblyQualifiedName));
+                this.BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.BasicHttpsBindingCollectionElementName, typeof(BasicHttpsBindingCollectionElement).AssemblyQualifiedName));
             }
         }
 

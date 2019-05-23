@@ -88,6 +88,7 @@ namespace ServiceModel.Configuration.ConfigurationManager.Tests
         }
 
         [InlineData("basicHttpBinding", typeof(BasicHttpBinding))]
+        [InlineData("basicHttpsBinding", typeof(BasicHttpsBinding))]
         [Theory]
         public void SimpleBasicHttpBinding(string bindingName, Type bindingType)
         {
