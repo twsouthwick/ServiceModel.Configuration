@@ -22,12 +22,11 @@ namespace ConfigurationSample
         {
             services.AddServiceModelClient()
                 .AddConfigurationManagerFile("wcf.config")
-                .AddServiceEndpoint(options =>
+                .AddServiceEndpoint("roles", options =>
                 {
                     options.Services.Add<IRoleService>(o =>
                     {
                         o.Binding = new BasicHttpBinding();
-                        o.Endpoint = new EndpointAddress("http://localhost:8090/roles");
                     });
                 });
 

@@ -1,9 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using ServiceModel.Configuration;
 using System.Collections.Generic;
-using System.Linq;
-using System.ServiceModel;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 
 namespace ConfigurationSample.Controllers
 {
@@ -11,20 +8,18 @@ namespace ConfigurationSample.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        private readonly ChannelFactory<IRoleService> _service;
+        private readonly IRoleService _service;
 
-        public ValuesController(ChannelFactory<IRoleService> service)
+        public ValuesController(IChannelFactoryProvider channelProvider)
         {
-            _service = service;
-            var channel = service.CreateChannel();
-            var role = channel.GetRoles("user1");
+            _service = channelProvider.CreateChannelFactory<IRoleService>("roles").CreateChannel();
         }
 
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            return new string[] { _service.GetType().FullName };
+            return new ActionResult<IEnumerable<string>>(_service.GetRoles("user1"));
         }
     }
 }

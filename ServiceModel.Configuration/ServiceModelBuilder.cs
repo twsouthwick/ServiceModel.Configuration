@@ -42,5 +42,13 @@ namespace ServiceModel.Configuration
 
             return this;
         }
+
+        public ServiceModelBuilder AddDefaultChannel<T>()
+            where T : class
+        {
+            Services.AddSingleton(ctx => ctx.GetRequiredService<IChannelFactoryProvider>().CreateChannelFactory<T>(ServiceModelDefaults.DefaultName).CreateChannel());
+
+            return this;
+        }
     }
 }
