@@ -19,7 +19,9 @@ namespace ServiceModel.Configuration
             _isOptional = isOptional;
         }
 
-        public void Configure(string _, ServiceModelOptions options)
+        public void Configure(string _, ServiceModelOptions options) => Configure(options);
+
+        public void Configure(ServiceModelOptions options)
         {
             using (var configFile = new WrappedConfigurationFile(_path))
             {
@@ -38,7 +40,7 @@ namespace ServiceModel.Configuration
 
                 if (section is ServiceModelSectionGroup group)
                 {
-                    Configure(_, options, group);
+                    Configure(options, group);
                 }
                 else
                 {
@@ -47,7 +49,7 @@ namespace ServiceModel.Configuration
             }
         }
 
-        private void Configure(string _, ServiceModelOptions options, ServiceModelSectionGroup group)
+        private void Configure(ServiceModelOptions options, ServiceModelSectionGroup group)
         {
             foreach (var service in group.Services.Services.Cast<ServiceElement>())
             {
@@ -59,10 +61,6 @@ namespace ServiceModel.Configuration
                     });
                 }
             }
-        }
-
-        public void Configure(ServiceModelOptions options)
-        {
         }
     }
 }
