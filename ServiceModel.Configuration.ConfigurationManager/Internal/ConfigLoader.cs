@@ -30,8 +30,8 @@ namespace System.ServiceModel.Description
 
         //resolvedEndpoints will be initialized to null on all threads
         //ThreadStatic gives each thread own copy of object
-        [ThreadStatic]
-        static List<string> resolvedEndpoints;
+        //[ThreadStatic]
+        //static List<string> resolvedEndpoints;
 
         static readonly object[] emptyObjectArray = new object[] { };
         static readonly Type[] emptyTypeArray = new Type[] { };

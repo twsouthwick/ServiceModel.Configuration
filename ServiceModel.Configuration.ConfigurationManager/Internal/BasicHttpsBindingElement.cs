@@ -21,20 +21,21 @@ namespace System.ServiceModel.Configuration
             : this(null)
         {
         }
+#if MESSAGE_ENCODING
+        [ConfigurationProperty(ConfigurationStrings.MessageEncoding, DefaultValue = BasicHttpBindingDefaults.MessageEncoding)]
+        [ServiceModelEnumValidator(typeof(WSMessageEncodingHelper))]
+        public WSMessageEncoding MessageEncoding
+        {
+            get { return (WSMessageEncoding)base[ConfigurationStrings.MessageEncoding]; }
+            set { base[ConfigurationStrings.MessageEncoding] = value; }
+        }
+#endif
 
-        //[ConfigurationProperty(ConfigurationStrings.MessageEncoding, DefaultValue = BasicHttpBindingDefaults.MessageEncoding)]
-        //[ServiceModelEnumValidator(typeof(WSMessageEncodingHelper))]
-        //public WSMessageEncoding MessageEncoding
-        //{
-        //    get { return (WSMessageEncoding)base[ConfigurationStrings.MessageEncoding]; }
-        //    set { base[ConfigurationStrings.MessageEncoding] = value; }
-        //}
-
-        //[ConfigurationProperty(ConfigurationStrings.Security)]
-        //public BasicHttpsSecurityElement Security
-        //{
-        //    get { return (BasicHttpsSecurityElement)base[ConfigurationStrings.Security]; }
-        //}
+        [ConfigurationProperty(ConfigurationStrings.Security)]
+        public BasicHttpsSecurityElement Security
+        {
+            get { return (BasicHttpsSecurityElement)base[ConfigurationStrings.Security]; }
+        }
 
         protected override Type BindingElementType
         {
@@ -46,8 +47,10 @@ namespace System.ServiceModel.Configuration
             base.InitializeFrom(binding);
             BasicHttpsBinding bpBinding = (BasicHttpsBinding)binding;
 
-            //SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MessageEncoding, bpBinding.MessageEncoding);
-            //this.Security.InitializeFrom(bpBinding.Security);
+#if MESSAGE_ENCODING
+            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MessageEncoding, bpBinding.MessageEncoding);
+#endif
+            this.Security.InitializeFrom(bpBinding.Security);
         }
 
         protected override void OnApplyConfiguration(Binding binding)
@@ -55,9 +58,11 @@ namespace System.ServiceModel.Configuration
             base.OnApplyConfiguration(binding);
             BasicHttpsBinding bpBinding = (BasicHttpsBinding)binding;
 
-            //bpBinding.MessageEncoding = this.MessageEncoding;
+#if MESSAGE_ENCODING
+            bpBinding.MessageEncoding = this.MessageEncoding;
+#endif
 
-            //this.Security.ApplyConfiguration(bpBinding.Security);
+            this.Security.ApplyConfiguration(bpBinding.Security);
         }
     }
 }

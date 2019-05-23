@@ -12,11 +12,6 @@ namespace System.ServiceModel.Diagnostics
 
     class ExceptionUtility
     {
-        const string ExceptionStackAsStringKey = "System.ServiceModel.Diagnostics.ExceptionUtility.ExceptionStackAsString";
-
-        // This field should be only used for debug build.
-        internal static ExceptionUtility mainInstance;
-
         internal Exception ThrowHelper(Exception exception, TraceEventType eventType, object _) => exception;
 
         internal Exception ThrowHelper(Exception exception, TraceEventType eventType)

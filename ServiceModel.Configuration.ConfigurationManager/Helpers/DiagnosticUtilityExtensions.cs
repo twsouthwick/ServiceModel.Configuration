@@ -135,6 +135,6 @@ namespace System
             return ExceptionUtility.ThrowHelperError(new InvalidOperationException(message));
         }
 
-        internal static void FailFast(string v) => throw new ConfigurationException(v);
+        internal static void FailFast(string v) => throw new global::ServiceModel.Configuration.ServiceModelConfigurationException(v);
     }
 }
