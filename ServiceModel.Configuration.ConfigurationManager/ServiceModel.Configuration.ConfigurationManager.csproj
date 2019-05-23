@@ -12,4 +12,20 @@
     <ProjectReference Include="..\ServiceModel.Configuration\ServiceModel.Configuration.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Helpers\SR.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SR.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Helpers\SR.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SR.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>System</CustomToolNamespace>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>
