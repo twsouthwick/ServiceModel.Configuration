@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ServiceModel.Configuration;
 using System.Collections.Generic;
 
 namespace ConfigurationSample.Controllers
@@ -10,9 +9,9 @@ namespace ConfigurationSample.Controllers
     {
         private readonly IRoleService _service;
 
-        public ValuesController(IChannelFactoryProvider channelProvider)
+        public ValuesController(IRoleService service)
         {
-            _service = channelProvider.CreateChannelFactory<IRoleService>("roles").CreateChannel();
+            _service = service;
         }
 
         // GET api/values

@@ -28,7 +28,8 @@ namespace ConfigurationSample
                     {
                         o.Binding = new BasicHttpBinding();
                     });
-                });
+                })
+                .AddChannel<IRoleService>("roles");
 
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
