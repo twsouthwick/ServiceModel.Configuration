@@ -43,7 +43,7 @@ namespace ServiceModel.Configuration
             return this;
         }
 
-        public ServiceModelBuilder AddChannel<T>(string name)
+        public ServiceModelBuilder AddDefaultChannel<T>(string name)
             where T : class
         {
             Services.AddSingleton(ctx => ctx.GetRequiredService<IChannelFactoryProvider>().CreateChannelFactory<T>(name).CreateChannel());

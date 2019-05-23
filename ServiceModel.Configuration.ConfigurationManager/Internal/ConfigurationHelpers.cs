@@ -3,73 +3,65 @@
 //------------------------------------------------------------------------------
 namespace System.ServiceModel.Configuration
 {
+    using System.Collections.Generic;
     using System.Configuration;
     using System.Reflection;
     using System.Security;
 
     static class ConfigurationHelpers
     {
-        /// Be sure to update UnsafeGetAssociatedBindingCollectionElement if you modify this method
-        //internal static BindingCollectionElement GetAssociatedBindingCollectionElement(ContextInformation evaluationContext, string bindingCollectionName)
-        //{
-        //    BindingCollectionElement retVal = null;
-        //    BindingsSection bindingsSection = (BindingsSection)ConfigurationHelpers.GetAssociatedSection(evaluationContext, ConfigurationStrings.BindingsSectionGroupPath);
+        // Be sure to update UnsafeGetAssociatedBindingCollectionElement if you modify this method
+        internal static BindingCollectionElement GetAssociatedBindingCollectionElement(ContextInformation evaluationContext, string bindingCollectionName)
+        {
+            BindingCollectionElement retVal = null;
+            BindingsSection bindingsSection = (BindingsSection)ConfigurationHelpers.GetAssociatedSection(evaluationContext, ConfigurationStrings.BindingsSectionGroupPath);
 
-        //    if (null != bindingsSection)
-        //    {
-        //        bindingsSection.UpdateBindingSections(evaluationContext);
-        //        try
-        //        {
-        //            retVal = bindingsSection[bindingCollectionName];
-        //        }
-        //        catch (KeyNotFoundException)
-        //        {
-        //            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-        //                new ConfigurationErrorsException(SR.GetString(SR.ConfigBindingExtensionNotFound,
-        //                ConfigurationHelpers.GetBindingsSectionPath(bindingCollectionName))));
-        //        }
-        //        catch (NullReferenceException) // System.Configuration.ConfigurationElement bug
-        //        {
-        //            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-        //                new ConfigurationErrorsException(SR.GetString(SR.ConfigBindingExtensionNotFound,
-        //                ConfigurationHelpers.GetBindingsSectionPath(bindingCollectionName))));
-        //        }
-        //    }
+            if (null != bindingsSection)
+            {
+                bindingsSection.UpdateBindingSections(evaluationContext);
+                try
+                {
+                    retVal = bindingsSection[bindingCollectionName];
+                }
+                catch (KeyNotFoundException)
+                {
+                    throw new ConfigurationErrorsException("ERROR!");// SR.GetString(SR.ConfigBindingExtensionNotFound, ConfigurationHelpers.GetBindingsSectionPath(bindingCollectionName))));
+                }
+                catch (NullReferenceException) // System.Configuration.ConfigurationElement bug
+                {
+                    throw new ConfigurationErrorsException("ERROR!");// SR.GetString(SR.ConfigBindingExtensionNotFound, ConfigurationHelpers.GetBindingsSectionPath(bindingCollectionName))));
+                }
+            }
 
-        //    return retVal;
-        //}
+            return retVal;
+        }
 
-        //// Be sure to update GetAssociatedBindingCollectionElement if you modify this method
-        //[Fx.Tag.SecurityNote(Critical = "Uses SecurityCritical method UnsafeGetAssociatedSection which elevates.")]
-        //[SecurityCritical]
-        //internal static BindingCollectionElement UnsafeGetAssociatedBindingCollectionElement(ContextInformation evaluationContext, string bindingCollectionName)
-        //{
-        //    BindingCollectionElement retVal = null;
-        //    BindingsSection bindingsSection = (BindingsSection)ConfigurationHelpers.UnsafeGetAssociatedSection(evaluationContext, ConfigurationStrings.BindingsSectionGroupPath);
+        // Be sure to update GetAssociatedBindingCollectionElement if you modify this method
+        [SecurityCritical]
+        internal static BindingCollectionElement UnsafeGetAssociatedBindingCollectionElement(ContextInformation evaluationContext, string bindingCollectionName)
+        {
+            BindingCollectionElement retVal = null;
+            BindingsSection bindingsSection = (BindingsSection)ConfigurationHelpers.UnsafeGetAssociatedSection(evaluationContext, ConfigurationStrings.BindingsSectionGroupPath);
 
-        //    if (null != bindingsSection)
-        //    {
-        //        bindingsSection.UpdateBindingSections(evaluationContext);
-        //        try
-        //        {
-        //            retVal = bindingsSection[bindingCollectionName];
-        //        }
-        //        catch (KeyNotFoundException)
-        //        {
-        //            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-        //                new ConfigurationErrorsException(SR.GetString(SR.ConfigBindingExtensionNotFound,
-        //                ConfigurationHelpers.GetBindingsSectionPath(bindingCollectionName))));
-        //        }
-        //        catch (NullReferenceException) // System.Configuration.ConfigurationElement bug
-        //        {
-        //            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-        //                new ConfigurationErrorsException(SR.GetString(SR.ConfigBindingExtensionNotFound,
-        //                ConfigurationHelpers.GetBindingsSectionPath(bindingCollectionName))));
-        //        }
-        //    }
+            if (null != bindingsSection)
+            {
+                bindingsSection.UpdateBindingSections(evaluationContext);
+                try
+                {
+                    retVal = bindingsSection[bindingCollectionName];
+                }
+                catch (KeyNotFoundException)
+                {
+                    throw new ConfigurationErrorsException("Error!");// SR.GetString(SR.ConfigBindingExtensionNotFound, ConfigurationHelpers.GetBindingsSectionPath(bindingCollectionName))));
+                }
+                catch (NullReferenceException) // System.Configuration.ConfigurationElement bug
+                {
+                    throw new ConfigurationErrorsException("ERROR!");// SR.GetString(SR.ConfigBindingExtensionNotFound, ConfigurationHelpers.GetBindingsSectionPath(bindingCollectionName))));
+                }
+            }
 
-        //    return retVal;
-        //}
+            return retVal;
+        }
 
         ///// Be sure to update UnsafeGetAssociatedEndpointCollectionElement if you modify this method
         //internal static EndpointCollectionElement GetAssociatedEndpointCollectionElement(ContextInformation evaluationContext, string endpointCollectionName)
@@ -134,34 +126,23 @@ namespace System.ServiceModel.Configuration
         //}
 
         ///// Be sure to update UnsafeGetAssociatedSection if you modify this method
-        //internal static object GetAssociatedSection(ContextInformation evalContext, string sectionPath)
-        //{
-        //    object retval = null;
-        //    if (evalContext != null)
-        //    {
-        //        retval = evalContext.GetSection(sectionPath);
-        //    }
-        //    else
-        //    {
-        //        retval = AspNetEnvironment.Current.GetConfigurationSection(sectionPath);
-
-        //        // Trace after call to underlying configuration system to
-        //        // insure that configuration system is initialized
-        //        if (DiagnosticUtility.ShouldTraceVerbose)
-        //        {
-        //            TraceUtility.TraceEvent(TraceEventType.Verbose, TraceCode.GetConfigurationSection,
-        //                SR.GetString(SR.TraceCodeGetConfigurationSection),
-        //                new StringTraceRecord("ConfigurationSection", sectionPath), null, null);
-        //        }
-        //    }
-        //    if (retval == null)
-        //    {
-        //        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-        //            new ConfigurationErrorsException(SR.GetString(SR.ConfigSectionNotFound,
-        //            sectionPath)));
-        //    }
-        //    return retval;
-        //}
+        internal static object GetAssociatedSection(ContextInformation evalContext, string sectionPath)
+        {
+            object retval = null;
+            if (evalContext != null)
+            {
+                retval = evalContext.GetSection(sectionPath);
+            }
+            else
+            {
+                //retval = AspNetEnvironment.Current.GetConfigurationSection(sectionPath);
+            }
+            if (retval == null)
+            {
+                throw new ConfigurationErrorsException("ERROR!");// SR.GetString(SR.ConfigSectionNotFound, sectionPath)));
+            }
+            return retval;
+        }
 
         // Be sure to update GetAssociatedSection if you modify this method
         internal static object UnsafeGetAssociatedSection(ContextInformation evalContext, string sectionPath)
@@ -185,18 +166,17 @@ namespace System.ServiceModel.Configuration
         }
 
         ///// Be sure to update UnsafeGetBindingCollectionElement if you modify this method
-        //internal static BindingCollectionElement GetBindingCollectionElement(string bindingCollectionName)
-        //{
-        //    return GetAssociatedBindingCollectionElement(null, bindingCollectionName);
-        //}
+        internal static BindingCollectionElement GetBindingCollectionElement(string bindingCollectionName)
+        {
+            return GetAssociatedBindingCollectionElement(null, bindingCollectionName);
+        }
 
-        //// Be sure to update GetBindingCollectionElement if you modify this method
-        //[Fx.Tag.SecurityNote(Critical = "Uses SecurityCritical method UnsafeGetAssociatedBindingCollectionElement which elevates.")]
-        //[SecurityCritical]
-        //internal static BindingCollectionElement UnsafeGetBindingCollectionElement(string bindingCollectionName)
-        //{
-        //    return UnsafeGetAssociatedBindingCollectionElement(null, bindingCollectionName);
-        //}
+        // Be sure to update GetBindingCollectionElement if you modify this method
+        [SecurityCritical]
+        internal static BindingCollectionElement UnsafeGetBindingCollectionElement(string bindingCollectionName)
+        {
+            return UnsafeGetAssociatedBindingCollectionElement(null, bindingCollectionName);
+        }
 
         //internal static string GetBindingsSectionPath(string sectionName)
         //{
@@ -222,11 +202,11 @@ namespace System.ServiceModel.Configuration
         //    return UnsafeGetAssociatedEndpointCollectionElement(null, endpointCollectionName);
         //}
 
-        ///// Be sure to update UnsafeGetSection if you modify this method
-        //internal static object GetSection(string sectionPath)
-        //{
-        //    return GetAssociatedSection(null, sectionPath);
-        //}
+        /// Be sure to update UnsafeGetSection if you modify this method
+        internal static object GetSection(string sectionPath)
+        {
+            return GetAssociatedSection(null, sectionPath);
+        }
 
         // Be sure to update GetSection if you modify this method
         [SecurityCritical]

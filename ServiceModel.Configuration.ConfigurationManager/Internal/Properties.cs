@@ -3190,30 +3190,30 @@ namespace System.ServiceModel.Configuration
 //    }
 //}
 
-//// configType.Name: ExtensionElement
+// configType.Name: ExtensionElement
 
-//namespace System.ServiceModel.Configuration
-//{
-//    public partial class ExtensionElement
-//    {
-//        ConfigurationPropertyCollection properties;
+namespace System.ServiceModel.Configuration
+{
+    public partial class ExtensionElement
+    {
+        ConfigurationPropertyCollection properties;
 
-//        protected override ConfigurationPropertyCollection Properties
-//        {
-//            get
-//            {
-//                if (this.properties == null)
-//                {
-//                    ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
-//                    properties.Add(new ConfigurationProperty("name", typeof(System.String), null, null, new System.Configuration.StringValidator(1, 2147483647, null), System.Configuration.ConfigurationPropertyOptions.IsRequired | System.Configuration.ConfigurationPropertyOptions.IsKey));
-//                    properties.Add(new ConfigurationProperty("type", typeof(System.String), null, null, new System.Configuration.StringValidator(1, 2147483647, null), System.Configuration.ConfigurationPropertyOptions.IsRequired));
-//                    this.properties = properties;
-//                }
-//                return this.properties;
-//            }
-//        }
-//    }
-//}
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get
+            {
+                if (this.properties == null)
+                {
+                    ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
+                    properties.Add(new ConfigurationProperty("name", typeof(System.String), null, null, new System.Configuration.StringValidator(1, 2147483647, null), System.Configuration.ConfigurationPropertyOptions.IsRequired | System.Configuration.ConfigurationPropertyOptions.IsKey));
+                    properties.Add(new ConfigurationProperty("type", typeof(System.String), null, null, new System.Configuration.StringValidator(1, 2147483647, null), System.Configuration.ConfigurationPropertyOptions.IsRequired));
+                    this.properties = properties;
+                }
+                return this.properties;
+            }
+        }
+    }
+}
 
 //// configType.Name: ServiceHostingEnvironmentSection
 
@@ -3330,30 +3330,30 @@ namespace System.ServiceModel.Configuration
 
 //// configType.Name: ExtensionsSection
 
-//namespace System.ServiceModel.Configuration
-//{
-//    public partial class ExtensionsSection
-//    {
-//        ConfigurationPropertyCollection properties;
+namespace System.ServiceModel.Configuration
+{
+    public partial class ExtensionsSection
+    {
+        ConfigurationPropertyCollection properties;
 
-//        protected override ConfigurationPropertyCollection Properties
-//        {
-//            get
-//            {
-//                if (this.properties == null)
-//                {
-//                    ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
-//                    properties.Add(new ConfigurationProperty("behaviorExtensions", typeof(System.ServiceModel.Configuration.ExtensionElementCollection), null, null, null, System.Configuration.ConfigurationPropertyOptions.None));
-//                    properties.Add(new ConfigurationProperty("bindingElementExtensions", typeof(System.ServiceModel.Configuration.ExtensionElementCollection), null, null, null, System.Configuration.ConfigurationPropertyOptions.None));
-//                    properties.Add(new ConfigurationProperty("bindingExtensions", typeof(System.ServiceModel.Configuration.ExtensionElementCollection), null, null, null, System.Configuration.ConfigurationPropertyOptions.None));
-//                    properties.Add(new ConfigurationProperty("endpointExtensions", typeof(System.ServiceModel.Configuration.ExtensionElementCollection), null, null, null, System.Configuration.ConfigurationPropertyOptions.None));
-//                    this.properties = properties;
-//                }
-//                return this.properties;
-//            }
-//        }
-//    }
-//}
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get
+            {
+                if (this.properties == null)
+                {
+                    ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
+                    properties.Add(new ConfigurationProperty("behaviorExtensions", typeof(System.ServiceModel.Configuration.ExtensionElementCollection), null, null, null, System.Configuration.ConfigurationPropertyOptions.None));
+                    properties.Add(new ConfigurationProperty("bindingElementExtensions", typeof(System.ServiceModel.Configuration.ExtensionElementCollection), null, null, null, System.Configuration.ConfigurationPropertyOptions.None));
+                    properties.Add(new ConfigurationProperty("bindingExtensions", typeof(System.ServiceModel.Configuration.ExtensionElementCollection), null, null, null, System.Configuration.ConfigurationPropertyOptions.None));
+                    properties.Add(new ConfigurationProperty("endpointExtensions", typeof(System.ServiceModel.Configuration.ExtensionElementCollection), null, null, null, System.Configuration.ConfigurationPropertyOptions.None));
+                    this.properties = properties;
+                }
+                return this.properties;
+            }
+        }
+    }
+}
 
 //// configType.Name: ServiceSecurityAuditElement
 

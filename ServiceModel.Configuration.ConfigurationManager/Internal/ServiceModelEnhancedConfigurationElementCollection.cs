@@ -8,7 +8,7 @@ namespace System.ServiceModel.Configuration
     using System.Configuration;
     using System.Globalization;
 
-    internal abstract class ServiceModelEnhancedConfigurationElementCollection<TConfigurationElement> : ServiceModelConfigurationElementCollection<TConfigurationElement>
+    public abstract class ServiceModelEnhancedConfigurationElementCollection<TConfigurationElement> : ServiceModelConfigurationElementCollection<TConfigurationElement>
         where TConfigurationElement : ConfigurationElement, new()
     {
         internal ServiceModelEnhancedConfigurationElementCollection(string elementName)

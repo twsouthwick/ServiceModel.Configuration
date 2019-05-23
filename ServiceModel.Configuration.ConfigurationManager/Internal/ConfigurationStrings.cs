@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Copyright (c) Microsoft Corporation.  All rights reserved.
+// Copyright(c) Microsoft Corporation.All rights reserved.
 //------------------------------------------------------------------------------
 namespace System.ServiceModel.Configuration
 {
@@ -494,59 +494,59 @@ namespace System.ServiceModel.Configuration
         internal const string X509FindType = "x509FindType";
         internal const string XmlElement = "xmlElement";
 
-        //internal static string BehaviorsSectionPath
-        //{
-        //    get { return ConfigurationHelpers.GetSectionPath(ConfigurationStrings.BehaviorsSectionName); }
-        //}
+        internal static string BehaviorsSectionPath
+        {
+            get { return ConfigurationHelpers.GetSectionPath(ConfigurationStrings.BehaviorsSectionName); }
+        }
 
-        //internal static string BindingsSectionGroupPath
-        //{
-        //    get { return ConfigurationHelpers.GetSectionPath(ConfigurationStrings.BindingsSectionGroupName); }
-        //}
+        internal static string BindingsSectionGroupPath
+        {
+            get { return ConfigurationHelpers.GetSectionPath(ConfigurationStrings.BindingsSectionGroupName); }
+        }
 
-        //internal static string ClientSectionPath
-        //{
-        //    get { return ConfigurationHelpers.GetSectionPath(ConfigurationStrings.ClientSectionName); }
-        //}
+        internal static string ClientSectionPath
+        {
+            get { return ConfigurationHelpers.GetSectionPath(ConfigurationStrings.ClientSectionName); }
+        }
 
-        //internal static string ComContractsSectionPath
-        //{
-        //    get { return ConfigurationHelpers.GetSectionPath(ConfigurationStrings.ComContractsSectionName); }
-        //}
+        internal static string ComContractsSectionPath
+        {
+            get { return ConfigurationHelpers.GetSectionPath(ConfigurationStrings.ComContractsSectionName); }
+        }
 
-        //internal static string CommonBehaviorsSectionPath
-        //{
-        //    get { return ConfigurationHelpers.GetSectionPath(ConfigurationStrings.CommonBehaviorsSectionName); }
-        //}
+        internal static string CommonBehaviorsSectionPath
+        {
+            get { return ConfigurationHelpers.GetSectionPath(ConfigurationStrings.CommonBehaviorsSectionName); }
+        }
 
-        //internal static string DiagnosticSectionPath
-        //{
-        //    get { return ConfigurationHelpers.GetSectionPath(ConfigurationStrings.DiagnosticSectionName); }
-        //}
+        internal static string DiagnosticSectionPath
+        {
+            get { return ConfigurationHelpers.GetSectionPath(ConfigurationStrings.DiagnosticSectionName); }
+        }
 
-        //internal static string ExtensionsSectionPath
-        //{
-        //    get { return ConfigurationHelpers.GetSectionPath(ConfigurationStrings.Extensions); }
-        //}
+        internal static string ExtensionsSectionPath
+        {
+            get { return ConfigurationHelpers.GetSectionPath(ConfigurationStrings.Extensions); }
+        }
 
-        //internal static string ProtocolMappingSectionPath
-        //{
-        //    get { return ConfigurationHelpers.GetSectionPath(ConfigurationStrings.ProtocolMappingSectionName); }
-        //}
+        internal static string ProtocolMappingSectionPath
+        {
+            get { return ConfigurationHelpers.GetSectionPath(ConfigurationStrings.ProtocolMappingSectionName); }
+        }
 
-        //internal static string ServiceHostingEnvironmentSectionPath
-        //{
-        //    get { return ConfigurationHelpers.GetSectionPath(ConfigurationStrings.ServiceHostingEnvironmentSectionName); }
-        //}
+        internal static string ServiceHostingEnvironmentSectionPath
+        {
+            get { return ConfigurationHelpers.GetSectionPath(ConfigurationStrings.ServiceHostingEnvironmentSectionName); }
+        }
 
         internal static string ServicesSectionPath
         {
             get { return ConfigurationHelpers.GetSectionPath(ConfigurationStrings.ServicesSectionName); }
         }
 
-        //internal static string StandardEndpointsSectionPath
-        //{
-        //    get { return ConfigurationHelpers.GetSectionPath(ConfigurationStrings.StandardEndpointsSectionName); }
-        //}
+        internal static string StandardEndpointsSectionPath
+        {
+            get { return ConfigurationHelpers.GetSectionPath(ConfigurationStrings.StandardEndpointsSectionName); }
+        }
     }
 }

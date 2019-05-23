@@ -12,7 +12,7 @@ namespace System.ServiceModel.Configuration
     using System.Linq;
     using System.Text;
 
-    internal abstract class ServiceModelConfigurationElementCollection<ConfigurationElementType> : ConfigurationElementCollection
+    public abstract class ServiceModelConfigurationElementCollection<ConfigurationElementType> : ConfigurationElementCollection
         where ConfigurationElementType : ConfigurationElement, new()
     {
         ConfigurationElementCollectionType collectionType;

@@ -22,14 +22,7 @@ namespace ConfigurationSample
         {
             services.AddServiceModelClient()
                 .AddConfigurationManagerFile("wcf.config")
-                .AddServiceEndpoint("roles", options =>
-                {
-                    options.Services.Add<IRoleService>(o =>
-                    {
-                        o.Binding = new BasicHttpBinding();
-                    });
-                })
-                .AddChannel<IRoleService>("roles");
+                .AddDefaultChannel<IRoleService>("roles");
 
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);

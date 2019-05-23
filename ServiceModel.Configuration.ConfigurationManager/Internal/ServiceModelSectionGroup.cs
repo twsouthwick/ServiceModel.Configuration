@@ -17,10 +17,10 @@ namespace System.ServiceModel.Configuration
         //    get { return (BehaviorsSection)this.Sections[ConfigurationStrings.BehaviorsSectionName]; }
         //}
 
-        //public BindingsSection Bindings
-        //{
-        //    get { return (BindingsSection)this.Sections[ConfigurationStrings.BindingsSectionGroupName]; }
-        //}
+        public BindingsSection Bindings
+        {
+            get { return (BindingsSection)this.Sections[ConfigurationStrings.BindingsSectionGroupName]; }
+        }
 
         //public ClientSection Client
         //{

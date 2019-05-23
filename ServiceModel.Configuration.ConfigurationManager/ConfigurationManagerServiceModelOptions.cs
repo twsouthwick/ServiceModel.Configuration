@@ -3,6 +3,7 @@ using System.Configuration;
 using System.Linq;
 using System.ServiceModel;
 using System.ServiceModel.Configuration;
+using System.ServiceModel.Description;
 
 namespace ServiceModel.Configuration
 {
@@ -58,6 +59,11 @@ namespace ServiceModel.Configuration
                     options.Services.Add(_mapper.ResolveContract(endpoint.Contract), o =>
                     {
                         o.Endpoint = new EndpointAddress(endpoint.Address);
+
+                        if (!string.IsNullOrEmpty(endpoint.Binding) || !string.IsNullOrEmpty(endpoint.BindingConfiguration))
+                        {
+                            o.Binding = ConfigLoader.LookupBinding(endpoint.Binding, endpoint.BindingConfiguration, ConfigurationHelpers.GetEvaluationContext(endpoint));
+                        }
                     });
                 }
             }
