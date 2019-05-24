@@ -3456,30 +3456,30 @@ namespace System.ServiceModel.Configuration
 //    }
 //}
 
-//// configType.Name: SslStreamSecurityElement
+// configType.Name: SslStreamSecurityElement
 
-//namespace System.ServiceModel.Configuration
-//{
-//    public sealed partial class SslStreamSecurityElement
-//    {
-//        ConfigurationPropertyCollection properties;
+namespace System.ServiceModel.Configuration
+{
+    public sealed partial class SslStreamSecurityElement
+    {
+        ConfigurationPropertyCollection properties;
 
-//        protected override ConfigurationPropertyCollection Properties
-//        {
-//            get
-//            {
-//                if (this.properties == null)
-//                {
-//                    ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
-//                    properties.Add(new ConfigurationProperty("requireClientCertificate", typeof(System.Boolean), false, null, null, System.Configuration.ConfigurationPropertyOptions.None));
-//                    properties.Add(new ConfigurationProperty("sslProtocols", typeof(System.Security.Authentication.SslProtocols), System.Security.Authentication.SslProtocols.Tls | System.Security.Authentication.SslProtocols.Tls11 | System.Security.Authentication.SslProtocols.Tls12, null, new System.ServiceModel.Configuration.ServiceModelEnumValidator(typeof(System.ServiceModel.Security.SslProtocolsHelper)), System.Configuration.ConfigurationPropertyOptions.None));
-//                    this.properties = properties;
-//                }
-//                return this.properties;
-//            }
-//        }
-//    }
-//}
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get
+            {
+                if (this.properties == null)
+                {
+                    ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
+                    properties.Add(new ConfigurationProperty("requireClientCertificate", typeof(System.Boolean), false, null, null, System.Configuration.ConfigurationPropertyOptions.None));
+                    properties.Add(new ConfigurationProperty("sslProtocols", typeof(System.Security.Authentication.SslProtocols), System.Security.Authentication.SslProtocols.Tls | System.Security.Authentication.SslProtocols.Tls11 | System.Security.Authentication.SslProtocols.Tls12, null, new System.ServiceModel.Configuration.ServiceModelEnumValidator(typeof(System.ServiceModel.Security.SslProtocolsHelper)), System.Configuration.ConfigurationPropertyOptions.None));
+                    this.properties = properties;
+                }
+                return this.properties;
+            }
+        }
+    }
+}
 
 //// configType.Name: TcpTransportElement
 
