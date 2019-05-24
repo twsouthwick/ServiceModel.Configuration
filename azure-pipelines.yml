@@ -1,0 +1,33 @@
+trigger:
+- master
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  solution: 'ServiceModel.Configuration.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+
+steps:
+- task: VSBuild@1
+  inputs:
+    solution: '$(solution)'
+    msbuildArgs: '/t:restore;build'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+- task: VSTest@2
+  inputs:
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+- script: 'dotnet pack /p:Version=$(build.BuildNumber)'
+- task: CopyFiles@2
+  inputs:
+    contents: '**/*nupkg' 
+    targetFolder: '$(build.artifactstagingdirectory)'
+    flattenFolders: true
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact'
+  inputs:
+    PathtoPublish: '$(build.artifactstagingdirectory)'
+    ArtifactName: 'drop'

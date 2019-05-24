@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+
+  <ItemGroup>
+
+    <!-- GitVersionTask is not compiled against .NET Core, so importing the targets will
+         result in a failure because it will try to resolve Microsoft.Build.Utilities v4.0 -->
+    <PackageReference Include="GitVersionTask" Version="4.0.0" Condition=" '$(MSBuildRuntimeType)' != 'Core' AND Exists('$(MSBuildThisFileDirectory)\.git') ">
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
+</Project>

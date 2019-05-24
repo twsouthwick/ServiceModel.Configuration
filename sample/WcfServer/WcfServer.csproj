@@ -5,6 +5,7 @@
     <ApplicationIcon />
     <OutputType>Exe</OutputType>
     <StartupObject />
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
