@@ -24,7 +24,7 @@ namespace System.ServiceModel.Configuration
         }
 
         [ConfigurationProperty(ConfigurationStrings.SslProtocols, DefaultValue = TransportDefaults.OldDefaultSslProtocols)]
-        //[ServiceModelEnumValidator(typeof(SslProtocolsHelper))]
+        [ServiceModelEnumValidator(typeof(SslProtocolsHelper))]
         public SslProtocols SslProtocols
         {
             get { return (SslProtocols)base[ConfigurationStrings.SslProtocols]; }
