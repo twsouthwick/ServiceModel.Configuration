@@ -74,11 +74,11 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.ProxyAddress] = value; }
         }
 
-        //[ConfigurationProperty(ConfigurationStrings.ReaderQuotas)]
-        //public XmlDictionaryReaderQuotasElement ReaderQuotas
-        //{
-        //    get { return (XmlDictionaryReaderQuotasElement)base[ConfigurationStrings.ReaderQuotas]; }
-        //}
+        [ConfigurationProperty(ConfigurationStrings.ReaderQuotas)]
+        public XmlDictionaryReaderQuotasElement ReaderQuotas
+        {
+            get { return (XmlDictionaryReaderQuotasElement)base[ConfigurationStrings.ReaderQuotas]; }
+        }
 
         [ConfigurationProperty(ConfigurationStrings.TextEncoding, DefaultValue = TextEncoderDefaults.EncodingString)]
         [TypeConverter(typeof(EncodingConverter))]
@@ -124,7 +124,7 @@ namespace System.ServiceModel.Configuration
             SetPropertyValueIfNotDefaultValue(ConfigurationStrings.TransferMode, httpBindingBase.TransferMode);
             SetPropertyValueIfNotDefaultValue(ConfigurationStrings.UseDefaultWebProxy, httpBindingBase.UseDefaultWebProxy);
 
-            //this.ReaderQuotas.InitializeFrom(httpBindingBase.ReaderQuotas);
+            this.ReaderQuotas.InitializeFrom(httpBindingBase.ReaderQuotas);
         }
 
         protected override void OnApplyConfiguration(Binding binding)
@@ -150,7 +150,7 @@ namespace System.ServiceModel.Configuration
                 httpBindingBase.MaxBufferSize = this.MaxBufferSize;
             }
 
-            //this.ReaderQuotas.ApplyConfiguration(httpBindingBase.ReaderQuotas);
+            this.ReaderQuotas.ApplyConfiguration(httpBindingBase.ReaderQuotas);
         }
     }
 }

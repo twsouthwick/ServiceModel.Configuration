@@ -126,6 +126,12 @@
   <data name="ConfigDuplicateExtensionType" xml:space="preserve">
     <value>ConfigDuplicateExtensionType</value>
   </data>
+  <data name="ConfigDuplicateItem" xml:space="preserve">
+    <value>ConfigDuplicateItem</value>
+  </data>
+  <data name="ConfigDuplicateKey" xml:space="preserve">
+    <value>ConfigDuplicateKey</value>
+  </data>
   <data name="ConfigDuplicateKeyAtSameScope" xml:space="preserve">
     <value>ConfigDuplicateKeyAtSameScope</value>
   </data>
@@ -134,6 +140,9 @@
   </data>
   <data name="ConfigElementKeysNull" xml:space="preserve">
     <value>ConfigElementKeysNull</value>
+  </data>
+  <data name="ConfigElementTypeNotAllowed" xml:space="preserve">
+    <value>ConfigElementTypeNotAllowed</value>
   </data>
   <data name="ConfigExtensionCollectionNotFound" xml:space="preserve">
     <value>ConfigExtensionCollectionNotFound</value>
@@ -147,11 +156,23 @@
   <data name="ConfigInvalidEncodingValue" xml:space="preserve">
     <value>ConfigInvalidEncodingValue</value>
   </data>
+  <data name="ConfigInvalidExtensionElement" xml:space="preserve">
+    <value>ConfigInvalidExtensionElement</value>
+  </data>
+  <data name="ConfigInvalidExtensionElementName" xml:space="preserve">
+    <value>ConfigInvalidExtensionElementName</value>
+  </data>
+  <data name="ConfigInvalidExtensionType" xml:space="preserve">
+    <value>ConfigInvalidExtensionType</value>
+  </data>
   <data name="ConfigInvalidSection" xml:space="preserve">
     <value>ConfigInvalidSection</value>
   </data>
   <data name="ConfigInvalidStartValue" xml:space="preserve">
     <value>ConfigInvalidStartValue</value>
+  </data>
+  <data name="ConfigInvalidType" xml:space="preserve">
+    <value>ConfigInvalidType</value>
   </data>
   <data name="ConfigInvalidTypeForBinding" xml:space="preserve">
     <value>ConfigInvalidTypeForBinding</value>
@@ -165,6 +186,9 @@
   <data name="ConfigKeysDoNotMatch" xml:space="preserve">
     <value>ConfigKeysDoNotMatch</value>
   </data>
+  <data name="ConfigMessageEncodingAlreadyInBinding" xml:space="preserve">
+    <value>ConfigMessageEncodingAlreadyInBinding</value>
+  </data>
   <data name="ConfigNoExtensionCollectionAssociatedWithType" xml:space="preserve">
     <value>ConfigNoExtensionCollectionAssociatedWithType</value>
   </data>
@@ -173,6 +197,12 @@
   </data>
   <data name="ConfigSectionNotFound" xml:space="preserve">
     <value>ConfigSectionNotFound</value>
+  </data>
+  <data name="ConfigStreamUpgradeElementAlreadyInBinding" xml:space="preserve">
+    <value>ConfigStreamUpgradeElementAlreadyInBinding</value>
+  </data>
+  <data name="ConfigTransportAlreadyInBinding" xml:space="preserve">
+    <value>ConfigTransportAlreadyInBinding</value>
   </data>
   <data name="GenericCallbackException" xml:space="preserve">
     <value>GenericCallbackException</value>
@@ -188,6 +218,9 @@
   </data>
   <data name="ID1024" xml:space="preserve">
     <value>ID1024</value>
+  </data>
+  <data name="StreamUpgradeBindingElement" xml:space="preserve">
+    <value>StreamUpgradeBindingElement</value>
   </data>
   <data name="StringNullOrEmpty" xml:space="preserve">
     <value>StringNullOrEmpty</value>

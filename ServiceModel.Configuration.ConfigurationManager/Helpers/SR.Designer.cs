@@ -88,6 +88,24 @@ namespace System {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ConfigDuplicateItem.
+        /// </summary>
+        internal static string ConfigDuplicateItem {
+            get {
+                return ResourceManager.GetString("ConfigDuplicateItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ConfigDuplicateKey.
+        /// </summary>
+        internal static string ConfigDuplicateKey {
+            get {
+                return ResourceManager.GetString("ConfigDuplicateKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ConfigDuplicateKeyAtSameScope.
         /// </summary>
         internal static string ConfigDuplicateKeyAtSameScope {
@@ -111,6 +129,15 @@ namespace System {
         internal static string ConfigElementKeysNull {
             get {
                 return ResourceManager.GetString("ConfigElementKeysNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ConfigElementTypeNotAllowed.
+        /// </summary>
+        internal static string ConfigElementTypeNotAllowed {
+            get {
+                return ResourceManager.GetString("ConfigElementTypeNotAllowed", resourceCulture);
             }
         }
         
@@ -151,6 +178,33 @@ namespace System {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ConfigInvalidExtensionElement.
+        /// </summary>
+        internal static string ConfigInvalidExtensionElement {
+            get {
+                return ResourceManager.GetString("ConfigInvalidExtensionElement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ConfigInvalidExtensionElementName.
+        /// </summary>
+        internal static string ConfigInvalidExtensionElementName {
+            get {
+                return ResourceManager.GetString("ConfigInvalidExtensionElementName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ConfigInvalidExtensionType.
+        /// </summary>
+        internal static string ConfigInvalidExtensionType {
+            get {
+                return ResourceManager.GetString("ConfigInvalidExtensionType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ConfigInvalidSection.
         /// </summary>
         internal static string ConfigInvalidSection {
@@ -165,6 +219,15 @@ namespace System {
         internal static string ConfigInvalidStartValue {
             get {
                 return ResourceManager.GetString("ConfigInvalidStartValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ConfigInvalidType.
+        /// </summary>
+        internal static string ConfigInvalidType {
+            get {
+                return ResourceManager.GetString("ConfigInvalidType", resourceCulture);
             }
         }
         
@@ -205,6 +268,15 @@ namespace System {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ConfigMessageEncodingAlreadyInBinding.
+        /// </summary>
+        internal static string ConfigMessageEncodingAlreadyInBinding {
+            get {
+                return ResourceManager.GetString("ConfigMessageEncodingAlreadyInBinding", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ConfigNoExtensionCollectionAssociatedWithType.
         /// </summary>
         internal static string ConfigNoExtensionCollectionAssociatedWithType {
@@ -228,6 +300,24 @@ namespace System {
         internal static string ConfigSectionNotFound {
             get {
                 return ResourceManager.GetString("ConfigSectionNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ConfigStreamUpgradeElementAlreadyInBinding.
+        /// </summary>
+        internal static string ConfigStreamUpgradeElementAlreadyInBinding {
+            get {
+                return ResourceManager.GetString("ConfigStreamUpgradeElementAlreadyInBinding", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ConfigTransportAlreadyInBinding.
+        /// </summary>
+        internal static string ConfigTransportAlreadyInBinding {
+            get {
+                return ResourceManager.GetString("ConfigTransportAlreadyInBinding", resourceCulture);
             }
         }
         
@@ -273,6 +363,15 @@ namespace System {
         internal static string ID1024 {
             get {
                 return ResourceManager.GetString("ID1024", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to StreamUpgradeBindingElement.
+        /// </summary>
+        internal static string StreamUpgradeBindingElement {
+            get {
+                return ResourceManager.GetString("StreamUpgradeBindingElement", resourceCulture);
             }
         }
         

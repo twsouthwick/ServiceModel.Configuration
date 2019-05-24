@@ -77,11 +77,11 @@ namespace System.ServiceModel.Configuration
             set { BindingsSection.configuration = value; }
         }
 
-        //[ConfigurationProperty(ConfigurationStrings.CustomBindingCollectionElementName, Options = ConfigurationPropertyOptions.None)]
-        //public CustomBindingCollectionElement CustomBinding
-        //{
-        //    get { return (CustomBindingCollectionElement)base[ConfigurationStrings.CustomBindingCollectionElementName]; }
-        //}
+        [ConfigurationProperty(ConfigurationStrings.CustomBindingCollectionElementName, Options = ConfigurationPropertyOptions.None)]
+        public CustomBindingCollectionElement CustomBinding
+        {
+            get { return (CustomBindingCollectionElement)base[ConfigurationStrings.CustomBindingCollectionElementName]; }
+        }
 
         //[ConfigurationProperty(ConfigurationStrings.MsmqIntegrationBindingCollectionElementName, Options = ConfigurationPropertyOptions.None)]
         //public MsmqIntegrationBindingCollectionElement MsmqIntegrationBinding
@@ -219,7 +219,7 @@ namespace System.ServiceModel.Configuration
                 BindingCollectionElement bindingCollectionElement = sectionGroup.BindingCollectionElements[sectionName];
 
                 // Save the custom bindings as the last choice
-                //if (!(bindingCollectionElement is CustomBindingCollectionElement))
+                if (!(bindingCollectionElement is CustomBindingCollectionElement))
                 {
                     MethodInfo tryAddMethod = bindingCollectionElement.GetType().GetMethod("TryAdd", BindingFlags.Instance | BindingFlags.NonPublic);
                     if (tryAddMethod != null)
@@ -233,16 +233,16 @@ namespace System.ServiceModel.Configuration
                     }
                 }
             }
-            //if (!retval)
-            //{
-            //    // Much of the time, the custombinding should come out ok.
-            //    CustomBindingCollectionElement customBindingSection = CustomBindingCollectionElement.GetBindingCollectionElement();
-            //    retval = customBindingSection.TryAdd(name, binding, BindingsSection.Configuration);
-            //    if (retval)
-            //    {
-            //        outBindingSectionName = ConfigurationStrings.CustomBindingCollectionElementName;
-            //    }
-            //}
+            if (!retval)
+            {
+                // Much of the time, the custombinding should come out ok.
+                CustomBindingCollectionElement customBindingSection = CustomBindingCollectionElement.GetBindingCollectionElement();
+                retval = customBindingSection.TryAdd(name, binding, BindingsSection.Configuration);
+                if (retval)
+                {
+                    outBindingSectionName = ConfigurationStrings.CustomBindingCollectionElementName;
+                }
+            }
 
             // This little oddity exists to make sure that the out param is assigned to before the method
             // exits.

@@ -549,33 +549,33 @@ using System.Globalization;
 //    }
 //}
 
-//// configType.Name: BinaryMessageEncodingElement
+// configType.Name: BinaryMessageEncodingElement
 
-//namespace System.ServiceModel.Configuration
-//{
-//    public sealed partial class BinaryMessageEncodingElement
-//    {
-//        ConfigurationPropertyCollection properties;
+namespace System.ServiceModel.Configuration
+{
+    public sealed partial class BinaryMessageEncodingElement
+    {
+        ConfigurationPropertyCollection properties;
 
-//        protected override ConfigurationPropertyCollection Properties
-//        {
-//            get
-//            {
-//                if (this.properties == null)
-//                {
-//                    ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
-//                    properties.Add(new ConfigurationProperty("maxReadPoolSize", typeof(System.Int32), 64, null, new System.Configuration.IntegerValidator(1, 2147483647, false), System.Configuration.ConfigurationPropertyOptions.None));
-//                    properties.Add(new ConfigurationProperty("maxWritePoolSize", typeof(System.Int32), 16, null, new System.Configuration.IntegerValidator(1, 2147483647, false), System.Configuration.ConfigurationPropertyOptions.None));
-//                    properties.Add(new ConfigurationProperty("maxSessionSize", typeof(System.Int32), 2048, null, new System.Configuration.IntegerValidator(0, 2147483647, false), System.Configuration.ConfigurationPropertyOptions.None));
-//                    properties.Add(new ConfigurationProperty("readerQuotas", typeof(System.ServiceModel.Configuration.XmlDictionaryReaderQuotasElement), null, null, null, System.Configuration.ConfigurationPropertyOptions.None));
-//                    properties.Add(new ConfigurationProperty("compressionFormat", typeof(System.ServiceModel.Channels.CompressionFormat), System.ServiceModel.Channels.CompressionFormat.None, null, new System.ServiceModel.Configuration.ServiceModelEnumValidator(typeof(System.ServiceModel.Channels.CompressionFormatHelper)), System.Configuration.ConfigurationPropertyOptions.None));
-//                    this.properties = properties;
-//                }
-//                return this.properties;
-//            }
-//        }
-//    }
-//}
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get
+            {
+                if (this.properties == null)
+                {
+                    ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
+                    properties.Add(new ConfigurationProperty("maxReadPoolSize", typeof(System.Int32), 64, null, new System.Configuration.IntegerValidator(1, 2147483647, false), System.Configuration.ConfigurationPropertyOptions.None));
+                    properties.Add(new ConfigurationProperty("maxWritePoolSize", typeof(System.Int32), 16, null, new System.Configuration.IntegerValidator(1, 2147483647, false), System.Configuration.ConfigurationPropertyOptions.None));
+                    properties.Add(new ConfigurationProperty("maxSessionSize", typeof(System.Int32), 2048, null, new System.Configuration.IntegerValidator(0, 2147483647, false), System.Configuration.ConfigurationPropertyOptions.None));
+                    properties.Add(new ConfigurationProperty("readerQuotas", typeof(System.ServiceModel.Configuration.XmlDictionaryReaderQuotasElement), null, null, null, System.Configuration.ConfigurationPropertyOptions.None));
+                    properties.Add(new ConfigurationProperty("compressionFormat", typeof(System.ServiceModel.Channels.CompressionFormat), System.ServiceModel.Channels.CompressionFormat.None, null, new System.ServiceModel.Configuration.ServiceModelEnumValidator(typeof(System.ServiceModel.Channels.CompressionFormatHelper)), System.Configuration.ConfigurationPropertyOptions.None));
+                    this.properties = properties;
+                }
+                return this.properties;
+            }
+        }
+    }
+}
 
 //// configType.Name: CertificateElement
 
@@ -924,30 +924,30 @@ using System.Globalization;
 
 //// configType.Name: CustomBindingElement
 
-//namespace System.ServiceModel.Configuration
-//{
-//    public partial class CustomBindingElement
-//    {
-//        ConfigurationPropertyCollection properties;
+namespace System.ServiceModel.Configuration
+{
+    public partial class CustomBindingElement
+    {
+        ConfigurationPropertyCollection properties;
 
-//        protected override ConfigurationPropertyCollection Properties
-//        {
-//            get
-//            {
-//                if (this.properties == null)
-//                {
-//                    ConfigurationPropertyCollection properties = base.Properties;
-//                    properties.Add(new ConfigurationProperty("closeTimeout", typeof(System.TimeSpan), System.TimeSpan.Parse("00:01:00", CultureInfo.InvariantCulture), new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(), new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture), System.TimeSpan.Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)), System.Configuration.ConfigurationPropertyOptions.None));
-//                    properties.Add(new ConfigurationProperty("openTimeout", typeof(System.TimeSpan), System.TimeSpan.Parse("00:01:00", CultureInfo.InvariantCulture), new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(), new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture), System.TimeSpan.Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)), System.Configuration.ConfigurationPropertyOptions.None));
-//                    properties.Add(new ConfigurationProperty("receiveTimeout", typeof(System.TimeSpan), System.TimeSpan.Parse("00:10:00", CultureInfo.InvariantCulture), new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(), new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture), System.TimeSpan.Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)), System.Configuration.ConfigurationPropertyOptions.None));
-//                    properties.Add(new ConfigurationProperty("sendTimeout", typeof(System.TimeSpan), System.TimeSpan.Parse("00:01:00", CultureInfo.InvariantCulture), new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(), new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture), System.TimeSpan.Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)), System.Configuration.ConfigurationPropertyOptions.None));
-//                    this.properties = properties;
-//                }
-//                return this.properties;
-//            }
-//        }
-//    }
-//}
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get
+            {
+                if (this.properties == null)
+                {
+                    ConfigurationPropertyCollection properties = base.Properties;
+                    properties.Add(new ConfigurationProperty("closeTimeout", typeof(System.TimeSpan), System.TimeSpan.Parse("00:01:00", CultureInfo.InvariantCulture), new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(), new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture), System.TimeSpan.Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)), System.Configuration.ConfigurationPropertyOptions.None));
+                    properties.Add(new ConfigurationProperty("openTimeout", typeof(System.TimeSpan), System.TimeSpan.Parse("00:01:00", CultureInfo.InvariantCulture), new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(), new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture), System.TimeSpan.Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)), System.Configuration.ConfigurationPropertyOptions.None));
+                    properties.Add(new ConfigurationProperty("receiveTimeout", typeof(System.TimeSpan), System.TimeSpan.Parse("00:10:00", CultureInfo.InvariantCulture), new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(), new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture), System.TimeSpan.Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)), System.Configuration.ConfigurationPropertyOptions.None));
+                    properties.Add(new ConfigurationProperty("sendTimeout", typeof(System.TimeSpan), System.TimeSpan.Parse("00:01:00", CultureInfo.InvariantCulture), new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(), new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture), System.TimeSpan.Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)), System.Configuration.ConfigurationPropertyOptions.None));
+                    this.properties = properties;
+                }
+                return this.properties;
+            }
+        }
+    }
+}
 
 //// configType.Name: CustomBindingCollectionElement
 

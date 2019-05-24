@@ -64,7 +64,7 @@ namespace System.ServiceModel.Configuration
 
         void InitializeBindingElementExtenions()
         {
-            //this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.BinaryMessageEncodingSectionName, typeof(BinaryMessageEncodingElement).AssemblyQualifiedName));
+            this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.BinaryMessageEncodingSectionName, typeof(BinaryMessageEncodingElement).AssemblyQualifiedName));
             //this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.CompositeDuplexSectionName, typeof(CompositeDuplexElement).AssemblyQualifiedName));
             //this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.OneWaySectionName, typeof(OneWayElement).AssemblyQualifiedName));
             //this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.TransactionFlowSectionName, typeof(TransactionFlowElement).AssemblyQualifiedName));
@@ -79,7 +79,7 @@ namespace System.ServiceModel.Configuration
             //this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.PrivacyNoticeSectionName, typeof(PrivacyNoticeElement).AssemblyQualifiedName));
             //this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.ReliableSessionSectionName, typeof(ReliableSessionElement).AssemblyQualifiedName));
             this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.SecuritySectionName, typeof(SecurityElement).AssemblyQualifiedName));
-            //this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.SslStreamSecuritySectionName, typeof(SslStreamSecurityElement).AssemblyQualifiedName));
+            this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.SslStreamSecuritySectionName, typeof(SslStreamSecurityElement).AssemblyQualifiedName));
             //this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.TcpTransportSectionName, typeof(TcpTransportElement).AssemblyQualifiedName));
             //this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.TextMessageEncodingSectionName, typeof(TextMessageEncodingElement).AssemblyQualifiedName));
             //this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.UnrecognizedPolicyAssertionSectionName, typeof(UnrecognizedPolicyAssertionElement).AssemblyQualifiedName));
@@ -95,7 +95,7 @@ namespace System.ServiceModel.Configuration
         void InitializeBindingExtensions()
         {
             this.BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.BasicHttpBindingCollectionElementName, typeof(BasicHttpBindingCollectionElement).AssemblyQualifiedName));
-            //this.BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.CustomBindingCollectionElementName, typeof(CustomBindingCollectionElement).AssemblyQualifiedName));
+            this.BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.CustomBindingCollectionElementName, typeof(CustomBindingCollectionElement).AssemblyQualifiedName));
             //this.BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.MsmqIntegrationBindingCollectionElementName, typeof(MsmqIntegrationBindingCollectionElement).AssemblyQualifiedName));
             //this.BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.NetMsmqBindingCollectionElementName, typeof(NetMsmqBindingCollectionElement).AssemblyQualifiedName));
             //this.BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.NetNamedPipeBindingCollectionElementName, typeof(NetNamedPipeBindingCollectionElement).AssemblyQualifiedName));
