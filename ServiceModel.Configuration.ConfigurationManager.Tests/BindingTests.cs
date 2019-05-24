@@ -1,50 +1,18 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using NSubstitute;
 using System;
+using System.ServiceModel;
 using System.ServiceModel.Description;
 using Xunit;
 
 namespace ServiceModel.Configuration.ConfigurationManager.Tests
 {
-    public class ConfigurationManagerExtensionsTests : ServiceModelTestBase
+    public class BindingTests : ServiceModelTestBase
     {
-        [Fact]
-        public void SingleServiceDefaultResolver()
-        {
-            var name = Create<string>();
-            var address = Create<Uri>().ToString();
-            var xml = $@"
-<configuration>
-    <system.serviceModel>
-          <services>
-              <service name=""{name}"">
-                  <endpoint
-                      address=""{address}""
-                      contract=""{typeof(IService).FullName}"" />
-              </service>
-          </services>
-      </system.serviceModel>
-</configuration>";
-
-            using (var fs = TemporaryFileStream.Create(xml))
-            {
-                void Configure(ServiceModelBuilder builder)
-                {
-                    builder.AddConfigurationManagerFile(fs.Name);
-                }
-
-                using (var provider = CreateProvider(Configure))
-                {
-                    var factoryProvider = provider.GetRequiredService<IChannelFactoryProvider>();
-                    var factory = factoryProvider.CreateChannelFactory<IService>(name);
-
-                    Assert.Equal(address, factory.Endpoint.Address.ToString());
-                }
-            }
-        }
-
-        [Fact]
-        public void SingleServiceCustomResolver()
+        [InlineData("basicHttpBinding", typeof(BasicHttpBinding))]
+        [InlineData("basicHttpsBinding", typeof(BasicHttpsBinding))]
+        [Theory]
+        public void SimpleBasicHttpBinding(string bindingName, Type bindingType)
         {
             var name = Create<string>();
             var address = Create<Uri>().ToString();
@@ -56,7 +24,8 @@ namespace ServiceModel.Configuration.ConfigurationManager.Tests
             <service name=""{name}"">
                 <endpoint
                     address=""{address}""
-                    contract=""{contract}"" />
+                    contract=""{contract}""
+                    binding=""{bindingName}"" />
             </service>
         </services>
     </system.serviceModel>
@@ -81,6 +50,7 @@ namespace ServiceModel.Configuration.ConfigurationManager.Tests
                     var factory = factoryProvider.CreateChannelFactory<IService>(name);
 
                     Assert.Equal(address, factory.Endpoint.Address.ToString());
+                    Assert.Equal(bindingType, factory.Endpoint.Binding.GetType());
                 }
             }
         }
