@@ -27,6 +27,20 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 - script: dotnet pack # define version variable elsewhere in your pipeline
+- task: CopyFiles@2
+  inputs:
+    #sourceFolder: # Optional
+    contents: '**/*nupkg' 
+    targetFolder: '$(build.artifactstagingdirectory)'
+    #cleanTargetFolder: false # Optional
+    #overWrite: false # Optional
+    flattenFolders: true
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact'
+  inputs:
+    PathtoPublish: '$(build.artifactstagingdirectory)'
+    ArtifactName: 'drop'
+
 #- task: NuGetCommand@2
 #  inputs:
 #    command: push
