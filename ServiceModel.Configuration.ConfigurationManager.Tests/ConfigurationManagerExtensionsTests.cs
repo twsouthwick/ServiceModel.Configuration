@@ -2,6 +2,7 @@
 using NSubstitute;
 using System;
 using System.IO;
+using System.Security.Authentication;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
@@ -182,6 +183,20 @@ namespace ServiceModel.Configuration.ConfigurationManager.Tests
 
                     Assert.Equal(address, factory.Endpoint.Address.ToString());
                     var binding = Assert.IsType<CustomBinding>(factory.Endpoint.Binding);
+
+                    Assert.Collection(binding.Elements,
+                        e =>
+                        {
+                            var encoding = Assert.IsType<BinaryMessageEncodingBindingElement>(e);
+
+                            Assert.Equal(CompressionFormat.GZip, encoding.CompressionFormat);
+                        },
+                        e =>
+                        {
+                            var ssl = Assert.IsType<SslStreamSecurityBindingElement>(e);
+
+                            Assert.Equal(SslProtocols.Tls | SslProtocols.Tls11 | SslProtocols.Tls12, ssl.SslProtocols);
+                        });
                 }
             }
         }
