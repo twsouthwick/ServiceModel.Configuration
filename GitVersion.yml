@@ -1,0 +1,6 @@
+assembly-versioning-scheme: MajorMinorPatchTag
+mode: ContinuousDeployment
+branches:
+  master:
+    regex: master
+next-version: 0.1
