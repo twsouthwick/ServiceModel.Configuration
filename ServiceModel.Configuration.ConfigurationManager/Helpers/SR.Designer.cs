@@ -383,5 +383,14 @@ namespace System {
                 return ResourceManager.GetString("StringNullOrEmpty", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ValueMustBePositive.
+        /// </summary>
+        internal static string ValueMustBePositive {
+            get {
+                return ResourceManager.GetString("ValueMustBePositive", resourceCulture);
+            }
+        }
     }
 }

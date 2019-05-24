@@ -64,11 +64,11 @@ namespace System.ServiceModel.Configuration
             get { return (BasicHttpBindingCollectionElement)base[ConfigurationStrings.BasicHttpBindingCollectionElementName]; }
         }
 
-        //[ConfigurationProperty(ConfigurationStrings.BasicHttpsBindingCollectionElementName, Options = ConfigurationPropertyOptions.None)]
-        //public BasicHttpsBindingCollectionElement BasicHttpsBinding
-        //{
-        //    get { return (BasicHttpsBindingCollectionElement)base[ConfigurationStrings.BasicHttpsBindingCollectionElementName]; }
-        //}
+        [ConfigurationProperty(ConfigurationStrings.BasicHttpsBindingCollectionElementName, Options = ConfigurationPropertyOptions.None)]
+        public BasicHttpsBindingCollectionElement BasicHttpsBinding
+        {
+            get { return (BasicHttpsBindingCollectionElement)base[ConfigurationStrings.BasicHttpsBindingCollectionElementName]; }
+        }
 
         // This property should only be called/set from BindingsSectionGroup TryAdd
         static Configuration Configuration

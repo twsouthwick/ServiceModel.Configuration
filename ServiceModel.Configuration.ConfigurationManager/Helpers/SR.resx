@@ -225,4 +225,7 @@
   <data name="StringNullOrEmpty" xml:space="preserve">
     <value>StringNullOrEmpty</value>
   </data>
+  <data name="ValueMustBePositive" xml:space="preserve">
+    <value>ValueMustBePositive</value>
+  </data>
 </root>

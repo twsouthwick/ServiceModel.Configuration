@@ -80,7 +80,7 @@ namespace System.ServiceModel.Configuration
             //this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.ReliableSessionSectionName, typeof(ReliableSessionElement).AssemblyQualifiedName));
             this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.SecuritySectionName, typeof(SecurityElement).AssemblyQualifiedName));
             this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.SslStreamSecuritySectionName, typeof(SslStreamSecurityElement).AssemblyQualifiedName));
-            //this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.TcpTransportSectionName, typeof(TcpTransportElement).AssemblyQualifiedName));
+            this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.TcpTransportSectionName, typeof(TcpTransportElement).AssemblyQualifiedName));
             //this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.TextMessageEncodingSectionName, typeof(TextMessageEncodingElement).AssemblyQualifiedName));
             //this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.UnrecognizedPolicyAssertionSectionName, typeof(UnrecognizedPolicyAssertionElement).AssemblyQualifiedName));
             //this.BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.UseManagedPresentationSectionName, typeof(UseManagedPresentationElement).AssemblyQualifiedName));

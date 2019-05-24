@@ -76,6 +76,60 @@ namespace ServiceModel.Configuration.ConfigurationManager.Tests
             }
         }
 
+        [Fact]
+        public void CustomBindingWithTcpTransport()
+        {
+            var name = Create<string>();
+            var address = Create<Uri>().ToString();
+            var contract = Create<string>();
+            var xml = $@"
+<configuration>
+    <system.serviceModel>
+        <bindings>
+            <customBinding>
+                <binding name=""customName"">
+                    <tcpTransport />
+                </binding>
+            </customBinding>
+        </bindings>
+        <services>
+            <service name=""service1"">
+                <endpoint address=""{address}""
+                    binding=""customBinding"" bindingConfiguration=""customName""
+                    contract=""{contract}"">
+                </endpoint>
+            </service>
+        </services>
+    </system.serviceModel>
+</configuration>";
+
+            using (var fs = TemporaryFileStream.Create(xml))
+            {
+                void Configure(ServiceModelBuilder builder)
+                {
+                    var mapper = Substitute.For<IContractResolver>();
+
+                    mapper.ResolveContract(contract).Returns(typeof(IService));
+                    mapper.ResolveDescription(typeof(IService)).Returns(ContractDescription.GetContract(typeof(IService)));
+
+                    builder.Services.AddSingleton<IContractResolver>(mapper);
+                    builder.AddConfigurationManagerFile(fs.Name);
+                }
+
+                using (var provider = CreateProvider(Configure))
+                {
+                    var factoryProvider = provider.GetRequiredService<IChannelFactoryProvider>();
+                    var factory = factoryProvider.CreateChannelFactory<IService>(name);
+
+                    Assert.Equal(address, factory.Endpoint.Address.ToString());
+                    var binding = Assert.IsType<CustomBinding>(factory.Endpoint.Binding);
+
+                    Assert.Collection(binding.Elements, e => Assert.IsType<TcpTransportBindingElement>(e));
+                }
+            }
+        }
+
+
 #if FALSE
         [Fact]
         public void Example()

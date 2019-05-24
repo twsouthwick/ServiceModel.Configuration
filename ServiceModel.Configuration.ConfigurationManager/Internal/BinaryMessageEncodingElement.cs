@@ -45,7 +45,6 @@ namespace System.ServiceModel.Configuration
             base.ApplyConfiguration(bindingElement);
             BinaryMessageEncodingBindingElement binding = (BinaryMessageEncodingBindingElement)bindingElement;
             binding.MaxSessionSize = this.MaxSessionSize;
-#pragma warning suppress 56506 //Microsoft; base.ApplyConfiguration() checks for 'binding' being null
             this.ReaderQuotas.ApplyConfiguration(binding.ReaderQuotas);
             binding.CompressionFormat = this.CompressionFormat;
         }
@@ -55,7 +54,6 @@ namespace System.ServiceModel.Configuration
             base.CopyFrom(from);
 
             BinaryMessageEncodingElement source = (BinaryMessageEncodingElement)from;
-#pragma warning suppress 56506 //Microsoft; base.CopyFrom() checks for 'from' being null
             this.MaxSessionSize = source.MaxSessionSize;
             this.CompressionFormat = source.CompressionFormat;
         }

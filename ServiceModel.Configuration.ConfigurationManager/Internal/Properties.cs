@@ -891,36 +891,38 @@ namespace System.ServiceModel.Configuration
 //    }
 //}
 
-//// configType.Name: ConnectionOrientedTransportElement
+// configType.Name: ConnectionOrientedTransportElement
 
-//namespace System.ServiceModel.Configuration
-//{
-//    public partial class ConnectionOrientedTransportElement
-//    {
-//        ConfigurationPropertyCollection properties;
+namespace System.ServiceModel.Configuration
+{
+    public partial class ConnectionOrientedTransportElement
+    {
+        ConfigurationPropertyCollection properties;
 
-//        protected override ConfigurationPropertyCollection Properties
-//        {
-//            get
-//            {
-//                if (this.properties == null)
-//                {
-//                    ConfigurationPropertyCollection properties = base.Properties;
-//                    properties.Add(new ConfigurationProperty("connectionBufferSize", typeof(System.Int32), 8192, null, new System.Configuration.IntegerValidator(1, 2147483647, false), System.Configuration.ConfigurationPropertyOptions.None));
-//                    properties.Add(new ConfigurationProperty("hostNameComparisonMode", typeof(System.ServiceModel.HostNameComparisonMode), System.ServiceModel.HostNameComparisonMode.StrongWildcard, null, new System.ServiceModel.Configuration.ServiceModelEnumValidator(typeof(System.ServiceModel.HostNameComparisonModeHelper)), System.Configuration.ConfigurationPropertyOptions.None));
-//                    properties.Add(new ConfigurationProperty("channelInitializationTimeout", typeof(System.TimeSpan), System.TimeSpan.Parse("00:00:30", CultureInfo.InvariantCulture), new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(), new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(System.TimeSpan.Parse("00:00:00.0000001", CultureInfo.InvariantCulture), System.TimeSpan.Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)), System.Configuration.ConfigurationPropertyOptions.None));
-//                    properties.Add(new ConfigurationProperty("maxBufferSize", typeof(System.Int32), 65536, null, new System.Configuration.IntegerValidator(1, 2147483647, false), System.Configuration.ConfigurationPropertyOptions.None));
-//                    properties.Add(new ConfigurationProperty("maxPendingConnections", typeof(System.Int32), 0, null, new System.Configuration.IntegerValidator(0, 2147483647, false), System.Configuration.ConfigurationPropertyOptions.None));
-//                    properties.Add(new ConfigurationProperty("maxOutputDelay", typeof(System.TimeSpan), System.TimeSpan.Parse("00:00:00.2", CultureInfo.InvariantCulture), new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(), new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture), System.TimeSpan.Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)), System.Configuration.ConfigurationPropertyOptions.None));
-//                    properties.Add(new ConfigurationProperty("maxPendingAccepts", typeof(System.Int32), 0, null, new System.Configuration.IntegerValidator(0, 2147483647, false), System.Configuration.ConfigurationPropertyOptions.None));
-//                    properties.Add(new ConfigurationProperty("transferMode", typeof(System.ServiceModel.TransferMode), System.ServiceModel.TransferMode.Buffered, null, new System.ServiceModel.Configuration.ServiceModelEnumValidator(typeof(System.ServiceModel.TransferModeHelper)), System.Configuration.ConfigurationPropertyOptions.None));
-//                    this.properties = properties;
-//                }
-//                return this.properties;
-//            }
-//        }
-//    }
-//}
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get
+            {
+                if (this.properties == null)
+                {
+                    ConfigurationPropertyCollection properties = base.Properties;
+                    properties.Add(new ConfigurationProperty("connectionBufferSize", typeof(System.Int32), 8192, null, new System.Configuration.IntegerValidator(1, 2147483647, false), System.Configuration.ConfigurationPropertyOptions.None));
+#if DESKTOP
+                    properties.Add(new ConfigurationProperty("hostNameComparisonMode", typeof(System.ServiceModel.HostNameComparisonMode), System.ServiceModel.HostNameComparisonMode.StrongWildcard, null, new System.ServiceModel.Configuration.ServiceModelEnumValidator(typeof(System.ServiceModel.HostNameComparisonModeHelper)), System.Configuration.ConfigurationPropertyOptions.None));
+#endif
+                    properties.Add(new ConfigurationProperty("channelInitializationTimeout", typeof(System.TimeSpan), System.TimeSpan.Parse("00:00:30", CultureInfo.InvariantCulture), new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(), new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(System.TimeSpan.Parse("00:00:00.0000001", CultureInfo.InvariantCulture), System.TimeSpan.Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)), System.Configuration.ConfigurationPropertyOptions.None));
+                    properties.Add(new ConfigurationProperty("maxBufferSize", typeof(System.Int32), 65536, null, new System.Configuration.IntegerValidator(1, 2147483647, false), System.Configuration.ConfigurationPropertyOptions.None));
+                    properties.Add(new ConfigurationProperty("maxPendingConnections", typeof(System.Int32), 0, null, new System.Configuration.IntegerValidator(0, 2147483647, false), System.Configuration.ConfigurationPropertyOptions.None));
+                    properties.Add(new ConfigurationProperty("maxOutputDelay", typeof(System.TimeSpan), System.TimeSpan.Parse("00:00:00.2", CultureInfo.InvariantCulture), new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(), new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture), System.TimeSpan.Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)), System.Configuration.ConfigurationPropertyOptions.None));
+                    properties.Add(new ConfigurationProperty("maxPendingAccepts", typeof(System.Int32), 0, null, new System.Configuration.IntegerValidator(0, 2147483647, false), System.Configuration.ConfigurationPropertyOptions.None));
+                    properties.Add(new ConfigurationProperty("transferMode", typeof(System.ServiceModel.TransferMode), System.ServiceModel.TransferMode.Buffered, null, new System.ServiceModel.Configuration.ServiceModelEnumValidator(typeof(System.ServiceModel.TransferModeHelper)), System.Configuration.ConfigurationPropertyOptions.None));
+                    this.properties = properties;
+                }
+                return this.properties;
+            }
+        }
+    }
+}
 
 //// configType.Name: CustomBindingElement
 
@@ -3481,33 +3483,35 @@ namespace System.ServiceModel.Configuration
     }
 }
 
-//// configType.Name: TcpTransportElement
+// configType.Name: TcpTransportElement
 
-//namespace System.ServiceModel.Configuration
-//{
-//    public sealed partial class TcpTransportElement
-//    {
-//        ConfigurationPropertyCollection properties;
+namespace System.ServiceModel.Configuration
+{
+    public sealed partial class TcpTransportElement
+    {
+        ConfigurationPropertyCollection properties;
 
-//        protected override ConfigurationPropertyCollection Properties
-//        {
-//            get
-//            {
-//                if (this.properties == null)
-//                {
-//                    ConfigurationPropertyCollection properties = base.Properties;
-//                    properties.Add(new ConfigurationProperty("listenBacklog", typeof(System.Int32), 0, null, new System.Configuration.IntegerValidator(0, 2147483647, false), System.Configuration.ConfigurationPropertyOptions.None));
-//                    properties.Add(new ConfigurationProperty("portSharingEnabled", typeof(System.Boolean), false, null, null, System.Configuration.ConfigurationPropertyOptions.None));
-//                    properties.Add(new ConfigurationProperty("teredoEnabled", typeof(System.Boolean), false, null, null, System.Configuration.ConfigurationPropertyOptions.None));
-//                    properties.Add(new ConfigurationProperty("connectionPoolSettings", typeof(System.ServiceModel.Configuration.TcpConnectionPoolSettingsElement), null, null, null, System.Configuration.ConfigurationPropertyOptions.None));
-//                    properties.Add(new ConfigurationProperty("extendedProtectionPolicy", typeof(System.Security.Authentication.ExtendedProtection.Configuration.ExtendedProtectionPolicyElement), null, null, null, System.Configuration.ConfigurationPropertyOptions.None));
-//                    this.properties = properties;
-//                }
-//                return this.properties;
-//            }
-//        }
-//    }
-//}
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get
+            {
+                if (this.properties == null)
+                {
+                    ConfigurationPropertyCollection properties = base.Properties;
+                    properties.Add(new ConfigurationProperty("listenBacklog", typeof(System.Int32), 0, null, new System.Configuration.IntegerValidator(0, 2147483647, false), System.Configuration.ConfigurationPropertyOptions.None));
+                    properties.Add(new ConfigurationProperty("portSharingEnabled", typeof(System.Boolean), false, null, null, System.Configuration.ConfigurationPropertyOptions.None));
+                    properties.Add(new ConfigurationProperty("teredoEnabled", typeof(System.Boolean), false, null, null, System.Configuration.ConfigurationPropertyOptions.None));
+                    properties.Add(new ConfigurationProperty("connectionPoolSettings", typeof(System.ServiceModel.Configuration.TcpConnectionPoolSettingsElement), null, null, null, System.Configuration.ConfigurationPropertyOptions.None));
+#if DESKTOP
+                    properties.Add(new ConfigurationProperty("extendedProtectionPolicy", typeof(System.Security.Authentication.ExtendedProtection.Configuration.ExtendedProtectionPolicyElement), null, null, null, System.Configuration.ConfigurationPropertyOptions.None));
+#endif
+                    this.properties = properties;
+                }
+                return this.properties;
+            }
+        }
+    }
+}
 
 //// configType.Name: TcpTransportSecurityElement
 
