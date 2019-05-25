@@ -19,5 +19,8 @@ namespace ServiceModel.Configuration
 
             return new ServiceModelBuilder(services);
         }
+
+        public static ChannelFactory<T> CreateChannelFactory<T>(this IChannelFactoryProvider provider) => provider.CreateChannelFactory<T>(ServiceModelDefaults.DefaultName);
+
     }
 }

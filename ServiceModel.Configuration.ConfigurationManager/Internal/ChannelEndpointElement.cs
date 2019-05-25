@@ -10,7 +10,7 @@ namespace System.ServiceModel.Configuration
     using System.Security;
     using System.ServiceModel;
 
-    public sealed partial class ChannelEndpointElement : ConfigurationElement, IConfigurationContextProviderInternal
+    public sealed partial class ChannelEndpointElement : ConfigurationElement, IConfigurationContextProviderInternal, IEndpoint
     {
         [SecurityCritical]
         EvaluationContextHelper contextHelper;

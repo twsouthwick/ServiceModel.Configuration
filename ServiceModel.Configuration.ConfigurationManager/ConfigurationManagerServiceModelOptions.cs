@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -53,17 +55,31 @@ namespace ServiceModel.Configuration
 
         private void Configure(string name, ServiceModelOptions options, ServiceModelSectionGroup group)
         {
-            var service = group.Services.Services.Cast<ServiceElement>().FirstOrDefault(e => e.Name == name);
-
-            if (service != null)
+            if (string.Equals(ServiceModelDefaults.DefaultName, name, StringComparison.Ordinal))
             {
-                Add(options, service.Endpoints.Cast<ServiceEndpointElement>());
+                Add(options, group.Client?.Endpoints);
+            }
+            else
+            {
+                var service = group.Services.Services.Cast<ServiceElement>().FirstOrDefault(e => e.Name == name);
+
+                if (service != null)
+                {
+                    Add(options, service.Endpoints);
+                }
             }
         }
 
-        private void Add(ServiceModelOptions options, IEnumerable<ServiceEndpointElement> endpoints)
+
+
+        private void Add(ServiceModelOptions options, IEnumerable endpoints)
         {
-            foreach (var endpoint in endpoints)
+            if (endpoints is null)
+            {
+                return;
+            }
+
+            foreach (var endpoint in endpoints.OfType<IEndpoint>())
             {
                 options.Services.Add(_mapper.ResolveContract(endpoint.Contract), o =>
                 {

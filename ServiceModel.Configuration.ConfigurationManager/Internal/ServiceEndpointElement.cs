@@ -11,7 +11,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel;
     using System.ServiceModel.Description;
 
-    public sealed partial class ServiceEndpointElement : ConfigurationElement, IConfigurationContextProviderInternal
+    public sealed partial class ServiceEndpointElement : ConfigurationElement, IConfigurationContextProviderInternal, IEndpoint
     {
         public ServiceEndpointElement() : base() { }
 

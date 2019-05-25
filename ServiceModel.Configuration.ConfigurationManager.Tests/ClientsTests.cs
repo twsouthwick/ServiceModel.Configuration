@@ -8,14 +8,12 @@ namespace ServiceModel.Configuration.ConfigurationManager.Tests
 {
     public class ClientsTests : ServiceModelTestBase
     {
-        [Fact(Skip = "not working")]
+        [Fact]
         public void ClientBlock()
         {
-            var name = Create<string>();
             var address = Create<Uri>().ToString();
             var contract = Create<string>();
             var xml = $@"
-<?xml version=""1.0"" encoding=""utf-8"" ?>
 <configuration>
   <system.serviceModel>
     <client>
@@ -43,7 +41,7 @@ namespace ServiceModel.Configuration.ConfigurationManager.Tests
                 using (var provider = CreateProvider(Configure))
                 {
                     var factoryProvider = provider.GetRequiredService<IChannelFactoryProvider>();
-                    var factory = factoryProvider.CreateChannelFactory<IService>(name);
+                    var factory = factoryProvider.CreateChannelFactory<IService>();
 
                     Assert.Equal(address, factory.Endpoint.Address.ToString());
                 }
