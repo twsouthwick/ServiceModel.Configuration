@@ -44,6 +44,51 @@ namespace ServiceModel.Configuration.ConfigurationManager.Tests
         }
 
         [Fact]
+        public void SingleServiceDefaultResolverDifferentName()
+        {
+            var name1 = Create<string>();
+            var name2 = Create<string>();
+            var address1 = Create<Uri>().ToString();
+            var address2 = Create<Uri>().ToString();
+            var xml = $@"
+<configuration>
+    <system.serviceModel>
+          <services>
+              <service name=""{name1}"">
+                  <endpoint
+                      address=""{address1}""
+                      contract=""{typeof(IService).FullName}"" />
+              </service>
+              <service name=""{name2}"">
+                  <endpoint
+                      address=""{address2}""
+                      contract=""{typeof(IService).FullName}"" />
+              </service>
+          </services>
+      </system.serviceModel>
+</configuration>";
+
+            using (var fs = TemporaryFileStream.Create(xml))
+            {
+                void Configure(ServiceModelBuilder builder)
+                {
+                    builder.AddConfigurationManagerFile(fs.Name);
+                }
+
+                using (var provider = CreateProvider(Configure))
+                {
+                    var factoryProvider = provider.GetRequiredService<IChannelFactoryProvider>();
+
+                    var factory1 = factoryProvider.CreateChannelFactory<IService>(name1);
+                    Assert.Equal(address1, factory1.Endpoint.Address.ToString());
+
+                    var factory2 = factoryProvider.CreateChannelFactory<IService>(name2);
+                    Assert.Equal(address2, factory2.Endpoint.Address.ToString());
+                }
+            }
+        }
+
+        [Fact]
         public void SingleServiceCustomResolver()
         {
             var name = Create<string>();

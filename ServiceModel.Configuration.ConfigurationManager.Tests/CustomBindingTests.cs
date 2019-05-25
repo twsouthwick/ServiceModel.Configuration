@@ -28,7 +28,7 @@ namespace ServiceModel.Configuration.ConfigurationManager.Tests
             </customBinding>
         </bindings>
         <services>
-            <service name=""service1"">
+            <service name=""{name}"">
                 <endpoint address=""{address}""
                     binding=""customBinding"" bindingConfiguration=""customName""
                     contract=""{contract}"">
@@ -93,7 +93,7 @@ namespace ServiceModel.Configuration.ConfigurationManager.Tests
             </customBinding>
         </bindings>
         <services>
-            <service name=""service1"">
+            <service name=""{name}"">
                 <endpoint address=""{address}""
                     binding=""customBinding"" bindingConfiguration=""customName""
                     contract=""{contract}"">

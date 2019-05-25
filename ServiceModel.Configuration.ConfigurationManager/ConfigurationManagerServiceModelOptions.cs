@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Options;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.ServiceModel;
@@ -20,9 +21,9 @@ namespace ServiceModel.Configuration
             _isOptional = isOptional;
         }
 
-        public void Configure(string _, ServiceModelOptions options) => Configure(options);
+        public void Configure(ServiceModelOptions options) => Configure(ServiceModelDefaults.DefaultName, options);
 
-        public void Configure(ServiceModelOptions options)
+        public void Configure(string name, ServiceModelOptions options)
         {
             using (var configFile = new WrappedConfigurationFile(_path))
             {
@@ -41,7 +42,7 @@ namespace ServiceModel.Configuration
 
                 if (section is ServiceModelSectionGroup group)
                 {
-                    Configure(options, group);
+                    Configure(name, options, group);
                 }
                 else
                 {
@@ -50,22 +51,29 @@ namespace ServiceModel.Configuration
             }
         }
 
-        private void Configure(ServiceModelOptions options, ServiceModelSectionGroup group)
+        private void Configure(string name, ServiceModelOptions options, ServiceModelSectionGroup group)
         {
-            foreach (var service in group.Services.Services.Cast<ServiceElement>())
-            {
-                foreach (var endpoint in service.Endpoints.Cast<ServiceEndpointElement>())
-                {
-                    options.Services.Add(_mapper.ResolveContract(endpoint.Contract), o =>
-                    {
-                        o.Endpoint = new EndpointAddress(endpoint.Address);
+            var service = group.Services.Services.Cast<ServiceElement>().FirstOrDefault(e => e.Name == name);
 
-                        if (!string.IsNullOrEmpty(endpoint.Binding) || !string.IsNullOrEmpty(endpoint.BindingConfiguration))
-                        {
-                            o.Binding = ConfigLoader.LookupBinding(endpoint.Binding, endpoint.BindingConfiguration, ConfigurationHelpers.GetEvaluationContext(endpoint));
-                        }
-                    });
-                }
+            if (service != null)
+            {
+                Add(options, service.Endpoints.Cast<ServiceEndpointElement>());
+            }
+        }
+
+        private void Add(ServiceModelOptions options, IEnumerable<ServiceEndpointElement> endpoints)
+        {
+            foreach (var endpoint in endpoints)
+            {
+                options.Services.Add(_mapper.ResolveContract(endpoint.Contract), o =>
+                {
+                    o.Endpoint = new EndpointAddress(endpoint.Address);
+
+                    if (!string.IsNullOrEmpty(endpoint.Binding) || !string.IsNullOrEmpty(endpoint.BindingConfiguration))
+                    {
+                        o.Binding = ConfigLoader.LookupBinding(endpoint.Binding, endpoint.BindingConfiguration, ConfigurationHelpers.GetEvaluationContext(endpoint));
+                    }
+                });
             }
         }
     }
