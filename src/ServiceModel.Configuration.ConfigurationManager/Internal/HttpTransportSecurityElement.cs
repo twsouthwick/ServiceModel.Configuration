@@ -11,13 +11,14 @@ namespace System.ServiceModel.Configuration
     using System.Net;
     using System.Net.Security;
     using System.Runtime;
+    using System.Security.Authentication.ExtendedProtection.Configuration;
     using System.ServiceModel;
     using System.ServiceModel.Security;
     using System.ComponentModel;
 
     public sealed partial class HttpTransportSecurityElement : ServiceModelConfigurationElement
     {
-        [ConfigurationProperty(ConfigurationStrings.ClientCredentialType, DefaultValue = HttpClientCredentialType.None)]
+        [ConfigurationProperty(ConfigurationStrings.ClientCredentialType, DefaultValue = HttpTransportSecurity.DefaultClientCredentialType)]
         [ServiceModelEnumValidator(typeof(HttpClientCredentialTypeHelper))]
         public HttpClientCredentialType ClientCredentialType
         {
@@ -25,7 +26,7 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.ClientCredentialType] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.ProxyCredentialType, DefaultValue = HttpProxyCredentialType.None)]
+        [ConfigurationProperty(ConfigurationStrings.ProxyCredentialType, DefaultValue = HttpTransportSecurity.DefaultProxyCredentialType)]
         [ServiceModelEnumValidator(typeof(HttpProxyCredentialTypeHelper))]
         public HttpProxyCredentialType ProxyCredentialType
         {
@@ -33,17 +34,14 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.ProxyCredentialType] = value; }
         }
 
-#if EXTENDED_PROTECTION_POLICY
         [ConfigurationProperty(ConfigurationStrings.ExtendedProtectionPolicy)]
         public ExtendedProtectionPolicyElement ExtendedProtectionPolicy
         {
             get { return (ExtendedProtectionPolicyElement)base[ConfigurationStrings.ExtendedProtectionPolicy]; }
             private set { base[ConfigurationStrings.ExtendedProtectionPolicy] = value; }
         }
-#endif
 
-#if REALM
-        [ConfigurationProperty(ConfigurationStrings.Realm, DefaultValue = "")]
+        [ConfigurationProperty(ConfigurationStrings.Realm, DefaultValue = HttpTransportSecurity.DefaultRealm)]
         [StringValidator(MinLength = 0)]
         public string Realm
         {
@@ -57,7 +55,6 @@ namespace System.ServiceModel.Configuration
                 base[ConfigurationStrings.Realm] = value;
             }
         }
-#endif
 
         internal void ApplyConfiguration(HttpTransportSecurity security)
         {
@@ -67,13 +64,8 @@ namespace System.ServiceModel.Configuration
             }
             security.ClientCredentialType = this.ClientCredentialType;
             security.ProxyCredentialType = this.ProxyCredentialType;
-#if REALM
             security.Realm = this.Realm;
-#endif
-
-#if EXTENDED_PROTECTION_POLICY
             security.ExtendedProtectionPolicy = ChannelBindingUtility.BuildPolicy(this.ExtendedProtectionPolicy);
-#endif
         }
 
         internal void InitializeFrom(HttpTransportSecurity security)
@@ -84,13 +76,9 @@ namespace System.ServiceModel.Configuration
             }
             SetPropertyValueIfNotDefaultValue(ConfigurationStrings.ClientCredentialType, security.ClientCredentialType);
             SetPropertyValueIfNotDefaultValue(ConfigurationStrings.ProxyCredentialType, security.ProxyCredentialType);
-#if REALM
             SetPropertyValueIfNotDefaultValue(ConfigurationStrings.Realm, security.Realm);
-#endif
-
-#if EXTENDED_PROTECTION_POLICY
+            
             ChannelBindingUtility.InitializeFrom(security.ExtendedProtectionPolicy, this.ExtendedProtectionPolicy);
-#endif
         }
     }
 }

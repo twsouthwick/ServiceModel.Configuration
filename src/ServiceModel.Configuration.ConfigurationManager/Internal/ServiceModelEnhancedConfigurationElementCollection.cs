@@ -8,6 +8,7 @@ namespace System.ServiceModel.Configuration
     using System.Configuration;
     using System.Diagnostics;
     using System.Globalization;
+    using System.Runtime.Diagnostics;
     using System.ServiceModel.Diagnostics;
 
     public abstract class ServiceModelEnhancedConfigurationElementCollection<TConfigurationElement> : ServiceModelConfigurationElementCollection<TConfigurationElement>
@@ -39,6 +40,24 @@ namespace System.ServiceModel.Configuration
                     {
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(
                             SR.GetString(SR.ConfigDuplicateKeyAtSameScope, this.ElementName, newElementKey)));
+                    }
+                    else if (DiagnosticUtility.ShouldTraceWarning)
+                    {
+                        Dictionary<string, string> values = new Dictionary<string, string>(6);
+                        values.Add("ElementName", this.ElementName);
+                        values.Add("Name", newElementKey.ToString());
+                        values.Add("OldElementLocation", oldElement.ElementInformation.Source);
+                        values.Add("OldElementLineNumber", oldElement.ElementInformation.LineNumber.ToString(NumberFormatInfo.CurrentInfo));
+                        values.Add("NewElementLocation", element.ElementInformation.Source);
+                        values.Add("NewElementLineNumber", element.ElementInformation.LineNumber.ToString(NumberFormatInfo.CurrentInfo));
+
+                        DictionaryTraceRecord traceRecord = new DictionaryTraceRecord(values);
+                        TraceUtility.TraceEvent(TraceEventType.Warning,
+                            TraceCode.OverridingDuplicateConfigurationKey,
+                            SR.GetString(SR.TraceCodeOverridingDuplicateConfigurationKey),
+                            traceRecord,
+                            this,
+                            null);
                     }
                 }
             }

@@ -24,7 +24,6 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.ConnectionBufferSize] = value; }
         }
 
-#if DESKTOP
         [ConfigurationProperty(ConfigurationStrings.HostNameComparisonMode, DefaultValue = ConnectionOrientedTransportDefaults.HostNameComparisonMode)]
         [ServiceModelEnumValidatorAttribute(typeof(HostNameComparisonModeHelper))]
         public HostNameComparisonMode HostNameComparisonMode
@@ -32,7 +31,6 @@ namespace System.ServiceModel.Configuration
             get { return (HostNameComparisonMode)base[ConfigurationStrings.HostNameComparisonMode]; }
             set { base[ConfigurationStrings.HostNameComparisonMode] = value; }
         }
-#endif
 
         [ConfigurationProperty(ConfigurationStrings.ChannelInitializationTimeout, DefaultValue = ConnectionOrientedTransportDefaults.ChannelInitializationTimeoutString)]
         [TypeConverter(typeof(TimeSpanOrInfiniteConverter))]
@@ -89,16 +87,13 @@ namespace System.ServiceModel.Configuration
             base.ApplyConfiguration(bindingElement);
             ConnectionOrientedTransportBindingElement binding = (ConnectionOrientedTransportBindingElement)bindingElement;
             binding.ConnectionBufferSize = this.ConnectionBufferSize;
-#if DESKTOP
             binding.HostNameComparisonMode = this.HostNameComparisonMode;
             binding.ChannelInitializationTimeout = this.ChannelInitializationTimeout;
-#endif
             PropertyInformationCollection propertyInfo = this.ElementInformation.Properties;
             if (propertyInfo[ConfigurationStrings.MaxBufferSize].ValueOrigin != PropertyValueOrigin.Default)
             {
                 binding.MaxBufferSize = this.MaxBufferSize;
             }
-#if DESKTOP
             if (this.MaxPendingConnections != ConnectionOrientedTransportDefaults.MaxPendingConnectionsConst)
             {
                 binding.MaxPendingConnections = this.MaxPendingConnections;
@@ -108,7 +103,6 @@ namespace System.ServiceModel.Configuration
             {
                 binding.MaxPendingAccepts = this.MaxPendingAccepts;
             }
-#endif
             binding.TransferMode = this.TransferMode;
         }
 
@@ -117,10 +111,9 @@ namespace System.ServiceModel.Configuration
             base.CopyFrom(from);
 
             ConnectionOrientedTransportElement source = (ConnectionOrientedTransportElement)from;
+#pragma warning suppress 56506 // Microsoft, base.CopyFrom() validates the argument
             this.ConnectionBufferSize = source.ConnectionBufferSize;
-#if DESKTOP
             this.HostNameComparisonMode = source.HostNameComparisonMode;
-#endif
             this.ChannelInitializationTimeout = source.ChannelInitializationTimeout;
             this.MaxBufferSize = source.MaxBufferSize;
             this.MaxPendingConnections = source.MaxPendingConnections;
@@ -134,10 +127,9 @@ namespace System.ServiceModel.Configuration
             base.InitializeFrom(bindingElement);
             ConnectionOrientedTransportBindingElement binding = (ConnectionOrientedTransportBindingElement)bindingElement;
             SetPropertyValueIfNotDefaultValue(ConfigurationStrings.ConnectionBufferSize, binding.ConnectionBufferSize);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MaxBufferSize, binding.MaxBufferSize);
-#if DESKTOP
             SetPropertyValueIfNotDefaultValue(ConfigurationStrings.HostNameComparisonMode, binding.HostNameComparisonMode);
             SetPropertyValueIfNotDefaultValue(ConfigurationStrings.ChannelInitializationTimeout, binding.ChannelInitializationTimeout);
+            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MaxBufferSize, binding.MaxBufferSize);
             if (binding.IsMaxPendingConnectionsSet)
             {
                 ConfigurationProperty maxPendingConnectionsProperty = this.Properties[ConfigurationStrings.MaxPendingConnections];
@@ -149,7 +141,6 @@ namespace System.ServiceModel.Configuration
                 ConfigurationProperty maxPendingAcceptsProperty = this.Properties[ConfigurationStrings.MaxPendingAccepts];
                 SetPropertyValue(maxPendingAcceptsProperty, binding.MaxPendingAccepts, /*ignoreLocks = */ false);
             }
-#endif
             SetPropertyValueIfNotDefaultValue(ConfigurationStrings.TransferMode, binding.TransferMode);
         }
     }

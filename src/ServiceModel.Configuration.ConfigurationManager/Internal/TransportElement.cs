@@ -18,9 +18,7 @@ using System.ServiceModel.Channels;
             base.ApplyConfiguration(bindingElement);
             TransportBindingElement binding = (TransportBindingElement)bindingElement;
             binding.ManualAddressing = this.ManualAddressing;
-#if DESKTOP
             binding.MaxBufferPoolSize = this.MaxBufferPoolSize;
-#endif
             binding.MaxReceivedMessageSize = this.MaxReceivedMessageSize;
         }
 
@@ -29,6 +27,7 @@ using System.ServiceModel.Channels;
             base.CopyFrom(from);
 
             TransportElement source = (TransportElement)from;
+#pragma warning suppress 56506 // Microsoft, base.CopyFrom() validates the argument
             this.ManualAddressing = source.ManualAddressing;
             this.MaxBufferPoolSize = source.MaxBufferPoolSize;
             this.MaxReceivedMessageSize = source.MaxReceivedMessageSize;
@@ -48,9 +47,7 @@ using System.ServiceModel.Channels;
             base.InitializeFrom(bindingElement);
             TransportBindingElement binding = (TransportBindingElement)bindingElement;
             SetPropertyValueIfNotDefaultValue(ConfigurationStrings.ManualAddressing, binding.ManualAddressing);
-#if DESKTOP
             SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MaxBufferPoolSize, binding.MaxBufferPoolSize);
-#endif
             SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MaxReceivedMessageSize, binding.MaxReceivedMessageSize);
         }
 

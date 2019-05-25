@@ -10,8 +10,6 @@ namespace System.ServiceModel.Configuration
     using System.Xml;
     using System.Security;
     using System.Runtime;
-    using System.Diagnostics;
-    using System.Collections.Generic;
 
     public sealed partial class AddressHeaderCollectionElement : ServiceModelConfigurationElement
     {
@@ -41,7 +39,7 @@ namespace System.ServiceModel.Configuration
                 AddressHeaderCollection retVal = (AddressHeaderCollection)base[ConfigurationStrings.Headers];
                 if (null == retVal)
                 {
-                    retVal = new AddressHeaderCollection();
+                    retVal = AddressHeaderCollection.EmptyHeaderCollection;
                 }
                 return retVal;
             }
@@ -49,12 +47,14 @@ namespace System.ServiceModel.Configuration
             {
                 if (value == null)
                 {
-                    value = new AddressHeaderCollection();
+                    value = AddressHeaderCollection.EmptyHeaderCollection;
                 }
                 base[ConfigurationStrings.Headers] = value;
             }
         }
 
+        [Fx.Tag.SecurityNote(Critical = "Uses the critical helper SetIsPresent.",
+            Safe = "Controls how/when SetIsPresent is used, not arbitrarily callable from PT (method is protected and class is sealed).")]
         [SecuritySafeCritical]
         protected override void DeserializeElement(XmlReader reader, bool serializeCollectionKey)
         {
@@ -64,13 +64,11 @@ namespace System.ServiceModel.Configuration
 
         private void DeserializeElementCore(XmlReader reader)
         {
-#if DESKTOP
             this.Headers = AddressHeaderCollection.ReadServiceParameters(XmlDictionaryReader.CreateDictionaryReader(reader));
-#else
-            throw new PlatformNotSupportedException();
-#endif
         }
 
+        [Fx.Tag.SecurityNote(Critical = "Uses the critical helper SetIsPresent which elevates in order to set a property.",
+            Safe = "Only passes 'this', does not let caller influence parameter.")]
         [SecurityCritical]
         void SetIsPresent()
         {
@@ -79,7 +77,6 @@ namespace System.ServiceModel.Configuration
 
         protected override bool SerializeToXmlElement(XmlWriter writer, String elementName)
         {
-#if DESKTOP
             bool dataToWrite = this.Headers.Count != 0;
             if (dataToWrite && writer != null)
             {
@@ -88,9 +85,6 @@ namespace System.ServiceModel.Configuration
                 writer.WriteEndElement();
             }
             return dataToWrite;
-#else
-            throw new PlatformNotSupportedException();
-#endif
         }
 
         internal void InitializeFrom(AddressHeaderCollection headers)

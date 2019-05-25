@@ -7,21 +7,18 @@ namespace System.ServiceModel.Configuration
     using System;
     using System.ServiceModel;
     using System.Configuration;
+    using System.IdentityModel.Claims;
+    using System.IdentityModel.Policy;
     using System.Security.Cryptography;
     using System.Security.Cryptography.X509Certificates;
     using System.Xml;
 
-#if DESKTOP
-    using System.IdentityModel.Claims;
-    using System.IdentityModel.Policy;
-#endif
     public sealed partial class IdentityElement : ConfigurationElement
     {
         public IdentityElement()
         {
         }
 
-#if DESKTOP
         [ConfigurationProperty(ConfigurationStrings.UserPrincipalName)]
         public UserPrincipalNameElement UserPrincipalName
         {
@@ -57,7 +54,6 @@ namespace System.ServiceModel.Configuration
         {
             get { return (CertificateReferenceElement)base[ConfigurationStrings.CertificateReference]; }
         }
-#endif
 
         internal void Copy(IdentityElement source)
         {
@@ -65,7 +61,7 @@ namespace System.ServiceModel.Configuration
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("source");
             }
-#if DESKTOP
+
             PropertyInformationCollection properties = source.ElementInformation.Properties;
             if (properties[ConfigurationStrings.UserPrincipalName].ValueOrigin != PropertyValueOrigin.Default)
             {
@@ -86,7 +82,6 @@ namespace System.ServiceModel.Configuration
                 this.CertificateReference.X509FindType = source.CertificateReference.X509FindType;
                 this.CertificateReference.FindValue = source.CertificateReference.FindValue;
             }
-#endif
         }
 
         public void InitializeFrom(EndpointIdentity identity)
@@ -96,7 +91,6 @@ namespace System.ServiceModel.Configuration
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("identity");
             }
 
-#if DESKTOP
             Claim claim = identity.IdentityClaim;
             if (ClaimTypes.Dns.Equals(claim.ClaimType))
             {
@@ -120,7 +114,6 @@ namespace System.ServiceModel.Configuration
 #pragma warning suppress 56506 //Microsoft; this.Certificate can never be null (underlying configuration system guarantees)
                 this.Certificate.EncodedValue = Convert.ToBase64String(certs.Export(certs.Count == 1 ? X509ContentType.SerializedCert : X509ContentType.SerializedStore));
             }
-#endif
         }
     }
 }

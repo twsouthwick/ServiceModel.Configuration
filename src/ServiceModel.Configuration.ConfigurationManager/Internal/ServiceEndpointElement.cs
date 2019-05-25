@@ -6,7 +6,6 @@ namespace System.ServiceModel.Configuration
 {
     using System;
     using System.Configuration;
-    using System.Diagnostics;
     using System.Runtime;
     using System.ServiceModel;
     using System.ServiceModel.Description;
@@ -62,20 +61,20 @@ namespace System.ServiceModel.Configuration
             {
                 this.Contract = source.Contract;
             }
-            //if (properties[ConfigurationStrings.Headers].ValueOrigin != PropertyValueOrigin.Default
-            //    && source.Headers != null)
-            //{
-            //    this.Headers.Copy(source.Headers);
-            //}
-            //if (properties[ConfigurationStrings.Identity].ValueOrigin != PropertyValueOrigin.Default
-            //    && source.Identity != null)
-            //{
-            //    this.Identity.Copy(source.Identity);
-            //}
-            //if (properties[ConfigurationStrings.ListenUriMode].ValueOrigin != PropertyValueOrigin.Default)
-            //{
-            //    this.ListenUriMode = source.ListenUriMode;
-            //}
+            if (properties[ConfigurationStrings.Headers].ValueOrigin != PropertyValueOrigin.Default
+                && source.Headers != null)
+            {
+                this.Headers.Copy(source.Headers);
+            }
+            if (properties[ConfigurationStrings.Identity].ValueOrigin != PropertyValueOrigin.Default
+                && source.Identity != null)
+            {
+                this.Identity.Copy(source.Identity);
+            }
+            if (properties[ConfigurationStrings.ListenUriMode].ValueOrigin != PropertyValueOrigin.Default)
+            {
+                this.ListenUriMode = source.ListenUriMode;
+            }
             if (properties[ConfigurationStrings.ListenUri].ValueOrigin != PropertyValueOrigin.Default)
             {
                 this.ListenUri = source.ListenUri;
@@ -206,25 +205,25 @@ namespace System.ServiceModel.Configuration
             }
         }
 
-        //[ConfigurationProperty(ConfigurationStrings.Headers)]
-        //public AddressHeaderCollectionElement Headers
-        //{
-        //    get { return (AddressHeaderCollectionElement)base[ConfigurationStrings.Headers]; }
-        //}
+        [ConfigurationProperty(ConfigurationStrings.Headers)]
+        public AddressHeaderCollectionElement Headers
+        {
+            get { return (AddressHeaderCollectionElement)base[ConfigurationStrings.Headers]; }
+        }
 
-        //[ConfigurationProperty(ConfigurationStrings.Identity)]
-        //public IdentityElement Identity
-        //{
-        //    get { return (IdentityElement)base[ConfigurationStrings.Identity]; }
-        //}
+        [ConfigurationProperty(ConfigurationStrings.Identity)]
+        public IdentityElement Identity
+        {
+            get { return (IdentityElement)base[ConfigurationStrings.Identity]; }
+        }
 
-        //[ConfigurationProperty(ConfigurationStrings.ListenUriMode, DefaultValue = ListenUriMode.Explicit)]
-        //[ServiceModelEnumValidator(typeof(ListenUriModeHelper))]
-        //public ListenUriMode ListenUriMode
-        //{
-        //    get { return (ListenUriMode)base[ConfigurationStrings.ListenUriMode]; }
-        //    set { base[ConfigurationStrings.ListenUriMode] = value; }
-        //}
+        [ConfigurationProperty(ConfigurationStrings.ListenUriMode, DefaultValue = ListenUriMode.Explicit)]
+        [ServiceModelEnumValidator(typeof(ListenUriModeHelper))]
+        public ListenUriMode ListenUriMode
+        {
+            get { return (ListenUriMode)base[ConfigurationStrings.ListenUriMode]; }
+            set { base[ConfigurationStrings.ListenUriMode] = value; }
+        }
 
         [ConfigurationProperty(ConfigurationStrings.ListenUri, DefaultValue = null)]
         public Uri ListenUri
@@ -275,9 +274,11 @@ namespace System.ServiceModel.Configuration
             return this.EvaluationContext;
         }
 
+        [Fx.Tag.SecurityNote(Miscellaneous =
+            "RequiresReview - the return value will be used for a security decision -- see comment in interface definition")]
         ContextInformation IConfigurationContextProviderInternal.GetOriginalEvaluationContext()
         {
-            Debug.Assert(false, "Not implemented: IConfigurationContextProviderInternal.GetOriginalEvaluationContext");
+            Fx.Assert("Not implemented: IConfigurationContextProviderInternal.GetOriginalEvaluationContext");
             return null;
         }
     }

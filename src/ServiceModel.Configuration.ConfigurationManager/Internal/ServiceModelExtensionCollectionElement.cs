@@ -9,6 +9,7 @@ namespace System.ServiceModel.Configuration
     using System.Configuration;
     using System.Diagnostics;
     using System.Runtime;
+    using System.Runtime.Diagnostics;
     using System.Security;
     using System.ServiceModel;
     using System.ServiceModel.Diagnostics;
@@ -17,6 +18,7 @@ namespace System.ServiceModel.Configuration
     public abstract class ServiceModelExtensionCollectionElement<TServiceModelExtensionElement> : ConfigurationElement, ICollection<TServiceModelExtensionElement>, IConfigurationContextProviderInternal
         where TServiceModelExtensionElement : ServiceModelExtensionElement
     {
+        [Fx.Tag.SecurityNote(Critical = "Stores information used in a security decision.")]
         [SecurityCritical]
         EvaluationContextHelper contextHelper;
 
@@ -168,9 +170,35 @@ namespace System.ServiceModel.Configuration
                 {
                     retval = element.CanAdd(this.extensionCollectionName, ConfigurationHelpers.GetEvaluationContext(this));
                 }
+                else if (DiagnosticUtility.ShouldTraceWarning)
+                {
+                    TraceUtility.TraceEvent(TraceEventType.Warning,
+                        TraceCode.ExtensionElementAlreadyExistsInCollection,
+                        SR.GetString(SR.TraceCodeExtensionElementAlreadyExistsInCollection),
+                        this.CreateCanAddRecord(this[elementType]), this, null);
+                }
             }
-
+            else if (DiagnosticUtility.ShouldTraceWarning)
+            {
+                TraceUtility.TraceEvent(TraceEventType.Warning,
+                    TraceCode.ConfigurationIsReadOnly,
+                    SR.GetString(SR.TraceCodeConfigurationIsReadOnly),
+                    null, this, null);
+            }
             return retval;
+        }
+
+        DictionaryTraceRecord CreateCanAddRecord(TServiceModelExtensionElement element)
+        {
+            return this.CreateCanAddRecord(element, new Dictionary<string, string>(3));
+        }
+
+        DictionaryTraceRecord CreateCanAddRecord(TServiceModelExtensionElement element, Dictionary<string, string> values)
+        {
+            values["ElementType"] = System.Runtime.Diagnostics.DiagnosticTraceBase.XmlEncode(typeof(TServiceModelExtensionElement).AssemblyQualifiedName);
+            values["ConfiguredSectionName"] = element.ConfigurationElementName;
+            values["CollectionName"] = ConfigurationStrings.ExtensionsSectionPath + "/" + this.extensionCollectionName;
+            return new DictionaryTraceRecord(values);
         }
 
         public void Clear()
@@ -292,7 +320,24 @@ namespace System.ServiceModel.Configuration
 
             Type elementType;
             ContextInformation evaluationContext = ConfigurationHelpers.GetEvaluationContext(this);
-            elementType = GetExtensionType(evaluationContext, name);
+            try
+            {
+                elementType = GetExtensionType(evaluationContext, name);
+            }
+            catch (ConfigurationErrorsException e)
+            {
+                // Work-around for bug 219506@CSDMain: if the extension type cannot be loaded, we'll ignore 
+                // the exception when running in win8 app container and reading from machine.config.
+                if (System.ServiceModel.Channels.AppContainerInfo.IsRunningInAppContainer && evaluationContext.IsMachineLevel)
+                {
+                    DiagnosticUtility.TraceHandledException(e, TraceEventType.Information);
+                    return null;
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
             if (null != elementType)
             {
@@ -324,6 +369,8 @@ namespace System.ServiceModel.Configuration
             return retval;
         }
 
+        [Fx.Tag.SecurityNote(Critical = "Calls SecurityCritical method UnsafeLookupCollection which elevates in order to load config.",
+            Safe = "Does not leak any config objects.")]
         [SecuritySafeCritical]
         Type GetExtensionType(ContextInformation evaluationContext, string name)
         {
@@ -378,6 +425,8 @@ namespace System.ServiceModel.Configuration
             }
         }
 
+        [Fx.Tag.SecurityNote(Critical = "Uses the critical helper SetIsPresent.",
+            Safe = "Controls how/when SetIsPresent is used, not arbitrarily callable from PT (method is protected and class is sealed).")]
         [SecuritySafeCritical]
         protected override void DeserializeElement(XmlReader reader, bool serializeCollectionKey)
         {
@@ -428,6 +477,7 @@ namespace System.ServiceModel.Configuration
             }
         }
 
+        [Fx.Tag.SecurityNote(Critical = "Calls ConfigurationHelpers.SetIsPresent which elevates in order to set a property.")]
         [SecurityCritical]
         void SetIsPresent()
         {
@@ -493,6 +543,7 @@ namespace System.ServiceModel.Configuration
             return retval;
         }
 
+        [Fx.Tag.SecurityNote(Critical = "Accesses critical field contextHelper.")]
         [SecurityCritical]
         protected override void Reset(ConfigurationElement parentElement)
         {
@@ -582,6 +633,8 @@ namespace System.ServiceModel.Configuration
             return this.EvaluationContext;
         }
 
+        [Fx.Tag.SecurityNote(Critical = "Accesses critical field contextHelper.",
+            Miscellaneous = "RequiresReview -- the return value will be used for a security decision -- see comment in interface definition.")]
         [SecurityCritical]
         ContextInformation IConfigurationContextProviderInternal.GetOriginalEvaluationContext()
         {

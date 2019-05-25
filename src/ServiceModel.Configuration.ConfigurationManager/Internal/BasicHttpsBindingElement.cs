@@ -21,7 +21,7 @@ namespace System.ServiceModel.Configuration
             : this(null)
         {
         }
-#if MESSAGE_ENCODING
+
         [ConfigurationProperty(ConfigurationStrings.MessageEncoding, DefaultValue = BasicHttpBindingDefaults.MessageEncoding)]
         [ServiceModelEnumValidator(typeof(WSMessageEncodingHelper))]
         public WSMessageEncoding MessageEncoding
@@ -29,7 +29,6 @@ namespace System.ServiceModel.Configuration
             get { return (WSMessageEncoding)base[ConfigurationStrings.MessageEncoding]; }
             set { base[ConfigurationStrings.MessageEncoding] = value; }
         }
-#endif
 
         [ConfigurationProperty(ConfigurationStrings.Security)]
         public BasicHttpsSecurityElement Security
@@ -47,9 +46,7 @@ namespace System.ServiceModel.Configuration
             base.InitializeFrom(binding);
             BasicHttpsBinding bpBinding = (BasicHttpsBinding)binding;
 
-#if MESSAGE_ENCODING
             SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MessageEncoding, bpBinding.MessageEncoding);
-#endif
             this.Security.InitializeFrom(bpBinding.Security);
         }
 
@@ -58,9 +55,7 @@ namespace System.ServiceModel.Configuration
             base.OnApplyConfiguration(binding);
             BasicHttpsBinding bpBinding = (BasicHttpsBinding)binding;
 
-#if MESSAGE_ENCODING
             bpBinding.MessageEncoding = this.MessageEncoding;
-#endif
 
             this.Security.ApplyConfiguration(bpBinding.Security);
         }

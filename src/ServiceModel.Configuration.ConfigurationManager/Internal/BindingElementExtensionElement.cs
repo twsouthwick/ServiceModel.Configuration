@@ -10,7 +10,7 @@ namespace System.ServiceModel.Configuration
     using System.Configuration;
     using System.Globalization;
     using System.Xml;
-
+    
     public abstract class BindingElementExtensionElement : ServiceModelExtensionElement
     {
         public virtual void ApplyConfiguration(BindingElement bindingElement)

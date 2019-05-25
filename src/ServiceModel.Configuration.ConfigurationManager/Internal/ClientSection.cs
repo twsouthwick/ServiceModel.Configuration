@@ -31,12 +31,16 @@ namespace System.ServiceModel.Configuration
             return (ClientSection)ConfigurationHelpers.GetSection(ConfigurationStrings.ClientSectionPath);
         }
 
+        [Fx.Tag.SecurityNote(Critical = "Calls Critical method UnsafeGetSection which elevates in order to fetch config."
+            + "Caller must guard access to resultant config section.")]
         [SecurityCritical]
         internal static ClientSection UnsafeGetSection()
         {
             return (ClientSection)ConfigurationHelpers.UnsafeGetSection(ConfigurationStrings.ClientSectionPath);
         }
 
+        [Fx.Tag.SecurityNote(Critical = "Calls Critical method UnsafeGetSection which elevates in order to fetch config."
+            + "Caller must guard access to resultant config section.")]
         [SecurityCritical]
         internal static ClientSection UnsafeGetSection(ContextInformation contextInformation)
         {
@@ -80,10 +84,9 @@ namespace System.ServiceModel.Configuration
                     {
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigInvalidAttribute, "bindingConfiguration", "endpoint", "binding")));
                     }
-                    //TODO:
-                    //BehaviorsSection.ValidateEndpointBehaviorReference(endpoint.BehaviorConfiguration, context, endpoint);
+                    BehaviorsSection.ValidateEndpointBehaviorReference(endpoint.BehaviorConfiguration, context, endpoint);
                     BindingsSection.ValidateBindingReference(endpoint.Binding, endpoint.BindingConfiguration, context, endpoint);
-                    //StandardEndpointsSection.ValidateEndpointReference(endpoint.Kind, endpoint.EndpointConfiguration, context, endpoint);
+                    StandardEndpointsSection.ValidateEndpointReference(endpoint.Kind, endpoint.EndpointConfiguration, context, endpoint);
                 }
             }
         }
@@ -93,9 +96,11 @@ namespace System.ServiceModel.Configuration
             return this.EvaluationContext;
         }
 
+        [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - the return value will be used for a security decision -- see comment in interface definition.")]
         ContextInformation IConfigurationContextProviderInternal.GetOriginalEvaluationContext()
         {
-            throw new NotImplementedException();
+            Fx.Assert("Not implemented: IConfigurationContextProviderInternal.GetOriginalEvaluationContext");
+            return null;
         }
     }
 }

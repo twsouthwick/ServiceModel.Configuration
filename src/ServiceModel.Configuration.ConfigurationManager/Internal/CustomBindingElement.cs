@@ -165,11 +165,7 @@ namespace System.ServiceModel.Configuration
 
         bool CanAddStreamUpgradeElement(BindingElementExtensionElement element, ref BindingElementExtensionElement existingElement)
         {
-#if FEATURE_STREAMUPGRADEBINDINGELEMENT
             return this.CanAddExclusiveElement(typeof(StreamUpgradeBindingElement), element.BindingElementType, ref existingElement);
-#else
-            return true;
-#endif
         }
 
         bool CanAddTransportElement(BindingElementExtensionElement element, ref BindingElementExtensionElement existingElement)

@@ -159,7 +159,7 @@ namespace System.ServiceModel.Configuration
         internal const string HttpGetUrl = "httpGetUrl";
         internal const string HttpsGetEnabled = "httpsGetEnabled";
         internal const string HttpsGetUrl = "httpsGetUrl";
-        internal const string HealthDetailsEnabled = "healthDetailsEnabled";
+        internal const string HealthDetailsEnabled = "healthDetailsEnabled";        
         internal const string HttpHelpPageEnabled = "httpHelpPageEnabled";
         internal const string HttpHelpPageUrl = "httpHelpPageUrl";
         internal const string HttpsHelpPageEnabled = "httpsHelpPageEnabled";
@@ -178,7 +178,7 @@ namespace System.ServiceModel.Configuration
         internal const string MexHttpsBindingCollectionElementName = "mexHttpsBinding";
         internal const string ID = "ID";
         internal const string Identity = "identity";
-        internal const string IdentityConfiguration = "identityConfiguration";
+        internal const string IdentityConfiguration = "identityConfiguration";        
         internal const string IdleTimeout = "idleTimeout";
         internal const string IgnoreExtensionDataObject = "ignoreExtensionDataObject";
         internal const string ImpersonateCallerForAllOperations = "impersonateCallerForAllOperations";
@@ -332,7 +332,7 @@ namespace System.ServiceModel.Configuration
         internal const string PropagateActivity = "propagateActivity";
         internal const string ProtectionLevel = "protectionLevel";
         internal const string ProtectTokens = "protectTokens";
-        internal const string ProtocolMappingSectionName = "protocolMapping";
+        internal const string ProtocolMappingSectionName = "protocolMapping";        
         internal const string ProxyAddress = "proxyAddress";
         internal const string ProxyAuthenticationScheme = "proxyAuthenticationScheme";
         internal const string ProxyCredentialType = "proxyCredentialType";
@@ -375,8 +375,8 @@ namespace System.ServiceModel.Configuration
         internal const string SerializationFormat = "serializationFormat";
         internal const string Service = "service";
         internal const string ServiceActivations = "serviceActivations";
-        internal const string ServiceAuthenticationManagerSectionName = "serviceAuthenticationManager";
-        internal const string ServiceAuthenticationManagerType = "serviceAuthenticationManagerType";
+        internal const string ServiceAuthenticationManagerSectionName = "serviceAuthenticationManager";        
+        internal const string ServiceAuthenticationManagerType = "serviceAuthenticationManagerType";        
         internal const string ServiceAuthorizationAuditLevel = "serviceAuthorizationAuditLevel";
         internal const string ServiceAuthorizationManagerType = "serviceAuthorizationManagerType";
         internal const string ServiceAuthorizationSectionName = "serviceAuthorization";
@@ -406,7 +406,7 @@ namespace System.ServiceModel.Configuration
         internal const string SslProtocols = "sslProtocols";
         internal const string SslStreamSecuritySectionName = "sslStreamSecurity";
         internal const string StandardEndpoint = "standardEndpoint";
-        internal const string StandardEndpointsSectionName = "standardEndpoints";
+        internal const string StandardEndpointsSectionName = "standardEndpoints";        
         internal const string StoreLocation = "storeLocation";
         internal const string StoreName = "storeName";
         internal const string SubProtocol = "subProtocol";
@@ -447,7 +447,7 @@ namespace System.ServiceModel.Configuration
         internal const string TypeLibID = "typeLibID";
         internal const string TypeLibVersion = "typeLibVersion";
         internal const string UdpBindingCollectionElementName = "udpBinding";
-        internal const string UdpBindingCollectionElementType = "System.ServiceModel.Configuration.UdpBindingCollectionElement, System.ServiceModel.Channels, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35";
+        internal const string UdpBindingCollectionElementType = "System.ServiceModel.Configuration.UdpBindingCollectionElement, System.ServiceModel.Channels, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"; 
         internal const string UdpTransportElementType = "System.ServiceModel.Configuration.UdpTransportElement, System.ServiceModel.Channels, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35";
         internal const string UdpTransportImporterType = "System.ServiceModel.Channels.UdpTransportImporter, System.ServiceModel.Channels, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35";
         internal const string UdpTransportSectionName = "udpTransport";
@@ -476,7 +476,7 @@ namespace System.ServiceModel.Configuration
         internal const string WmiProviderEnabled = "wmiProviderEnabled";
         internal const string WriteEncoding = "writeEncoding";
         internal const string WSAtomicTransactionOctober2004 = "WSAtomicTransactionOctober2004";
-        internal const string WSAtomicTransaction11 = "WSAtomicTransaction11";
+        internal const string WSAtomicTransaction11 = "WSAtomicTransaction11";        
         internal const string WsdlImporters = "wsdlImporters";
         internal const string WSDualHttpBindingCollectionElementName = "wsDualHttpBinding";
         internal const string WSFederationHttpBindingCollectionElementName = "wsFederationHttpBinding";

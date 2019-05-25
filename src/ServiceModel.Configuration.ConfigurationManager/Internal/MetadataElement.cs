@@ -18,7 +18,7 @@ namespace System.ServiceModel.Configuration
         {
         }
 
-#if DESKTOP
+
         [ConfigurationProperty(ConfigurationStrings.PolicyImporters)]
         public PolicyImporterElementCollection PolicyImporters
         {
@@ -40,14 +40,11 @@ namespace System.ServiceModel.Configuration
         {
             return ConfigLoader.LoadPolicyImporters(this.PolicyImporters, this.EvaluationContext);
         }
-#endif
 
         internal void SetDefaults()
         {
-#if DESKTOP
             this.PolicyImporters.SetDefaults();
             this.WsdlImporters.SetDefaults();
-#endif
         }
     }
 }

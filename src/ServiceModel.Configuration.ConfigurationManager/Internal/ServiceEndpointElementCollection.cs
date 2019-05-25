@@ -33,11 +33,11 @@ namespace System.ServiceModel.Configuration
             ServiceEndpointElement configElementKey = (ServiceEndpointElement)element;
 
             // We need to provide something sufficiently unique for the underlying system.
-            // Conceptually, this is an ever-expanding collection.
+            // Conceptually, this is an ever-expanding collection. 
             // There is no logical object key for this collection.
             return string.Format(CultureInfo.InvariantCulture,
                 "address:{0};bindingConfiguration{1};bindingName:{2};bindingNamespace:{3};bindingSectionName:{4};contractType:{5};kind:{6};endpointConfiguration:{7};",
-                configElementKey.Address?.ToString().ToUpperInvariant(),
+                (configElementKey.Address == null) ? null : configElementKey.Address.ToString().ToUpperInvariant(),
                 configElementKey.BindingConfiguration,
                 configElementKey.BindingName,
                 configElementKey.BindingNamespace,

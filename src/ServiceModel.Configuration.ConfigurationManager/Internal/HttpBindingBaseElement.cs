@@ -35,13 +35,13 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.BypassProxyOnLocal] = value; }
         }
 
-        //[ConfigurationProperty(ConfigurationStrings.HostNameComparisonMode, DefaultValue = HttpTransportDefaults.HostNameComparisonMode)]
-        //[ServiceModelEnumValidator(typeof(HostNameComparisonModeHelper))]
-        //public HostNameComparisonMode HostNameComparisonMode
-        //{
-        //    get { return (HostNameComparisonMode)base[ConfigurationStrings.HostNameComparisonMode]; }
-        //    set { base[ConfigurationStrings.HostNameComparisonMode] = value; }
-        //}
+        [ConfigurationProperty(ConfigurationStrings.HostNameComparisonMode, DefaultValue = HttpTransportDefaults.HostNameComparisonMode)]
+        [ServiceModelEnumValidator(typeof(HostNameComparisonModeHelper))]
+        public HostNameComparisonMode HostNameComparisonMode
+        {
+            get { return (HostNameComparisonMode)base[ConfigurationStrings.HostNameComparisonMode]; }
+            set { base[ConfigurationStrings.HostNameComparisonMode] = value; }
+        }
 
         [ConfigurationProperty(ConfigurationStrings.MaxBufferPoolSize, DefaultValue = TransportDefaults.MaxBufferPoolSize)]
         [LongValidator(MinValue = 0)]
@@ -67,6 +67,8 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.MaxReceivedMessageSize] = value; }
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(FxCop.Category.Configuration, "Configuration104",
+                            Justification = "This attribute comes from previous releases.")]
         [ConfigurationProperty(ConfigurationStrings.ProxyAddress, DefaultValue = HttpTransportDefaults.ProxyAddress)]
         public Uri ProxyAddress
         {
@@ -80,6 +82,8 @@ namespace System.ServiceModel.Configuration
             get { return (XmlDictionaryReaderQuotasElement)base[ConfigurationStrings.ReaderQuotas]; }
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(FxCop.Category.Configuration, "Configuration104",
+                            Justification = "This attribute comes from previous releases.")]
         [ConfigurationProperty(ConfigurationStrings.TextEncoding, DefaultValue = TextEncoderDefaults.EncodingString)]
         [TypeConverter(typeof(EncodingConverter))]
         public Encoding TextEncoding
@@ -115,7 +119,7 @@ namespace System.ServiceModel.Configuration
             HttpBindingBase httpBindingBase = (HttpBindingBase)binding;
             this.InitializeAllowCookies(httpBindingBase);
             SetPropertyValueIfNotDefaultValue(ConfigurationStrings.BypassProxyOnLocal, httpBindingBase.BypassProxyOnLocal);
-            //SetPropertyValueIfNotDefaultValue(ConfigurationStrings.HostNameComparisonMode, httpBindingBase.HostNameComparisonMode);
+            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.HostNameComparisonMode, httpBindingBase.HostNameComparisonMode);
             SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MaxBufferSize, httpBindingBase.MaxBufferSize);
             SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MaxBufferPoolSize, httpBindingBase.MaxBufferPoolSize);
             SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MaxReceivedMessageSize, httpBindingBase.MaxReceivedMessageSize);
@@ -124,7 +128,7 @@ namespace System.ServiceModel.Configuration
             SetPropertyValueIfNotDefaultValue(ConfigurationStrings.TransferMode, httpBindingBase.TransferMode);
             SetPropertyValueIfNotDefaultValue(ConfigurationStrings.UseDefaultWebProxy, httpBindingBase.UseDefaultWebProxy);
 
-            this.ReaderQuotas.InitializeFrom(httpBindingBase.ReaderQuotas);
+            this.ReaderQuotas.InitializeFrom(httpBindingBase.ReaderQuotas);            
         }
 
         protected override void OnApplyConfiguration(Binding binding)
@@ -132,7 +136,7 @@ namespace System.ServiceModel.Configuration
             HttpBindingBase httpBindingBase = (HttpBindingBase)binding;
 
             httpBindingBase.BypassProxyOnLocal = this.BypassProxyOnLocal;
-            //httpBindingBase.HostNameComparisonMode = this.HostNameComparisonMode;
+            httpBindingBase.HostNameComparisonMode = this.HostNameComparisonMode;
             httpBindingBase.MaxBufferPoolSize = this.MaxBufferPoolSize;
             httpBindingBase.MaxReceivedMessageSize = this.MaxReceivedMessageSize;
             httpBindingBase.TextEncoding = this.TextEncoding;

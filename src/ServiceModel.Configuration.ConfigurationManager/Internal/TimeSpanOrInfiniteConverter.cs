@@ -8,7 +8,7 @@ namespace System.ServiceModel.Configuration
     using System.Runtime;
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
-    using System.ComponentModel;
+    using System.ComponentModel;    
 
     class TimeSpanOrInfiniteConverter : TimeSpanConverter
     {
@@ -16,12 +16,12 @@ namespace System.ServiceModel.Configuration
         {
             if (value == null)
             {
-                throw new ArgumentNullException(nameof(value));
+                throw FxTrace.Exception.ArgumentNull("value");
             }
 
             if (!(value is TimeSpan))
             {
-                throw new ArgumentOutOfRangeException(nameof(value));//, InternalSR.IncompatibleArgumentType(typeof(TimeSpan), value.GetType()));
+                throw FxTrace.Exception.Argument("value", InternalSR.IncompatibleArgumentType(typeof(TimeSpan), value.GetType()));
             }
 
             if ((TimeSpan)value == TimeSpan.MaxValue)
@@ -33,7 +33,7 @@ namespace System.ServiceModel.Configuration
                 return base.ConvertTo(context, cultureInfo, value, type);
             }
         }
-
+        
         public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo cultureInfo, object data)
         {
             if (string.Equals((string)data, "infinite", StringComparison.OrdinalIgnoreCase))

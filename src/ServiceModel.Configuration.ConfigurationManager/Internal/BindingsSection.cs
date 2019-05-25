@@ -6,13 +6,13 @@ namespace System.ServiceModel.Configuration
 {
     using System.Collections.Generic;
     using System.Configuration;
-    using System.Diagnostics;
     using System.Reflection;
     using System.Runtime;
     using System.Security;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.Xml;
+    using System.Runtime.Diagnostics;
 
     public sealed partial class BindingsSection : ConfigurationSection, IConfigurationContextProviderInternal
     {
@@ -26,7 +26,7 @@ namespace System.ServiceModel.Configuration
             get
             {
                 Dictionary<string, BindingCollectionElement> bindingCollectionElements = new Dictionary<string, BindingCollectionElement>();
-
+                
                 foreach (ConfigurationProperty property in this.Properties)
                 {
                     bindingCollectionElements.Add(property.Name, this[property.Name]);
@@ -83,78 +83,78 @@ namespace System.ServiceModel.Configuration
             get { return (CustomBindingCollectionElement)base[ConfigurationStrings.CustomBindingCollectionElementName]; }
         }
 
-        //[ConfigurationProperty(ConfigurationStrings.MsmqIntegrationBindingCollectionElementName, Options = ConfigurationPropertyOptions.None)]
-        //public MsmqIntegrationBindingCollectionElement MsmqIntegrationBinding
-        //{
-        //    get { return (MsmqIntegrationBindingCollectionElement)base[ConfigurationStrings.MsmqIntegrationBindingCollectionElementName]; }
-        //}
+        [ConfigurationProperty(ConfigurationStrings.MsmqIntegrationBindingCollectionElementName, Options = ConfigurationPropertyOptions.None)]
+        public MsmqIntegrationBindingCollectionElement MsmqIntegrationBinding
+        {
+            get { return (MsmqIntegrationBindingCollectionElement)base[ConfigurationStrings.MsmqIntegrationBindingCollectionElementName]; }
+        }
 
-        //[ConfigurationProperty(ConfigurationStrings.NetHttpBindingCollectionElementName, Options = ConfigurationPropertyOptions.None)]
-        //public NetHttpBindingCollectionElement NetHttpBinding
-        //{
-        //    get { return (NetHttpBindingCollectionElement)base[ConfigurationStrings.NetHttpBindingCollectionElementName]; }
-        //}
+        [ConfigurationProperty(ConfigurationStrings.NetHttpBindingCollectionElementName, Options = ConfigurationPropertyOptions.None)]
+        public NetHttpBindingCollectionElement NetHttpBinding
+        {
+            get { return (NetHttpBindingCollectionElement)base[ConfigurationStrings.NetHttpBindingCollectionElementName]; }
+        }
 
-        //[ConfigurationProperty(ConfigurationStrings.NetHttpsBindingCollectionElementName, Options = ConfigurationPropertyOptions.None)]
-        //public NetHttpsBindingCollectionElement NetHttpsBinding
-        //{
-        //    get { return (NetHttpsBindingCollectionElement)base[ConfigurationStrings.NetHttpsBindingCollectionElementName]; }
-        //}
+        [ConfigurationProperty(ConfigurationStrings.NetHttpsBindingCollectionElementName, Options = ConfigurationPropertyOptions.None)]
+        public NetHttpsBindingCollectionElement NetHttpsBinding
+        {
+            get { return (NetHttpsBindingCollectionElement)base[ConfigurationStrings.NetHttpsBindingCollectionElementName]; }
+        }
 
-        //[ConfigurationProperty(ConfigurationStrings.NetPeerTcpBindingCollectionElementName, Options = ConfigurationPropertyOptions.None)]
-        //[ObsoleteAttribute ("PeerChannel feature is obsolete and will be removed in the future.", false)]
-        //public NetPeerTcpBindingCollectionElement NetPeerTcpBinding
-        //{
-        //    get { return (NetPeerTcpBindingCollectionElement)base[ConfigurationStrings.NetPeerTcpBindingCollectionElementName]; }
-        //}
+        [ConfigurationProperty(ConfigurationStrings.NetPeerTcpBindingCollectionElementName, Options = ConfigurationPropertyOptions.None)]
+        [ObsoleteAttribute ("PeerChannel feature is obsolete and will be removed in the future.", false)]
+        public NetPeerTcpBindingCollectionElement NetPeerTcpBinding
+        {
+            get { return (NetPeerTcpBindingCollectionElement)base[ConfigurationStrings.NetPeerTcpBindingCollectionElementName]; }
+        }
 
-        //[ConfigurationProperty(ConfigurationStrings.NetMsmqBindingCollectionElementName, Options = ConfigurationPropertyOptions.None)]
-        //public NetMsmqBindingCollectionElement NetMsmqBinding
-        //{
-        //    get { return (NetMsmqBindingCollectionElement)base[ConfigurationStrings.NetMsmqBindingCollectionElementName]; }
-        //}
+        [ConfigurationProperty(ConfigurationStrings.NetMsmqBindingCollectionElementName, Options = ConfigurationPropertyOptions.None)]
+        public NetMsmqBindingCollectionElement NetMsmqBinding
+        {
+            get { return (NetMsmqBindingCollectionElement)base[ConfigurationStrings.NetMsmqBindingCollectionElementName]; }
+        }
 
-        //[ConfigurationProperty(ConfigurationStrings.NetNamedPipeBindingCollectionElementName, Options = ConfigurationPropertyOptions.None)]
-        //public NetNamedPipeBindingCollectionElement NetNamedPipeBinding
-        //{
-        //    get { return (NetNamedPipeBindingCollectionElement)base[ConfigurationStrings.NetNamedPipeBindingCollectionElementName]; }
-        //}
+        [ConfigurationProperty(ConfigurationStrings.NetNamedPipeBindingCollectionElementName, Options = ConfigurationPropertyOptions.None)]
+        public NetNamedPipeBindingCollectionElement NetNamedPipeBinding
+        {
+            get { return (NetNamedPipeBindingCollectionElement)base[ConfigurationStrings.NetNamedPipeBindingCollectionElementName]; }
+        }
 
-        //[ConfigurationProperty(ConfigurationStrings.NetTcpBindingCollectionElementName, Options = ConfigurationPropertyOptions.None)]
-        //public NetTcpBindingCollectionElement NetTcpBinding
-        //{
-        //    get { return (NetTcpBindingCollectionElement)base[ConfigurationStrings.NetTcpBindingCollectionElementName]; }
-        //}
+        [ConfigurationProperty(ConfigurationStrings.NetTcpBindingCollectionElementName, Options = ConfigurationPropertyOptions.None)]
+        public NetTcpBindingCollectionElement NetTcpBinding
+        {
+            get { return (NetTcpBindingCollectionElement)base[ConfigurationStrings.NetTcpBindingCollectionElementName]; }
+        }
 
-        //[ConfigurationProperty(ConfigurationStrings.WSFederationHttpBindingCollectionElementName, Options = ConfigurationPropertyOptions.None)]
-        //public WSFederationHttpBindingCollectionElement WSFederationHttpBinding
-        //{
-        //    get { return (WSFederationHttpBindingCollectionElement)base[ConfigurationStrings.WSFederationHttpBindingCollectionElementName]; }
-        //}
+        [ConfigurationProperty(ConfigurationStrings.WSFederationHttpBindingCollectionElementName, Options = ConfigurationPropertyOptions.None)]
+        public WSFederationHttpBindingCollectionElement WSFederationHttpBinding
+        {
+            get { return (WSFederationHttpBindingCollectionElement)base[ConfigurationStrings.WSFederationHttpBindingCollectionElementName]; }
+        }
 
-        //[ConfigurationProperty(ConfigurationStrings.WS2007FederationHttpBindingCollectionElementName, Options = ConfigurationPropertyOptions.None)]
-        //public WS2007FederationHttpBindingCollectionElement WS2007FederationHttpBinding
-        //{
-        //    get { return (WS2007FederationHttpBindingCollectionElement)base[ConfigurationStrings.WS2007FederationHttpBindingCollectionElementName]; }
-        //}
+        [ConfigurationProperty(ConfigurationStrings.WS2007FederationHttpBindingCollectionElementName, Options = ConfigurationPropertyOptions.None)]
+        public WS2007FederationHttpBindingCollectionElement WS2007FederationHttpBinding
+        {
+            get { return (WS2007FederationHttpBindingCollectionElement)base[ConfigurationStrings.WS2007FederationHttpBindingCollectionElementName]; }
+        }
 
-        //[ConfigurationProperty(ConfigurationStrings.WSHttpBindingCollectionElementName, Options = ConfigurationPropertyOptions.None)]
-        //public WSHttpBindingCollectionElement WSHttpBinding
-        //{
-        //    get { return (WSHttpBindingCollectionElement)base[ConfigurationStrings.WSHttpBindingCollectionElementName]; }
-        //}
+        [ConfigurationProperty(ConfigurationStrings.WSHttpBindingCollectionElementName, Options = ConfigurationPropertyOptions.None)]
+        public WSHttpBindingCollectionElement WSHttpBinding
+        {
+            get { return (WSHttpBindingCollectionElement)base[ConfigurationStrings.WSHttpBindingCollectionElementName]; }
+        }
 
-        //[ConfigurationProperty(ConfigurationStrings.WS2007HttpBindingCollectionElementName, Options = ConfigurationPropertyOptions.None)]
-        //public WS2007HttpBindingCollectionElement WS2007HttpBinding
-        //{
-        //    get { return (WS2007HttpBindingCollectionElement)base[ConfigurationStrings.WS2007HttpBindingCollectionElementName]; }
-        //}
+        [ConfigurationProperty(ConfigurationStrings.WS2007HttpBindingCollectionElementName, Options = ConfigurationPropertyOptions.None)]
+        public WS2007HttpBindingCollectionElement WS2007HttpBinding
+        {
+            get { return (WS2007HttpBindingCollectionElement)base[ConfigurationStrings.WS2007HttpBindingCollectionElementName]; }
+        }
 
-        //[ConfigurationProperty(ConfigurationStrings.WSDualHttpBindingCollectionElementName, Options = ConfigurationPropertyOptions.None)]
-        //public WSDualHttpBindingCollectionElement WSDualHttpBinding
-        //{
-        //    get { return (WSDualHttpBindingCollectionElement)base[ConfigurationStrings.WSDualHttpBindingCollectionElementName]; }
-        //}
+        [ConfigurationProperty(ConfigurationStrings.WSDualHttpBindingCollectionElementName, Options = ConfigurationPropertyOptions.None)]
+        public WSDualHttpBindingCollectionElement WSDualHttpBinding
+        {
+            get { return (WSDualHttpBindingCollectionElement)base[ConfigurationStrings.WSDualHttpBindingCollectionElementName]; }
+        }
 
         public static BindingsSection GetSection(Configuration config)
         {
@@ -208,7 +208,11 @@ namespace System.ServiceModel.Configuration
             // This should be protected at the callers site.  If assumption is invalid, then
             // configuration system is in an indeterminate state.  Need to stop in a manner that
             // user code can not capture.
-            Debug.Assert(BindingsSection.Configuration != null);
+            if (null == BindingsSection.Configuration)
+            {
+                Fx.Assert("The TryAdd(string name, Binding binding, Configuration config, out string binding) variant of this function should always be called first. The Configuration object is not set.");
+                DiagnosticUtility.FailFast("The TryAdd(string name, Binding binding, Configuration config, out string binding) variant of this function should always be called first. The Configuration object is not set.");
+            }
 
             bool retval = false;
             string outBindingSectionName = null;
@@ -255,6 +259,8 @@ namespace System.ServiceModel.Configuration
             UpdateBindingSections(ConfigurationHelpers.GetEvaluationContext(this));
         }
 
+        [Fx.Tag.SecurityNote(Critical = "Calls UnsafeLookupCollection which elevates.",
+            Safe = "Doesn't leak resultant config.")]
         [SecuritySafeCritical]
         internal void UpdateBindingSections(ContextInformation evaluationContext)
         {
@@ -262,7 +268,7 @@ namespace System.ServiceModel.Configuration
 
             // Extension collections are additive only (BasicMap) and do not allow for <clear>
             // or <remove> tags, nor do they allow for overriding an entry.  This allows us
-            // to optimize this to only walk the binding extension collection if the counts
+            // to optimize this to only walk the binding extension collection if the counts 
             // mismatch.
             if (bindingExtensions.Count != this.properties.Count)
             {
@@ -292,6 +298,8 @@ namespace System.ServiceModel.Configuration
             }
         }
 
+        [Fx.Tag.SecurityNote(Critical = "Calls UnsafeGetAssociatedBindingCollectionElement which elevates.",
+            Safe = "Doesn't leak resultant config.")]
         [SecuritySafeCritical]
         internal static void ValidateBindingReference(string binding, string bindingConfiguration, ContextInformation evaluationContext, ConfigurationElement configurationElement)
         {
@@ -299,7 +307,11 @@ namespace System.ServiceModel.Configuration
             // This should be protected at the callers site.  If assumption is invalid, then
             // configuration system is in an indeterminate state.  Need to stop in a manner that
             // user code can not capture.
-            Debug.Assert(evaluationContext != null);
+            if (null == evaluationContext)
+            {
+                Fx.Assert("ValidateBindingReference() should only called with valid ContextInformation");
+                DiagnosticUtility.FailFast("ValidateBindingReference() should only called with valid ContextInformation");
+            }
 
             if (!String.IsNullOrEmpty(binding))
             {
@@ -342,9 +354,11 @@ namespace System.ServiceModel.Configuration
             return this.EvaluationContext;
         }
 
+        [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - the return value will be used for a security decision -- see comment in interface definition.")]
         ContextInformation IConfigurationContextProviderInternal.GetOriginalEvaluationContext()
         {
-            throw new NotImplementedException();
+            Fx.Assert("Not implemented: IConfigurationContextProviderInternal.GetOriginalEvaluationContext");
+            return null;
         }
     }
 }

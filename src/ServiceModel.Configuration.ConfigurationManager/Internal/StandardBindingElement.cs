@@ -13,6 +13,7 @@ namespace System.ServiceModel.Configuration
 
     public abstract partial class StandardBindingElement : ServiceModelConfigurationElement, IBindingConfigurationElement, IConfigurationContextProviderInternal
     {
+        [Fx.Tag.SecurityNote(Critical = "Stores information used in a security decision.")]
         [SecurityCritical]
         EvaluationContextHelper contextHelper;
 
@@ -141,6 +142,7 @@ namespace System.ServiceModel.Configuration
 
         protected abstract void OnApplyConfiguration(Binding binding);
 
+        [Fx.Tag.SecurityNote(Critical = "Accesses critical field contextHelper.")]
         [SecurityCritical]
         protected override void Reset(ConfigurationElement parentElement)
         {
@@ -154,6 +156,8 @@ namespace System.ServiceModel.Configuration
             return this.EvaluationContext;
         }
 
+        [Fx.Tag.SecurityNote(Critical = "Accesses critical field contextHelper.",
+            Miscellaneous = "RequiresReview -- the return value will be used for a security decision -- see comment in interface definition.")]
         [SecurityCritical]
         ContextInformation IConfigurationContextProviderInternal.GetOriginalEvaluationContext()
         {
