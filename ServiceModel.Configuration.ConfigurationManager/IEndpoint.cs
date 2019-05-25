@@ -13,3 +13,15 @@ namespace System
         Uri Address { get; }
     }
 }
+
+
+namespace System.ServiceModel.Configuration
+{
+    partial class ChannelEndpointElement : IEndpoint
+    {
+    }
+
+    partial class ServiceEndpointElement : IEndpoint
+    {
+    }
+}
