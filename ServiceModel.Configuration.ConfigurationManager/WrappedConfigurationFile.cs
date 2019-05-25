@@ -17,14 +17,22 @@ namespace ServiceModel.Configuration
             ("client", typeof(ClientSection)),
         };
 
+        private readonly Lazy<string> _config;
+
         public WrappedConfigurationFile(string path)
         {
-            ConfigPath = WrapFile(XDocument.Load(path));
+            _config = new Lazy<string>(() => WrapFile(XDocument.Load(path)), true);
         }
 
-        public string ConfigPath { get; }
+        public string ConfigPath => _config.Value;
 
-        public void Dispose() => File.Delete(ConfigPath);
+        public void Dispose()
+        {
+            if (_config.IsValueCreated)
+            {
+                File.Delete(_config.Value);
+            }
+        }
 
         private static string WrapFile(XDocument original)
         {

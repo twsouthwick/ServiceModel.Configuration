@@ -10,51 +10,47 @@ using System.ServiceModel.Description;
 
 namespace ServiceModel.Configuration
 {
-    internal class ConfigurationManagerServiceModelOptions : IConfigureNamedOptions<ServiceModelOptions>
+    internal class ConfigurationManagerServiceModelOptions : IConfigureNamedOptions<ServiceModelOptions>, IDisposable
     {
         private readonly IContractResolver _mapper;
-        private readonly string _path;
-        private readonly bool _isOptional;
+        private readonly Lazy<ServiceModelSectionGroup> _section;
+        private readonly WrappedConfigurationFile _file;
 
         public ConfigurationManagerServiceModelOptions(IContractResolver mapper, string path, bool isOptional)
         {
             _mapper = mapper;
-            _path = path;
-            _isOptional = isOptional;
+            _file = new WrappedConfigurationFile(path);
+
+            _section = new Lazy<ServiceModelSectionGroup>(() =>
+            {
+                var configuration = ConfigurationManager.OpenMappedMachineConfiguration(new ConfigurationFileMap(_file.ConfigPath));
+                var section = ServiceModelSectionGroup.GetSectionGroup(configuration);
+
+                if (section is null && !isOptional)
+                {
+                    throw new ServiceModelConfigurationException("Section not found");
+                }
+
+                return section;
+            }, true);
         }
+
+        public void Dispose() => _file.Dispose();
 
         public void Configure(ServiceModelOptions options) => Configure(ServiceModelDefaults.DefaultName, options);
 
         public void Configure(string name, ServiceModelOptions options)
         {
-            using (var configFile = new WrappedConfigurationFile(_path))
-            {
-                var configuration = ConfigurationManager.OpenMappedMachineConfiguration(new ConfigurationFileMap(configFile.ConfigPath));
-                var section = ServiceModelSectionGroup.GetSectionGroup(configuration);
-
-                if (section == null)
-                {
-                    if (_isOptional)
-                    {
-                        return;
-                    }
-
-                    throw new ServiceModelConfigurationException("Section not found");
-                }
-
-                if (section is ServiceModelSectionGroup group)
-                {
-                    Configure(name, options, group);
-                }
-                else
-                {
-                    throw new ServiceModelConfigurationException("Not valid type");
-                }
-            }
+            Configure(name, options, _section.Value);
         }
 
         private void Configure(string name, ServiceModelOptions options, ServiceModelSectionGroup group)
         {
+            if (group is null)
+            {
+                return;
+            }
+
             if (string.Equals(ServiceModelDefaults.DefaultName, name, StringComparison.Ordinal))
             {
                 Add(options, group.Client?.Endpoints);
@@ -69,8 +65,6 @@ namespace ServiceModel.Configuration
                 }
             }
         }
-
-
 
         private void Add(ServiceModelOptions options, IEnumerable endpoints)
         {
