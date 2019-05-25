@@ -160,6 +160,15 @@ namespace System {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ConfigInvalidAttribute.
+        /// </summary>
+        internal static string ConfigInvalidAttribute {
+            get {
+                return ResourceManager.GetString("ConfigInvalidAttribute", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ConfigInvalidBindingName.
         /// </summary>
         internal static string ConfigInvalidBindingName {
@@ -363,6 +372,15 @@ namespace System {
         internal static string ID1024 {
             get {
                 return ResourceManager.GetString("ID1024", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RequiredAttributeMissing.
+        /// </summary>
+        internal static string RequiredAttributeMissing {
+            get {
+                return ResourceManager.GetString("RequiredAttributeMissing", resourceCulture);
             }
         }
         

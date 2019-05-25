@@ -150,6 +150,9 @@
   <data name="ConfigExtensionTypeNotRegisteredInCollection" xml:space="preserve">
     <value>ConfigExtensionTypeNotRegisteredInCollection</value>
   </data>
+  <data name="ConfigInvalidAttribute" xml:space="preserve">
+    <value>ConfigInvalidAttribute</value>
+  </data>
   <data name="ConfigInvalidBindingName" xml:space="preserve">
     <value>ConfigInvalidBindingName</value>
   </data>
@@ -218,6 +221,9 @@
   </data>
   <data name="ID1024" xml:space="preserve">
     <value>ID1024</value>
+  </data>
+  <data name="RequiredAttributeMissing" xml:space="preserve">
+    <value>RequiredAttributeMissing</value>
   </data>
   <data name="StreamUpgradeBindingElement" xml:space="preserve">
     <value>StreamUpgradeBindingElement</value>

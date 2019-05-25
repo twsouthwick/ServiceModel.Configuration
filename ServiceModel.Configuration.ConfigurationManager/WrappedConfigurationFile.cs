@@ -14,6 +14,7 @@ namespace ServiceModel.Configuration
             ("services", typeof(ServicesSection)),
             ("bindings", typeof(BindingsSection)),
             ("extensions", typeof(ExtensionsSection)),
+            ("client", typeof(ClientSection)),
         };
 
         public WrappedConfigurationFile(string path)

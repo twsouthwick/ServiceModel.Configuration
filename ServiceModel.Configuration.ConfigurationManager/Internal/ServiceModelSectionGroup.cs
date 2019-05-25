@@ -22,10 +22,10 @@ namespace System.ServiceModel.Configuration
             get { return (BindingsSection)this.Sections[ConfigurationStrings.BindingsSectionGroupName]; }
         }
 
-        //public ClientSection Client
-        //{
-        //    get { return (ClientSection)this.Sections[ConfigurationStrings.ClientSectionName]; }
-        //}
+        public ClientSection Client
+        {
+            get { return (ClientSection)this.Sections[ConfigurationStrings.ClientSectionName]; }
+        }
 
         //public ComContractsSection ComContracts
         //{

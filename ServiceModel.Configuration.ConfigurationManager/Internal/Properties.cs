@@ -276,29 +276,29 @@ using System.Globalization;
 //    }
 //}
 
-//// configType.Name: AddressHeaderCollectionElement
+// configType.Name: AddressHeaderCollectionElement
 
-//namespace System.ServiceModel.Configuration
-//{
-//    public sealed partial class AddressHeaderCollectionElement
-//    {
-//        ConfigurationPropertyCollection properties;
+namespace System.ServiceModel.Configuration
+{
+    public sealed partial class AddressHeaderCollectionElement
+    {
+        ConfigurationPropertyCollection properties;
 
-//        protected override ConfigurationPropertyCollection Properties
-//        {
-//            get
-//            {
-//                if (this.properties == null)
-//                {
-//                    ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
-//                    properties.Add(new ConfigurationProperty("headers", typeof(System.ServiceModel.Channels.AddressHeaderCollection), null, null, null, System.Configuration.ConfigurationPropertyOptions.None));
-//                    this.properties = properties;
-//                }
-//                return this.properties;
-//            }
-//        }
-//    }
-//}
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get
+            {
+                if (this.properties == null)
+                {
+                    ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
+                    properties.Add(new ConfigurationProperty("headers", typeof(System.ServiceModel.Channels.AddressHeaderCollection), null, null, null, System.Configuration.ConfigurationPropertyOptions.None));
+                    this.properties = properties;
+                }
+                return this.properties;
+            }
+        }
+    }
+}
 
 //// configType.Name: ServiceAuthenticationElement
 
@@ -629,38 +629,38 @@ namespace System.ServiceModel.Configuration
 //    }
 //}
 
-//// configType.Name: ChannelEndpointElement
+// configType.Name: ChannelEndpointElement
 
-//namespace System.ServiceModel.Configuration
-//{
-//    public sealed partial class ChannelEndpointElement
-//    {
-//        ConfigurationPropertyCollection properties;
+namespace System.ServiceModel.Configuration
+{
+    public sealed partial class ChannelEndpointElement
+    {
+        ConfigurationPropertyCollection properties;
 
-//        protected override ConfigurationPropertyCollection Properties
-//        {
-//            get
-//            {
-//                if (this.properties == null)
-//                {
-//                    ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
-//                    properties.Add(new ConfigurationProperty("address", typeof(System.Uri), null, null, null, System.Configuration.ConfigurationPropertyOptions.None));
-//                    properties.Add(new ConfigurationProperty("behaviorConfiguration", typeof(System.String), string.Empty, null, new System.Configuration.StringValidator(0, 2147483647, null), System.Configuration.ConfigurationPropertyOptions.None));
-//                    properties.Add(new ConfigurationProperty("binding", typeof(System.String), string.Empty, null, new System.Configuration.StringValidator(0, 2147483647, null), System.Configuration.ConfigurationPropertyOptions.None));
-//                    properties.Add(new ConfigurationProperty("bindingConfiguration", typeof(System.String), string.Empty, null, new System.Configuration.StringValidator(0, 2147483647, null), System.Configuration.ConfigurationPropertyOptions.None));
-//                    properties.Add(new ConfigurationProperty("contract", typeof(System.String), string.Empty, null, new System.Configuration.StringValidator(0, 2147483647, null), System.Configuration.ConfigurationPropertyOptions.IsKey));
-//                    properties.Add(new ConfigurationProperty("headers", typeof(System.ServiceModel.Configuration.AddressHeaderCollectionElement), null, null, null, System.Configuration.ConfigurationPropertyOptions.None));
-//                    properties.Add(new ConfigurationProperty("identity", typeof(System.ServiceModel.Configuration.IdentityElement), null, null, null, System.Configuration.ConfigurationPropertyOptions.None));
-//                    properties.Add(new ConfigurationProperty("name", typeof(System.String), string.Empty, null, new System.Configuration.StringValidator(0, 2147483647, null), System.Configuration.ConfigurationPropertyOptions.IsKey));
-//                    properties.Add(new ConfigurationProperty("kind", typeof(System.String), string.Empty, null, new System.Configuration.StringValidator(0, 2147483647, null), System.Configuration.ConfigurationPropertyOptions.None));
-//                    properties.Add(new ConfigurationProperty("endpointConfiguration", typeof(System.String), string.Empty, null, new System.Configuration.StringValidator(0, 2147483647, null), System.Configuration.ConfigurationPropertyOptions.None));
-//                    this.properties = properties;
-//                }
-//                return this.properties;
-//            }
-//        }
-//    }
-//}
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get
+            {
+                if (this.properties == null)
+                {
+                    ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
+                    properties.Add(new ConfigurationProperty("address", typeof(System.Uri), null, null, null, System.Configuration.ConfigurationPropertyOptions.None));
+                    properties.Add(new ConfigurationProperty("behaviorConfiguration", typeof(System.String), string.Empty, null, new System.Configuration.StringValidator(0, 2147483647, null), System.Configuration.ConfigurationPropertyOptions.None));
+                    properties.Add(new ConfigurationProperty("binding", typeof(System.String), string.Empty, null, new System.Configuration.StringValidator(0, 2147483647, null), System.Configuration.ConfigurationPropertyOptions.None));
+                    properties.Add(new ConfigurationProperty("bindingConfiguration", typeof(System.String), string.Empty, null, new System.Configuration.StringValidator(0, 2147483647, null), System.Configuration.ConfigurationPropertyOptions.None));
+                    properties.Add(new ConfigurationProperty("contract", typeof(System.String), string.Empty, null, new System.Configuration.StringValidator(0, 2147483647, null), System.Configuration.ConfigurationPropertyOptions.IsKey));
+                    properties.Add(new ConfigurationProperty("headers", typeof(System.ServiceModel.Configuration.AddressHeaderCollectionElement), null, null, null, System.Configuration.ConfigurationPropertyOptions.None));
+                    properties.Add(new ConfigurationProperty("identity", typeof(System.ServiceModel.Configuration.IdentityElement), null, null, null, System.Configuration.ConfigurationPropertyOptions.None));
+                    properties.Add(new ConfigurationProperty("name", typeof(System.String), string.Empty, null, new System.Configuration.StringValidator(0, 2147483647, null), System.Configuration.ConfigurationPropertyOptions.IsKey));
+                    properties.Add(new ConfigurationProperty("kind", typeof(System.String), string.Empty, null, new System.Configuration.StringValidator(0, 2147483647, null), System.Configuration.ConfigurationPropertyOptions.None));
+                    properties.Add(new ConfigurationProperty("endpointConfiguration", typeof(System.String), string.Empty, null, new System.Configuration.StringValidator(0, 2147483647, null), System.Configuration.ConfigurationPropertyOptions.None));
+                    this.properties = properties;
+                }
+                return this.properties;
+            }
+        }
+    }
+}
 
 //// configType.Name: ChannelPoolSettingsElement
 
@@ -763,28 +763,28 @@ namespace System.ServiceModel.Configuration
 
 //// configType.Name: ClientSection
 
-//namespace System.ServiceModel.Configuration
-//{
-//    public sealed partial class ClientSection
-//    {
-//        ConfigurationPropertyCollection properties;
+namespace System.ServiceModel.Configuration
+{
+    public sealed partial class ClientSection
+    {
+        ConfigurationPropertyCollection properties;
 
-//        protected override ConfigurationPropertyCollection Properties
-//        {
-//            get
-//            {
-//                if (this.properties == null)
-//                {
-//                    ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
-//                    properties.Add(new ConfigurationProperty("", typeof(System.ServiceModel.Configuration.ChannelEndpointElementCollection), null, null, null, System.Configuration.ConfigurationPropertyOptions.IsDefaultCollection));
-//                    properties.Add(new ConfigurationProperty("metadata", typeof(System.ServiceModel.Configuration.MetadataElement), null, null, null, System.Configuration.ConfigurationPropertyOptions.None));
-//                    this.properties = properties;
-//                }
-//                return this.properties;
-//            }
-//        }
-//    }
-//}
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get
+            {
+                if (this.properties == null)
+                {
+                    ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
+                    properties.Add(new ConfigurationProperty("", typeof(System.ServiceModel.Configuration.ChannelEndpointElementCollection), null, null, null, System.Configuration.ConfigurationPropertyOptions.IsDefaultCollection));
+                    properties.Add(new ConfigurationProperty("metadata", typeof(System.ServiceModel.Configuration.MetadataElement), null, null, null, System.Configuration.ConfigurationPropertyOptions.None));
+                    this.properties = properties;
+                }
+                return this.properties;
+            }
+        }
+    }
+}
 
 //// configType.Name: CallbackTimeoutsElement
 
