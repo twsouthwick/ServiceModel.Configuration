@@ -6,10 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\ServiceModel.Configuration.Tests\ServiceModelTestBase.cs" Link="ServiceModelTestBase.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="AutoFixture" Version="4.8.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.1.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.0-preview-20181205-02" />
@@ -19,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ServiceModel.Configuration.ConfigurationManager\ServiceModel.Configuration.ConfigurationManager.csproj" />
+    <ProjectReference Include="..\..\src\ServiceModel.Configuration\ServiceModel.Configuration.csproj" />
   </ItemGroup>
 
 </Project>

@@ -23,7 +23,7 @@ steps:
 - script: 'dotnet pack /p:Version=$(build.BuildNumber)'
 - task: CopyFiles@2
   inputs:
-    contents: '**/*nupkg' 
+    contents: '**/*nupkg'
     targetFolder: '$(build.artifactstagingdirectory)'
     flattenFolders: true
 - task: PublishBuildArtifacts@1
