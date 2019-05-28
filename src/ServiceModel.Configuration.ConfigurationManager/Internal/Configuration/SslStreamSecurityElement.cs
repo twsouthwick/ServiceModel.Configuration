@@ -37,7 +37,9 @@ namespace System.ServiceModel.Configuration
             base.ApplyConfiguration(bindingElement);
             SslStreamSecurityBindingElement sslBindingElement =
                 (SslStreamSecurityBindingElement)bindingElement;
-            //sslBindingElement.RequireClientCertificate = this.RequireClientCertificate;
+#if DESKTOP
+            sslBindingElement.RequireClientCertificate = this.RequireClientCertificate;
+#endif
             sslBindingElement.SslProtocols = this.SslProtocols;
         }
 
@@ -69,7 +71,9 @@ namespace System.ServiceModel.Configuration
             base.InitializeFrom(bindingElement);
             SslStreamSecurityBindingElement sslBindingElement
                 = (SslStreamSecurityBindingElement)bindingElement;
-            //SetPropertyValueIfNotDefaultValue(ConfigurationStrings.RequireClientCertificate, sslBindingElement.RequireClientCertificate);
+#if DESKTOP
+            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.RequireClientCertificate, sslBindingElement.RequireClientCertificate);
+#endif
             SetPropertyValueIfNotDefaultValue(ConfigurationStrings.SslProtocols, sslBindingElement.SslProtocols);
         }
     }

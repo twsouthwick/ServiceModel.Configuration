@@ -40,6 +40,26 @@ namespace System.ServiceModel.Configuration
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(
                             SR.GetString(SR.ConfigDuplicateKeyAtSameScope, this.ElementName, newElementKey)));
                     }
+#if DESKTOP
+                    else if (DiagnosticUtility.ShouldTraceWarning)
+                    {
+                        Dictionary<string, string> values = new Dictionary<string, string>(6);
+                        values.Add("ElementName", this.ElementName);
+                        values.Add("Name", newElementKey.ToString());
+                        values.Add("OldElementLocation", oldElement.ElementInformation.Source);
+                        values.Add("OldElementLineNumber", oldElement.ElementInformation.LineNumber.ToString(NumberFormatInfo.CurrentInfo));
+                        values.Add("NewElementLocation", element.ElementInformation.Source);
+                        values.Add("NewElementLineNumber", element.ElementInformation.LineNumber.ToString(NumberFormatInfo.CurrentInfo));
+
+                        DictionaryTraceRecord traceRecord = new DictionaryTraceRecord(values);
+                        TraceUtility.TraceEvent(TraceEventType.Warning,
+                            TraceCode.OverridingDuplicateConfigurationKey,
+                            SR.GetString(SR.TraceCodeOverridingDuplicateConfigurationKey),
+                            traceRecord,
+                            this,
+                            null);
+                    }
+#endif
                 }
             }
             base.BaseAdd(element);

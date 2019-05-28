@@ -165,7 +165,7 @@ namespace System.ServiceModel.Configuration
 
         bool CanAddStreamUpgradeElement(BindingElementExtensionElement element, ref BindingElementExtensionElement existingElement)
         {
-#if FEATURE_STREAMUPGRADEBINDINGELEMENT
+#if DESKTOP
             return this.CanAddExclusiveElement(typeof(StreamUpgradeBindingElement), element.BindingElementType, ref existingElement);
 #else
             return true;

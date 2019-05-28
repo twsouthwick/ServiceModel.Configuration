@@ -21,7 +21,8 @@ namespace System.ServiceModel.Configuration
             : this(null)
         {
         }
-#if MESSAGE_ENCODING
+
+#if DESKTOP
         [ConfigurationProperty(ConfigurationStrings.MessageEncoding, DefaultValue = BasicHttpBindingDefaults.MessageEncoding)]
         [ServiceModelEnumValidator(typeof(WSMessageEncodingHelper))]
         public WSMessageEncoding MessageEncoding
@@ -47,7 +48,7 @@ namespace System.ServiceModel.Configuration
             base.InitializeFrom(binding);
             BasicHttpsBinding bpBinding = (BasicHttpsBinding)binding;
 
-#if MESSAGE_ENCODING
+#if DESKTOP
             SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MessageEncoding, bpBinding.MessageEncoding);
 #endif
             this.Security.InitializeFrom(bpBinding.Security);
@@ -58,7 +59,7 @@ namespace System.ServiceModel.Configuration
             base.OnApplyConfiguration(binding);
             BasicHttpsBinding bpBinding = (BasicHttpsBinding)binding;
 
-#if MESSAGE_ENCODING
+#if DESKTOP
             bpBinding.MessageEncoding = this.MessageEncoding;
 #endif
 

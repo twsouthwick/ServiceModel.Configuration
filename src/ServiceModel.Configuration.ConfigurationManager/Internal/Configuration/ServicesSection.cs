@@ -10,6 +10,7 @@ namespace System.ServiceModel.Configuration
 
     public sealed partial class ServicesSection : ConfigurationSection, IConfigurationContextProviderInternal
     {
+        [Fx.Tag.SecurityNote(Critical = "Stores information used in a security decision.")]
         [SecurityCritical]
         EvaluationContextHelper contextHelper;
 
@@ -28,6 +29,8 @@ namespace System.ServiceModel.Configuration
             return (ServicesSection)ConfigurationHelpers.GetSection(ConfigurationStrings.ServicesSectionPath);
         }
 
+        [Fx.Tag.SecurityNote(Critical = "Calls SecurityCritical method UnsafeGetSection which elevates in order to load config."
+            + "Caller must guard access to resultant config section.")]
         [SecurityCritical]
         internal static ServicesSection UnsafeGetSection()
         {
@@ -48,51 +51,56 @@ namespace System.ServiceModel.Configuration
             {
                 foreach (ServiceElement service in this.Services)
                 {
-                    //BehaviorsSection.ValidateServiceBehaviorReference(service.BehaviorConfiguration, context, service);
+#if DESKTOP
+                    BehaviorsSection.ValidateServiceBehaviorReference(service.BehaviorConfiguration, context, service);
 
-                    //foreach (ServiceEndpointElement endpoint in service.Endpoints)
-                    //{
-                    //    if (string.IsNullOrEmpty(endpoint.Kind))
-                    //    {
-                    //        if (!string.IsNullOrEmpty(endpoint.EndpointConfiguration))
-                    //        {
-                    //            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigInvalidAttribute, "endpointConfiguration", "endpoint", "kind")));
-                    //        }
-                    //        if (string.IsNullOrEmpty(endpoint.Binding))
-                    //        {
-                    //            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.RequiredAttributeMissing, "binding", "endpoint")));
-                    //        }
-                    //    }
-                    //    if (string.IsNullOrEmpty(endpoint.Binding) && !string.IsNullOrEmpty(endpoint.BindingConfiguration))
-                    //    {
-                    //        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigInvalidAttribute, "bindingConfiguration", "endpoint", "binding")));
-                    //    }
-                    //    BehaviorsSection.ValidateEndpointBehaviorReference(endpoint.BehaviorConfiguration, context, endpoint);
-                    //    BindingsSection.ValidateBindingReference(endpoint.Binding, endpoint.BindingConfiguration, context, endpoint);
-                    //    StandardEndpointsSection.ValidateEndpointReference(endpoint.Kind, endpoint.EndpointConfiguration, context, endpoint);
-                    //}
+                    foreach (ServiceEndpointElement endpoint in service.Endpoints)
+                    {
+                        if (string.IsNullOrEmpty(endpoint.Kind))
+                        {
+                            if (!string.IsNullOrEmpty(endpoint.EndpointConfiguration))
+                            {
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigInvalidAttribute, "endpointConfiguration", "endpoint", "kind")));
+                            }
+                            if (string.IsNullOrEmpty(endpoint.Binding))
+                            {
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.RequiredAttributeMissing, "binding", "endpoint")));
+                            }
+                        }
+                        if (string.IsNullOrEmpty(endpoint.Binding) && !string.IsNullOrEmpty(endpoint.BindingConfiguration))
+                        {
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigInvalidAttribute, "bindingConfiguration", "endpoint", "binding")));
+                        }
+                        BehaviorsSection.ValidateEndpointBehaviorReference(endpoint.BehaviorConfiguration, context, endpoint);
+                        BindingsSection.ValidateBindingReference(endpoint.Binding, endpoint.BindingConfiguration, context, endpoint);
+                        StandardEndpointsSection.ValidateEndpointReference(endpoint.Kind, endpoint.EndpointConfiguration, context, endpoint);
                 }
+#endif
             }
         }
-
-        [SecurityCritical]
-        protected override void Reset(ConfigurationElement parentElement)
-        {
-            this.contextHelper.OnReset(parentElement);
-
-            base.Reset(parentElement);
-        }
-
-        ContextInformation IConfigurationContextProviderInternal.GetEvaluationContext()
-        {
-            return this.EvaluationContext;
-        }
-
-        [SecurityCritical]
-        ContextInformation IConfigurationContextProviderInternal.GetOriginalEvaluationContext()
-        {
-            return this.contextHelper.GetOriginalContext(this);
-        }
     }
+
+    [Fx.Tag.SecurityNote(Critical = "Accesses critical field contextHelper.")]
+    [SecurityCritical]
+    protected override void Reset(ConfigurationElement parentElement)
+    {
+        this.contextHelper.OnReset(parentElement);
+
+        base.Reset(parentElement);
+    }
+
+    ContextInformation IConfigurationContextProviderInternal.GetEvaluationContext()
+    {
+        return this.EvaluationContext;
+    }
+
+    [Fx.Tag.SecurityNote(Critical = "Accesses critical field contextHelper.",
+        Miscellaneous = "RequiresReview -- the return value will be used for a security decision -- see comment in interface definition.")]
+    [SecurityCritical]
+    ContextInformation IConfigurationContextProviderInternal.GetOriginalEvaluationContext()
+    {
+        return this.contextHelper.GetOriginalContext(this);
+    }
+}
 }
 

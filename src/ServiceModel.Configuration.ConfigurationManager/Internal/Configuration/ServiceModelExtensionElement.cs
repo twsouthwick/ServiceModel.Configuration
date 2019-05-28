@@ -14,9 +14,10 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel.Diagnostics;
     using System.Xml;
 
-    //[ConfigurationPermission(SecurityAction.InheritanceDemand, Unrestricted = true)]
+    [ConfigurationPermission(SecurityAction.InheritanceDemand, Unrestricted = true)]
     public abstract class ServiceModelExtensionElement : ServiceModelConfigurationElement, IConfigurationContextProviderInternal
     {
+        [Fx.Tag.SecurityNote(Critical = "Stores information used in a security decision.")]
         [SecurityCritical]
         EvaluationContextHelper contextHelper;
 
@@ -31,6 +32,8 @@ namespace System.ServiceModel.Configuration
         {
         }
 
+        [Fx.Tag.SecurityNote(Critical = "Calls SecurityCritical method UnsafeLookupCollection which elevates in order to load config.",
+            Safe = "Does not leak any config objects.")]
         [SecuritySafeCritical]
         internal bool CanAdd(string extensionCollectionName, ContextInformation evaluationContext)
         {
@@ -60,7 +63,35 @@ namespace System.ServiceModel.Configuration
                         }
                     }
                 }
+#if DESKTOP
+                if (!retVal && DiagnosticUtility.ShouldTraceWarning)
+                {
+                    TraceUtility.TraceEvent(TraceEventType.Warning,
+                        TraceCode.ConfiguredExtensionTypeNotFound,
+                        SR.GetString(SR.TraceCodeConfiguredExtensionTypeNotFound),
+                        this.CreateCanAddRecord(extensionCollectionName), this, null);
+                }
+#endif
             }
+#if DESKTOP
+            else if (DiagnosticUtility.ShouldTraceWarning)
+            {
+                int traceCode;
+                string traceDescription;
+                if (collection != null && collection.Count == 0)
+                {
+                    traceCode = TraceCode.ExtensionCollectionIsEmpty;
+                    traceDescription = SR.GetString(SR.TraceCodeExtensionCollectionIsEmpty);
+                }
+                else
+                {
+                    traceCode = TraceCode.ExtensionCollectionDoesNotExist;
+                    traceDescription = SR.GetString(SR.TraceCodeExtensionCollectionDoesNotExist);
+                }
+                TraceUtility.TraceEvent(TraceEventType.Warning,
+                    traceCode, traceDescription, this.CreateCanAddRecord(extensionCollectionName), this, null);
+            }
+#endif
 
             return retVal;
         }
@@ -81,11 +112,11 @@ namespace System.ServiceModel.Configuration
             {
                 if (!string.IsNullOrEmpty(this.configurationElementName))
                 {
-                    Debug.Assert(this.configurationElementName == value,
+                    Fx.Assert(this.configurationElementName == value,
                         string.Format(System.Globalization.CultureInfo.InvariantCulture,
                             "The configuration element name has already being set to '{0} and cannot be reset to '{1}'",
                             this.configurationElementName, value));
-
+                    
                     return;
                 }
 
@@ -123,6 +154,16 @@ namespace System.ServiceModel.Configuration
             }
         }
 
+#if DESKTOP
+        DictionaryTraceRecord CreateCanAddRecord(string extensionCollectionName)
+        {
+            Dictionary<string, string> values = new Dictionary<string, string>(2);
+            values["ElementType"] = System.Runtime.Diagnostics.DiagnosticTraceBase.XmlEncode(ThisType.AssemblyQualifiedName);
+            values["CollectionName"] = ConfigurationStrings.ExtensionsSectionPath + "/" + extensionCollectionName;
+            return new DictionaryTraceRecord(values);
+        }
+#endif
+
         internal void DeserializeInternal(XmlReader reader, bool serializeCollectionKey)
         {
             this.DeserializeElement(reader, serializeCollectionKey);
@@ -144,6 +185,8 @@ namespace System.ServiceModel.Configuration
             return this[property];
         }
 
+        [Fx.Tag.SecurityNote(Critical = "Calls SecurityCritical methods UnsafeLookupCollection and UnsafeLookupAssociatedCollection which elevate in order to load config.",
+            Safe = "Does not leak any config objects.")]
         [SecuritySafeCritical]
         string GetConfigurationElementName()
         {
@@ -159,6 +202,17 @@ namespace System.ServiceModel.Configuration
 
             if (String.IsNullOrEmpty(this.extensionCollectionName))
             {
+#if DESKTOP
+                if (DiagnosticUtility.ShouldTraceWarning)
+                {
+                    TraceUtility.TraceEvent(TraceEventType.Warning,
+                        TraceCode.ExtensionCollectionNameNotFound,
+                        SR.GetString(SR.TraceCodeExtensionCollectionNameNotFound),
+                        this,
+                        (Exception)null);
+                }
+#endif
+
                 collection = ExtensionsSection.UnsafeLookupAssociatedCollection(ThisType, evaluationContext, out this.extensionCollectionName);
             }
             else
@@ -258,6 +312,7 @@ namespace System.ServiceModel.Configuration
             this.SetReadOnly();
         }
 
+        [Fx.Tag.SecurityNote(Critical = "Accesses critical field contextHelper.")]
         [SecurityCritical]
         protected override void Reset(ConfigurationElement parentElement)
         {
@@ -271,6 +326,8 @@ namespace System.ServiceModel.Configuration
             return this.EvaluationContext;
         }
 
+        [Fx.Tag.SecurityNote(Critical = "Accesses critical field contextHelper.",
+            Miscellaneous = "RequiresReview -- the return value will be used for a security decision -- see comment in interface definition.")]
         [SecurityCritical]
         ContextInformation IConfigurationContextProviderInternal.GetOriginalEvaluationContext()
         {

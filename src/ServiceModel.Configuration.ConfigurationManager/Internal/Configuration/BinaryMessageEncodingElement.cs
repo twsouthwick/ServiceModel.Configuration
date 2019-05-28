@@ -18,6 +18,22 @@ namespace System.ServiceModel.Configuration
             get { return typeof(BinaryMessageEncodingBindingElement); }
         }
 
+        [ConfigurationProperty(ConfigurationStrings.MaxReadPoolSize, DefaultValue = EncoderDefaults.MaxReadPoolSize)]
+        [IntegerValidator(MinValue = 1)]
+        public int MaxReadPoolSize
+        {
+            get { return (int)base[ConfigurationStrings.MaxReadPoolSize]; }
+            set { base[ConfigurationStrings.MaxReadPoolSize] = value; }
+        }
+
+        [ConfigurationProperty(ConfigurationStrings.MaxWritePoolSize, DefaultValue = EncoderDefaults.MaxWritePoolSize)]
+        [IntegerValidator(MinValue = 1)]
+        public int MaxWritePoolSize
+        {
+            get { return (int)base[ConfigurationStrings.MaxWritePoolSize]; }
+            set { base[ConfigurationStrings.MaxWritePoolSize] = value; }
+        }
+
         [ConfigurationProperty(ConfigurationStrings.MaxSessionSize, DefaultValue = BinaryEncoderDefaults.MaxSessionSize)]
         [IntegerValidator(MinValue = 0)]
         public int MaxSessionSize
@@ -45,6 +61,10 @@ namespace System.ServiceModel.Configuration
             base.ApplyConfiguration(bindingElement);
             BinaryMessageEncodingBindingElement binding = (BinaryMessageEncodingBindingElement)bindingElement;
             binding.MaxSessionSize = this.MaxSessionSize;
+#if DESKTOP
+            binding.MaxReadPoolSize = this.MaxReadPoolSize;
+            binding.MaxWritePoolSize = this.MaxWritePoolSize;
+#endif
             this.ReaderQuotas.ApplyConfiguration(binding.ReaderQuotas);
             binding.CompressionFormat = this.CompressionFormat;
         }
@@ -55,6 +75,8 @@ namespace System.ServiceModel.Configuration
 
             BinaryMessageEncodingElement source = (BinaryMessageEncodingElement)from;
             this.MaxSessionSize = source.MaxSessionSize;
+            this.MaxReadPoolSize = source.MaxReadPoolSize;
+            this.MaxWritePoolSize = source.MaxWritePoolSize;
             this.CompressionFormat = source.CompressionFormat;
         }
 
@@ -63,6 +85,10 @@ namespace System.ServiceModel.Configuration
             base.InitializeFrom(bindingElement);
             BinaryMessageEncodingBindingElement binding = (BinaryMessageEncodingBindingElement)bindingElement;
             SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MaxSessionSize, binding.MaxSessionSize);
+#if DESKTOP
+            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MaxReadPoolSize, binding.MaxReadPoolSize);
+            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MaxWritePoolSize, binding.MaxWritePoolSize);
+#endif
             this.ReaderQuotas.InitializeFrom(binding.ReaderQuotas);
             SetPropertyValueIfNotDefaultValue(ConfigurationStrings.CompressionFormat, binding.CompressionFormat);
         }

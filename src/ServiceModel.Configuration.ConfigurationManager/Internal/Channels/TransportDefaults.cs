@@ -235,7 +235,7 @@ namespace System.ServiceModel.Channels
         //internal const bool AllowNtlm = SspiSecurityTokenProvider.DefaultAllowNtlm;
         internal const int ConnectionBufferSize = 8192;
         internal const string ConnectionPoolGroupName = "default";
-        //internal const HostNameComparisonMode HostNameComparisonMode = System.ServiceModel.HostNameComparisonMode.StrongWildcard;
+        internal const HostNameComparisonMode HostNameComparisonMode = System.ServiceModel.HostNameComparisonMode.StrongWildcard;
         internal static TimeSpan IdleTimeout { get { return TimeSpanHelper.FromMinutes(2, IdleTimeoutString); } }
         internal const string IdleTimeoutString = "00:02:00";
         internal static TimeSpan ChannelInitializationTimeout { get { return TimeSpanHelper.FromSeconds(30, ChannelInitializationTimeoutString); } }
@@ -320,7 +320,7 @@ namespace System.ServiceModel.Channels
         internal const AuthenticationSchemes AuthenticationScheme = AuthenticationSchemes.Anonymous;
         internal const bool BypassProxyOnLocal = false;
         internal const bool DecompressionEnabled = true;
-        //internal const HostNameComparisonMode HostNameComparisonMode = System.ServiceModel.HostNameComparisonMode.StrongWildcard;
+        internal const HostNameComparisonMode HostNameComparisonMode = System.ServiceModel.HostNameComparisonMode.StrongWildcard;
         internal const bool KeepAliveEnabled = true;
         internal const Uri ProxyAddress = null;
         internal const AuthenticationSchemes ProxyAuthenticationScheme = AuthenticationSchemes.Anonymous;

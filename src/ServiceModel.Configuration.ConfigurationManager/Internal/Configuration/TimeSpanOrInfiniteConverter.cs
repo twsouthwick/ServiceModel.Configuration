@@ -16,12 +16,12 @@ namespace System.ServiceModel.Configuration
         {
             if (value == null)
             {
-                throw new ArgumentNullException(nameof(value));
+                throw FxTrace.Exception.ArgumentNull("value");
             }
 
             if (!(value is TimeSpan))
             {
-                throw new ArgumentOutOfRangeException(nameof(value));//, InternalSR.IncompatibleArgumentType(typeof(TimeSpan), value.GetType()));
+                throw FxTrace.Exception.Argument("value", InternalSR.IncompatibleArgumentType(typeof(TimeSpan), value.GetType()));
             }
 
             if ((TimeSpan)value == TimeSpan.MaxValue)

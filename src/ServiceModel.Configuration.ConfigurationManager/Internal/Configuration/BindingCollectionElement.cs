@@ -42,6 +42,8 @@ namespace System.ServiceModel.Configuration
 
         public abstract bool ContainsKey(string name);
 
+        [Fx.Tag.SecurityNote(Critical = "Calls UnsafeLookupCollection which elevates.",
+            Safe = "Doesn't leak config objects.")]
         [SecuritySafeCritical]
         string GetBindingName()
         {
@@ -99,9 +101,11 @@ namespace System.ServiceModel.Configuration
             return this.EvaluationContext;
         }
 
+        [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - the return value will be used for a security decision -- see comment in interface definition.")]
         ContextInformation IConfigurationContextProviderInternal.GetOriginalEvaluationContext()
         {
-            throw new NotImplementedException();
+            Fx.Assert("Not implemented: IConfigurationContextProviderInternal.GetOriginalEvaluationContext");
+            return null;
         }
     }
 }
