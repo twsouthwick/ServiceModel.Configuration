@@ -25,35 +25,41 @@ namespace System.ServiceModel.Configuration
             get { return typeof(BasicHttpBinding); }
         }
 
-        //[ConfigurationProperty(ConfigurationStrings.MessageEncoding, DefaultValue = BasicHttpBindingDefaults.MessageEncoding)]
-        //[ServiceModelEnumValidator(typeof(WSMessageEncodingHelper))]
-        //public WSMessageEncoding MessageEncoding
-        //{
-        //    get { return (WSMessageEncoding)base[ConfigurationStrings.MessageEncoding]; }
-        //    set { base[ConfigurationStrings.MessageEncoding] = value; }
-        //}
+#if DESKTOP
+        [ConfigurationProperty(ConfigurationStrings.MessageEncoding, DefaultValue = BasicHttpBindingDefaults.MessageEncoding)]
+        [ServiceModelEnumValidator(typeof(WSMessageEncodingHelper))]
+        public WSMessageEncoding MessageEncoding
+        {
+            get { return (WSMessageEncoding)base[ConfigurationStrings.MessageEncoding]; }
+            set { base[ConfigurationStrings.MessageEncoding] = value; }
+        }
+#endif
 
-        //[ConfigurationProperty(ConfigurationStrings.Security)]
-        //public BasicHttpSecurityElement Security
-        //{
-        //    get { return (BasicHttpSecurityElement)base[ConfigurationStrings.Security]; }
-        //}
+        [ConfigurationProperty(ConfigurationStrings.Security)]
+        public BasicHttpSecurityElement Security
+        {
+            get { return (BasicHttpSecurityElement)base[ConfigurationStrings.Security]; }
+        }
 
         protected internal override void InitializeFrom(Binding binding)
         {
             base.InitializeFrom(binding);
             BasicHttpBinding bpBinding = (BasicHttpBinding)binding;
 
-            //SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MessageEncoding, bpBinding.MessageEncoding);
-            //this.Security.InitializeFrom(bpBinding.Security);
+#if DESKTOP
+            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MessageEncoding, bpBinding.MessageEncoding);
+#endif
+            this.Security.InitializeFrom(bpBinding.Security);
         }
 
         protected override void OnApplyConfiguration(Binding binding)
         {
             base.OnApplyConfiguration(binding);
             BasicHttpBinding bpBinding = (BasicHttpBinding)binding;
-            //bpBinding.MessageEncoding = this.MessageEncoding;
-            //this.Security.ApplyConfiguration(bpBinding.Security);
+#if DESKTOP
+            bpBinding.MessageEncoding = this.MessageEncoding;
+#endif
+            this.Security.ApplyConfiguration(bpBinding.Security);
         }
     }
 }

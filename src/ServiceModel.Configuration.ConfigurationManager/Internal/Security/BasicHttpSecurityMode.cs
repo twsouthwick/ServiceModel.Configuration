@@ -7,8 +7,6 @@ namespace System.ServiceModel
 
     static class BasicHttpSecurityModeHelper
     {
-        internal const BasicHttpSecurityMode DefaultMode = BasicHttpSecurityMode.None;
-
         internal static bool IsDefined(BasicHttpSecurityMode value)
         {
             return (value == BasicHttpSecurityMode.None ||

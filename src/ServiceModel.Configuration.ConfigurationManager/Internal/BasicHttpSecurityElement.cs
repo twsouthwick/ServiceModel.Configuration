@@ -15,7 +15,9 @@ namespace System.ServiceModel.Configuration
 
     public sealed partial class BasicHttpSecurityElement : ServiceModelConfigurationElement
     {
-        [ConfigurationProperty(ConfigurationStrings.Mode, DefaultValue = BasicHttpSecurityModeHelper.DefaultMode)]
+        private const BasicHttpSecurityMode DefaultMode = BasicHttpSecurityMode.None;
+
+        [ConfigurationProperty(ConfigurationStrings.Mode, DefaultValue = DefaultMode)]
         [ServiceModelEnumValidator(typeof(BasicHttpSecurityModeHelper))]
         public BasicHttpSecurityMode Mode
         {
@@ -29,13 +31,11 @@ namespace System.ServiceModel.Configuration
             get { return (HttpTransportSecurityElement)base[ConfigurationStrings.Transport]; }
         }
 
-#if MESSAGE
         [ConfigurationProperty(ConfigurationStrings.Message)]
         public BasicHttpMessageSecurityElement Message
         {
             get { return (BasicHttpMessageSecurityElement)base[ConfigurationStrings.Message]; }
         }
-#endif
 
         internal void ApplyConfiguration(BasicHttpSecurity security)
         {
@@ -45,8 +45,7 @@ namespace System.ServiceModel.Configuration
             }
             security.Mode = this.Mode;
             this.Transport.ApplyConfiguration(security.Transport);
-
-#if MESSAGE
+#if DESKTOP
             this.Message.ApplyConfiguration(security.Message);
 #endif
         }
@@ -59,8 +58,7 @@ namespace System.ServiceModel.Configuration
             }
             SetPropertyValueIfNotDefaultValue(ConfigurationStrings.Mode, security.Mode);
             this.Transport.InitializeFrom(security.Transport);
-
-#if MESSAGE
+#if DESKTOP
             this.Message.InitializeFrom(security.Message);
 #endif
         }

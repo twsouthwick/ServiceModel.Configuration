@@ -10,11 +10,11 @@ namespace System.ServiceModel.Configuration
     using System.Xml;
     using System.Security;
     using System.Runtime;
-    using System.Diagnostics;
-    using System.Collections.Generic;
 
     public sealed partial class AddressHeaderCollectionElement : ServiceModelConfigurationElement
     {
+        private static readonly AddressHeaderCollection EmptyHeaderCollection = new AddressHeaderCollection();
+
         public AddressHeaderCollectionElement()
         {
         }
@@ -41,7 +41,7 @@ namespace System.ServiceModel.Configuration
                 AddressHeaderCollection retVal = (AddressHeaderCollection)base[ConfigurationStrings.Headers];
                 if (null == retVal)
                 {
-                    retVal = new AddressHeaderCollection();
+                    retVal = EmptyHeaderCollection;
                 }
                 return retVal;
             }
@@ -49,12 +49,14 @@ namespace System.ServiceModel.Configuration
             {
                 if (value == null)
                 {
-                    value = new AddressHeaderCollection();
+                    value = EmptyHeaderCollection;
                 }
                 base[ConfigurationStrings.Headers] = value;
             }
         }
 
+        [Fx.Tag.SecurityNote(Critical = "Uses the critical helper SetIsPresent.",
+            Safe = "Controls how/when SetIsPresent is used, not arbitrarily callable from PT (method is protected and class is sealed).")]
         [SecuritySafeCritical]
         protected override void DeserializeElement(XmlReader reader, bool serializeCollectionKey)
         {
@@ -71,6 +73,8 @@ namespace System.ServiceModel.Configuration
 #endif
         }
 
+        [Fx.Tag.SecurityNote(Critical = "Uses the critical helper SetIsPresent which elevates in order to set a property.",
+            Safe = "Only passes 'this', does not let caller influence parameter.")]
         [SecurityCritical]
         void SetIsPresent()
         {
