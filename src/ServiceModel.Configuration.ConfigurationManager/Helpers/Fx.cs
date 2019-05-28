@@ -4,6 +4,17 @@ using System.Text;
 
 namespace System
 {
+    internal static class FxTrace
+    {
+        internal static class Exception
+        {
+            internal static System.Exception ArgumentNull(string name)
+            {
+                return new ArgumentNullException(name);
+            }
+        }
+    }
+
     internal static class Fx
     {
         internal static class Tag
