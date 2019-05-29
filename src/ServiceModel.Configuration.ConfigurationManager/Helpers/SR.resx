@@ -144,6 +144,9 @@
   <data name="ConfigElementTypeNotAllowed" xml:space="preserve">
     <value>ConfigElementTypeNotAllowed</value>
   </data>
+  <data name="ConfigEndpointExtensionNotFound" xml:space="preserve">
+    <value>ConfigEndpointExtensionNotFound</value>
+  </data>
   <data name="ConfigExtensionCollectionNotFound" xml:space="preserve">
     <value>ConfigExtensionCollectionNotFound</value>
   </data>
@@ -156,8 +159,32 @@
   <data name="ConfigInvalidBindingName" xml:space="preserve">
     <value>ConfigInvalidBindingName</value>
   </data>
+  <data name="ConfigInvalidCertificateValidatorType" xml:space="preserve">
+    <value>ConfigInvalidCertificateValidatorType</value>
+  </data>
+  <data name="ConfigInvalidClassFactoryValue" xml:space="preserve">
+    <value>ConfigInvalidClassFactoryValue</value>
+  </data>
+  <data name="ConfigInvalidClassInstanceValue" xml:space="preserve">
+    <value>ConfigInvalidClassInstanceValue</value>
+  </data>
+  <data name="ConfigInvalidClientCredentialsType" xml:space="preserve">
+    <value>ConfigInvalidClientCredentialsType</value>
+  </data>
+  <data name="ConfigInvalidCommonEndpointBehaviorType" xml:space="preserve">
+    <value>ConfigInvalidCommonEndpointBehaviorType</value>
+  </data>
   <data name="ConfigInvalidEncodingValue" xml:space="preserve">
     <value>ConfigInvalidEncodingValue</value>
+  </data>
+  <data name="ConfigInvalidEndpointBehavior" xml:space="preserve">
+    <value>ConfigInvalidEndpointBehavior</value>
+  </data>
+  <data name="ConfigInvalidEndpointBehaviorType" xml:space="preserve">
+    <value>ConfigInvalidEndpointBehaviorType</value>
+  </data>
+  <data name="ConfigInvalidEndpointName" xml:space="preserve">
+    <value>ConfigInvalidEndpointName</value>
   </data>
   <data name="ConfigInvalidExtensionElement" xml:space="preserve">
     <value>ConfigInvalidExtensionElement</value>
@@ -171,6 +198,9 @@
   <data name="ConfigInvalidSection" xml:space="preserve">
     <value>ConfigInvalidSection</value>
   </data>
+  <data name="ConfigInvalidServiceBehavior" xml:space="preserve">
+    <value>ConfigInvalidServiceBehavior</value>
+  </data>
   <data name="ConfigInvalidStartValue" xml:space="preserve">
     <value>ConfigInvalidStartValue</value>
   </data>
@@ -182,6 +212,9 @@
   </data>
   <data name="ConfigInvalidTypeForBindingElement" xml:space="preserve">
     <value>ConfigInvalidTypeForBindingElement</value>
+  </data>
+  <data name="ConfigInvalidTypeForEndpoint" xml:space="preserve">
+    <value>ConfigInvalidTypeForEndpoint</value>
   </data>
   <data name="ConfigKeyNotFoundInElementCollection" xml:space="preserve">
     <value>ConfigKeyNotFoundInElementCollection</value>
@@ -207,8 +240,29 @@
   <data name="ConfigTransportAlreadyInBinding" xml:space="preserve">
     <value>ConfigTransportAlreadyInBinding</value>
   </data>
+  <data name="ConfigurationSchemaContainsX509IssuerSerialReference" xml:space="preserve">
+    <value>ConfigurationSchemaContainsX509IssuerSerialReference</value>
+  </data>
+  <data name="ConfigurationSchemaInsuffientForSecurityBindingElementInstance" xml:space="preserve">
+    <value>ConfigurationSchemaInsuffientForSecurityBindingElementInstance</value>
+  </data>
+  <data name="FlagEnumTypeExpected" xml:space="preserve">
+    <value>FlagEnumTypeExpected</value>
+  </data>
   <data name="GenericCallbackException" xml:space="preserve">
     <value>GenericCallbackException</value>
+  </data>
+  <data name="Hosting_MemoryGatesCheckFailedUnderPartialTrust" xml:space="preserve">
+    <value>Hosting_MemoryGatesCheckFailedUnderPartialTrust</value>
+  </data>
+  <data name="Hosting_NoAbsoluteRelativeAddress" xml:space="preserve">
+    <value>Hosting_NoAbsoluteRelativeAddress</value>
+  </data>
+  <data name="Hosting_RelativeAddressFormatError" xml:space="preserve">
+    <value>Hosting_RelativeAddressFormatError</value>
+  </data>
+  <data name="HttpMessageHandlerFactoryConfigInvalid_WithBothTypeAndHandlerList" xml:space="preserve">
+    <value>HttpMessageHandlerFactoryConfigInvalid_WithBothTypeAndHandlerList</value>
   </data>
   <data name="ID0003" xml:space="preserve">
     <value>ID0003</value>
@@ -222,8 +276,23 @@
   <data name="ID1024" xml:space="preserve">
     <value>ID1024</value>
   </data>
+  <data name="InputMustBeDelegatingHandlerElementError" xml:space="preserve">
+    <value>InputMustBeDelegatingHandlerElementError</value>
+  </data>
+  <data name="InvalidFlagEnumType" xml:space="preserve">
+    <value>InvalidFlagEnumType</value>
+  </data>
   <data name="RequiredAttributeMissing" xml:space="preserve">
     <value>RequiredAttributeMissing</value>
+  </data>
+  <data name="SecureConversationBootstrapCannotUseSecureConversation" xml:space="preserve">
+    <value>SecureConversationBootstrapCannotUseSecureConversation</value>
+  </data>
+  <data name="SecureConversationNeedsBootstrapSecurity" xml:space="preserve">
+    <value>SecureConversationNeedsBootstrapSecurity</value>
+  </data>
+  <data name="SessionValueInvalid" xml:space="preserve">
+    <value>SessionValueInvalid</value>
   </data>
   <data name="StreamUpgradeBindingElement" xml:space="preserve">
     <value>StreamUpgradeBindingElement</value>

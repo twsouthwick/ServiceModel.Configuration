@@ -18,14 +18,11 @@ namespace System
     {
         internal static class Exception
         {
-            internal static System.Exception Argument(string name, string message)
-            {
-                return new ArgumentException(message, name);
-            }
-            internal static System.Exception ArgumentNull(string name)
-            {
-                return new ArgumentNullException(name);
-            }
+            internal static System.Exception AsError(System.Exception e) => e;
+
+            internal static System.Exception Argument(string name, string message) => new ArgumentException(message, name);
+
+            internal static System.Exception ArgumentNull(string name) => new ArgumentNullException(name);
         }
     }
 
@@ -42,6 +39,11 @@ namespace System
 
     internal static class FxCop
     {
+        internal static class Rule
+        {
+            internal const string ConfigurationValidatorAttributeRule = "ConfigurationValidator";
+        }
+
         internal static class Category
         {
             internal const string Configuration = "Configuration";
@@ -50,6 +52,8 @@ namespace System
 
     internal static class Fx
     {
+        public static bool IsFatal(Exception _) => true;
+
         public static void Assert(bool condition, string message) => Debug.Assert(condition, message);
 
         public static void Assert(string message) => Assert(false, message);

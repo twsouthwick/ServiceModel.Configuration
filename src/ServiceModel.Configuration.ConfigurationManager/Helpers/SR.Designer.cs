@@ -142,6 +142,15 @@ namespace System {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ConfigEndpointExtensionNotFound.
+        /// </summary>
+        internal static string ConfigEndpointExtensionNotFound {
+            get {
+                return ResourceManager.GetString("ConfigEndpointExtensionNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ConfigExtensionCollectionNotFound.
         /// </summary>
         internal static string ConfigExtensionCollectionNotFound {
@@ -178,11 +187,83 @@ namespace System {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ConfigInvalidCertificateValidatorType.
+        /// </summary>
+        internal static string ConfigInvalidCertificateValidatorType {
+            get {
+                return ResourceManager.GetString("ConfigInvalidCertificateValidatorType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ConfigInvalidClassFactoryValue.
+        /// </summary>
+        internal static string ConfigInvalidClassFactoryValue {
+            get {
+                return ResourceManager.GetString("ConfigInvalidClassFactoryValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ConfigInvalidClassInstanceValue.
+        /// </summary>
+        internal static string ConfigInvalidClassInstanceValue {
+            get {
+                return ResourceManager.GetString("ConfigInvalidClassInstanceValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ConfigInvalidClientCredentialsType.
+        /// </summary>
+        internal static string ConfigInvalidClientCredentialsType {
+            get {
+                return ResourceManager.GetString("ConfigInvalidClientCredentialsType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ConfigInvalidCommonEndpointBehaviorType.
+        /// </summary>
+        internal static string ConfigInvalidCommonEndpointBehaviorType {
+            get {
+                return ResourceManager.GetString("ConfigInvalidCommonEndpointBehaviorType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ConfigInvalidEncodingValue.
         /// </summary>
         internal static string ConfigInvalidEncodingValue {
             get {
                 return ResourceManager.GetString("ConfigInvalidEncodingValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ConfigInvalidEndpointBehavior.
+        /// </summary>
+        internal static string ConfigInvalidEndpointBehavior {
+            get {
+                return ResourceManager.GetString("ConfigInvalidEndpointBehavior", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ConfigInvalidEndpointBehaviorType.
+        /// </summary>
+        internal static string ConfigInvalidEndpointBehaviorType {
+            get {
+                return ResourceManager.GetString("ConfigInvalidEndpointBehaviorType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ConfigInvalidEndpointName.
+        /// </summary>
+        internal static string ConfigInvalidEndpointName {
+            get {
+                return ResourceManager.GetString("ConfigInvalidEndpointName", resourceCulture);
             }
         }
         
@@ -223,6 +304,15 @@ namespace System {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ConfigInvalidServiceBehavior.
+        /// </summary>
+        internal static string ConfigInvalidServiceBehavior {
+            get {
+                return ResourceManager.GetString("ConfigInvalidServiceBehavior", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ConfigInvalidStartValue.
         /// </summary>
         internal static string ConfigInvalidStartValue {
@@ -255,6 +345,15 @@ namespace System {
         internal static string ConfigInvalidTypeForBindingElement {
             get {
                 return ResourceManager.GetString("ConfigInvalidTypeForBindingElement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ConfigInvalidTypeForEndpoint.
+        /// </summary>
+        internal static string ConfigInvalidTypeForEndpoint {
+            get {
+                return ResourceManager.GetString("ConfigInvalidTypeForEndpoint", resourceCulture);
             }
         }
         
@@ -331,11 +430,74 @@ namespace System {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ConfigurationSchemaContainsX509IssuerSerialReference.
+        /// </summary>
+        internal static string ConfigurationSchemaContainsX509IssuerSerialReference {
+            get {
+                return ResourceManager.GetString("ConfigurationSchemaContainsX509IssuerSerialReference", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ConfigurationSchemaInsuffientForSecurityBindingElementInstance.
+        /// </summary>
+        internal static string ConfigurationSchemaInsuffientForSecurityBindingElementInstance {
+            get {
+                return ResourceManager.GetString("ConfigurationSchemaInsuffientForSecurityBindingElementInstance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FlagEnumTypeExpected.
+        /// </summary>
+        internal static string FlagEnumTypeExpected {
+            get {
+                return ResourceManager.GetString("FlagEnumTypeExpected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to GenericCallbackException.
         /// </summary>
         internal static string GenericCallbackException {
             get {
                 return ResourceManager.GetString("GenericCallbackException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hosting_MemoryGatesCheckFailedUnderPartialTrust.
+        /// </summary>
+        internal static string Hosting_MemoryGatesCheckFailedUnderPartialTrust {
+            get {
+                return ResourceManager.GetString("Hosting_MemoryGatesCheckFailedUnderPartialTrust", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hosting_NoAbsoluteRelativeAddress.
+        /// </summary>
+        internal static string Hosting_NoAbsoluteRelativeAddress {
+            get {
+                return ResourceManager.GetString("Hosting_NoAbsoluteRelativeAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hosting_RelativeAddressFormatError.
+        /// </summary>
+        internal static string Hosting_RelativeAddressFormatError {
+            get {
+                return ResourceManager.GetString("Hosting_RelativeAddressFormatError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HttpMessageHandlerFactoryConfigInvalid_WithBothTypeAndHandlerList.
+        /// </summary>
+        internal static string HttpMessageHandlerFactoryConfigInvalid_WithBothTypeAndHandlerList {
+            get {
+                return ResourceManager.GetString("HttpMessageHandlerFactoryConfigInvalid_WithBothTypeAndHandlerList", resourceCulture);
             }
         }
         
@@ -376,11 +538,56 @@ namespace System {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to InputMustBeDelegatingHandlerElementError.
+        /// </summary>
+        internal static string InputMustBeDelegatingHandlerElementError {
+            get {
+                return ResourceManager.GetString("InputMustBeDelegatingHandlerElementError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to InvalidFlagEnumType.
+        /// </summary>
+        internal static string InvalidFlagEnumType {
+            get {
+                return ResourceManager.GetString("InvalidFlagEnumType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to RequiredAttributeMissing.
         /// </summary>
         internal static string RequiredAttributeMissing {
             get {
                 return ResourceManager.GetString("RequiredAttributeMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SecureConversationBootstrapCannotUseSecureConversation.
+        /// </summary>
+        internal static string SecureConversationBootstrapCannotUseSecureConversation {
+            get {
+                return ResourceManager.GetString("SecureConversationBootstrapCannotUseSecureConversation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SecureConversationNeedsBootstrapSecurity.
+        /// </summary>
+        internal static string SecureConversationNeedsBootstrapSecurity {
+            get {
+                return ResourceManager.GetString("SecureConversationNeedsBootstrapSecurity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SessionValueInvalid.
+        /// </summary>
+        internal static string SessionValueInvalid {
+            get {
+                return ResourceManager.GetString("SessionValueInvalid", resourceCulture);
             }
         }
         

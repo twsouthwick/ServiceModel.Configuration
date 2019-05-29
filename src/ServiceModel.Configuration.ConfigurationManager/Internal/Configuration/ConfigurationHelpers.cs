@@ -77,7 +77,6 @@ namespace System.ServiceModel.Configuration
             return retVal;
         }
 
-#if DESKTOP
         /// Be sure to update UnsafeGetAssociatedEndpointCollectionElement if you modify this method
         internal static EndpointCollectionElement GetAssociatedEndpointCollectionElement(ContextInformation evaluationContext, string endpointCollectionName)
         {
@@ -139,7 +138,6 @@ namespace System.ServiceModel.Configuration
 
             return retVal;
         }
-#endif
 
         /// Be sure to update UnsafeGetAssociatedSection if you modify this method
         internal static object GetAssociatedSection(ContextInformation evalContext, string sectionPath)
@@ -232,7 +230,6 @@ namespace System.ServiceModel.Configuration
             return string.Concat(ConfigurationStrings.StandardEndpointsSectionName, "/", sectionName);
         }
 
-#if DESKTOP
         /// Be sure to update UnsafeGetEndpointCollectionElement if you modify this method
         internal static EndpointCollectionElement GetEndpointCollectionElement(string endpointCollectionName)
         {
@@ -246,7 +243,6 @@ namespace System.ServiceModel.Configuration
         {
             return UnsafeGetAssociatedEndpointCollectionElement(null, endpointCollectionName);
         }
-#endif
 
         /// Be sure to update UnsafeGetSection if you modify this method
         internal static object GetSection(string sectionPath)
