@@ -21,7 +21,6 @@ namespace System.ServiceModel.Configuration
         {
         }
 
-#if DESKTOP
         [ConfigurationProperty(ConfigurationStrings.UserPrincipalName)]
         public UserPrincipalNameElement UserPrincipalName
         {
@@ -57,7 +56,6 @@ namespace System.ServiceModel.Configuration
         {
             get { return (CertificateReferenceElement)base[ConfigurationStrings.CertificateReference]; }
         }
-#endif
 
         internal void Copy(IdentityElement source)
         {
@@ -65,7 +63,7 @@ namespace System.ServiceModel.Configuration
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("source");
             }
-#if DESKTOP
+
             PropertyInformationCollection properties = source.ElementInformation.Properties;
             if (properties[ConfigurationStrings.UserPrincipalName].ValueOrigin != PropertyValueOrigin.Default)
             {
@@ -86,7 +84,6 @@ namespace System.ServiceModel.Configuration
                 this.CertificateReference.X509FindType = source.CertificateReference.X509FindType;
                 this.CertificateReference.FindValue = source.CertificateReference.FindValue;
             }
-#endif
         }
 
         public void InitializeFrom(EndpointIdentity identity)

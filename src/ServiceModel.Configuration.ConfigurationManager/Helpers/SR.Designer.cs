@@ -70,6 +70,24 @@ namespace System {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ConfigBindingReferenceCycleDetected.
+        /// </summary>
+        internal static string ConfigBindingReferenceCycleDetected {
+            get {
+                return ResourceManager.GetString("ConfigBindingReferenceCycleDetected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ConfigBindingTypeCannotBeNullOrEmpty.
+        /// </summary>
+        internal static string ConfigBindingTypeCannotBeNullOrEmpty {
+            get {
+                return ResourceManager.GetString("ConfigBindingTypeCannotBeNullOrEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ConfigDuplicateExtensionName.
         /// </summary>
         internal static string ConfigDuplicateExtensionName {
@@ -147,6 +165,24 @@ namespace System {
         internal static string ConfigEndpointExtensionNotFound {
             get {
                 return ResourceManager.GetString("ConfigEndpointExtensionNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ConfigEndpointReferenceCycleDetected.
+        /// </summary>
+        internal static string ConfigEndpointReferenceCycleDetected {
+            get {
+                return ResourceManager.GetString("ConfigEndpointReferenceCycleDetected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ConfigEndpointTypeCannotBeNullOrEmpty.
+        /// </summary>
+        internal static string ConfigEndpointTypeCannotBeNullOrEmpty {
+            get {
+                return ResourceManager.GetString("ConfigEndpointTypeCannotBeNullOrEmpty", resourceCulture);
             }
         }
         
@@ -385,6 +421,15 @@ namespace System {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ConfigNoEndpointCreated.
+        /// </summary>
+        internal static string ConfigNoEndpointCreated {
+            get {
+                return ResourceManager.GetString("ConfigNoEndpointCreated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ConfigNoExtensionCollectionAssociatedWithType.
         /// </summary>
         internal static string ConfigNoExtensionCollectionAssociatedWithType {
@@ -588,6 +633,60 @@ namespace System {
         internal static string SessionValueInvalid {
             get {
                 return ResourceManager.GetString("SessionValueInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SFxConfigChannelConfigurationNotFound.
+        /// </summary>
+        internal static string SFxConfigChannelConfigurationNotFound {
+            get {
+                return ResourceManager.GetString("SFxConfigChannelConfigurationNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SFxConfigContractNotFound.
+        /// </summary>
+        internal static string SFxConfigContractNotFound {
+            get {
+                return ResourceManager.GetString("SFxConfigContractNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SFxConfigLoaderMultipleEndpointMatchesSpecified2.
+        /// </summary>
+        internal static string SFxConfigLoaderMultipleEndpointMatchesSpecified2 {
+            get {
+                return ResourceManager.GetString("SFxConfigLoaderMultipleEndpointMatchesSpecified2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SFxConfigLoaderMultipleEndpointMatchesWildcard1.
+        /// </summary>
+        internal static string SFxConfigLoaderMultipleEndpointMatchesWildcard1 {
+            get {
+                return ResourceManager.GetString("SFxConfigLoaderMultipleEndpointMatchesWildcard1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SfxReflectedContractKeyNotFound2.
+        /// </summary>
+        internal static string SfxReflectedContractKeyNotFound2 {
+            get {
+                return ResourceManager.GetString("SfxReflectedContractKeyNotFound2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SfxReflectedContractKeyNotFoundEmpty.
+        /// </summary>
+        internal static string SfxReflectedContractKeyNotFoundEmpty {
+            get {
+                return ResourceManager.GetString("SfxReflectedContractKeyNotFoundEmpty", resourceCulture);
             }
         }
         
