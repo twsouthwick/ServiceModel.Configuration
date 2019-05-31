@@ -53,7 +53,7 @@ namespace ServiceModel.Configuration
 
             if (string.Equals(ServiceModelDefaults.DefaultName, name, StringComparison.Ordinal))
             {
-                Add(options, group.Client?.Endpoints);
+                Add(name, options, group.Client?.Endpoints);
             }
             else
             {
@@ -61,12 +61,12 @@ namespace ServiceModel.Configuration
 
                 if (service != null)
                 {
-                    Add(options, service.Endpoints);
+                    Add(name, options, service.Endpoints);
                 }
             }
         }
 
-        private void Add(ServiceModelOptions options, IEnumerable endpoints)
+        private void Add(string name, ServiceModelOptions options, IEnumerable endpoints)
         {
             if (endpoints is null)
             {
@@ -75,14 +75,20 @@ namespace ServiceModel.Configuration
 
             foreach (var endpoint in endpoints.OfType<IEndpoint>())
             {
-                options.Services.Add(_mapper.ResolveContract(endpoint.Contract), o =>
+                var contract = _mapper.ResolveContract(endpoint.Contract);
+
+                options.Services.Add(contract, o =>
                 {
-                    o.Endpoint = new EndpointAddress(endpoint.Address);
+                    var c = new ConfigLoader();
+
+                    o.Endpoint = ConfigLoader.LookupEndpoint(name,(_mapper.ResolveDescription(contract));
 
                     if (!string.IsNullOrEmpty(endpoint.Binding) || !string.IsNullOrEmpty(endpoint.BindingConfiguration))
                     {
                         o.Binding = ConfigLoader.LookupBinding(endpoint.Binding, endpoint.BindingConfiguration, ConfigurationHelpers.GetEvaluationContext(endpoint));
                     }
+
+                    ConfigLoader.LookupEndpoint()
                 });
             }
         }

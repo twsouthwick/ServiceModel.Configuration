@@ -120,6 +120,12 @@
   <data name="ConfigBindingExtensionNotFound" xml:space="preserve">
     <value>ConfigBindingExtensionNotFound</value>
   </data>
+  <data name="ConfigBindingReferenceCycleDetected" xml:space="preserve">
+    <value>ConfigBindingReferenceCycleDetected</value>
+  </data>
+  <data name="ConfigBindingTypeCannotBeNullOrEmpty" xml:space="preserve">
+    <value>ConfigBindingTypeCannotBeNullOrEmpty</value>
+  </data>
   <data name="ConfigDuplicateExtensionName" xml:space="preserve">
     <value>ConfigDuplicateExtensionName</value>
   </data>
@@ -146,6 +152,12 @@
   </data>
   <data name="ConfigEndpointExtensionNotFound" xml:space="preserve">
     <value>ConfigEndpointExtensionNotFound</value>
+  </data>
+  <data name="ConfigEndpointReferenceCycleDetected" xml:space="preserve">
+    <value>ConfigEndpointReferenceCycleDetected</value>
+  </data>
+  <data name="ConfigEndpointTypeCannotBeNullOrEmpty" xml:space="preserve">
+    <value>ConfigEndpointTypeCannotBeNullOrEmpty</value>
   </data>
   <data name="ConfigExtensionCollectionNotFound" xml:space="preserve">
     <value>ConfigExtensionCollectionNotFound</value>
@@ -225,6 +237,9 @@
   <data name="ConfigMessageEncodingAlreadyInBinding" xml:space="preserve">
     <value>ConfigMessageEncodingAlreadyInBinding</value>
   </data>
+  <data name="ConfigNoEndpointCreated" xml:space="preserve">
+    <value>ConfigNoEndpointCreated</value>
+  </data>
   <data name="ConfigNoExtensionCollectionAssociatedWithType" xml:space="preserve">
     <value>ConfigNoExtensionCollectionAssociatedWithType</value>
   </data>
@@ -293,6 +308,24 @@
   </data>
   <data name="SessionValueInvalid" xml:space="preserve">
     <value>SessionValueInvalid</value>
+  </data>
+  <data name="SFxConfigChannelConfigurationNotFound" xml:space="preserve">
+    <value>SFxConfigChannelConfigurationNotFound</value>
+  </data>
+  <data name="SFxConfigContractNotFound" xml:space="preserve">
+    <value>SFxConfigContractNotFound</value>
+  </data>
+  <data name="SFxConfigLoaderMultipleEndpointMatchesSpecified2" xml:space="preserve">
+    <value>SFxConfigLoaderMultipleEndpointMatchesSpecified2</value>
+  </data>
+  <data name="SFxConfigLoaderMultipleEndpointMatchesWildcard1" xml:space="preserve">
+    <value>SFxConfigLoaderMultipleEndpointMatchesWildcard1</value>
+  </data>
+  <data name="SfxReflectedContractKeyNotFound2" xml:space="preserve">
+    <value>SfxReflectedContractKeyNotFound2</value>
+  </data>
+  <data name="SfxReflectedContractKeyNotFoundEmpty" xml:space="preserve">
+    <value>SfxReflectedContractKeyNotFoundEmpty</value>
   </data>
   <data name="StreamUpgradeBindingElement" xml:space="preserve">
     <value>StreamUpgradeBindingElement</value>

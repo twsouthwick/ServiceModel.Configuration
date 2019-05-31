@@ -1,4 +1,6 @@
-﻿using System.ServiceModel.Configuration;
+﻿using System.ServiceModel;
+using System.ServiceModel.Configuration;
+using System.ServiceModel.Description;
 
 namespace System
 {
@@ -11,6 +13,19 @@ namespace System
         string BindingConfiguration { get; }
 
         Uri Address { get; }
+    }
+
+    internal static class EndpointExtensions
+    {
+        public static EndpointAddress GetEndpoint(this IEndpoint endpoint)
+        {
+            if (endpoint is ChannelEndpointElement e)
+            {
+                return ConfigLoader.LookupEndpoint()
+            }
+
+            throw new ArgumentOutOfRangeException();
+        }
     }
 }
 
