@@ -1,0 +1,33 @@
+//------------------------------------------------------------------------------
+// Copyright (c) Microsoft Corporation.  All rights reserved.
+//------------------------------------------------------------------------------
+
+namespace System.ServiceModel.Configuration
+{
+    using System;
+    using System.Configuration;
+
+    public sealed partial class ServicePrincipalNameElement : ConfigurationElement
+    {
+        public ServicePrincipalNameElement()
+        {
+        }
+
+        [ConfigurationProperty(ConfigurationStrings.Value, DefaultValue = "")]
+        [StringValidator(MinLength = 0)]
+        public String Value
+        {
+            get { return (string)base[ConfigurationStrings.Value]; }
+            set
+            {
+                if (String.IsNullOrEmpty(value))
+                {
+                    value = String.Empty;
+                }
+
+                base[ConfigurationStrings.Value] = value;
+            }
+        }
+    }
+
+}
